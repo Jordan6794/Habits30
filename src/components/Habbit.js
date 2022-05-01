@@ -23,6 +23,7 @@ function Habbit(props) {
       });
       greenStreakChecks();
    }
+   
 
    function clickedBad() {
       setColors((prevValue) => {
@@ -226,7 +227,7 @@ function Habbit(props) {
          <th>
             <button onClick={clearButton}>Clear</button>{" "}
             <button onClick={deleteButton}>Delete</button>
-            <span contentEditable="true">{props.name}</span>
+            <span>{props.name}</span>
             <button onClick={clickedGood}>+</button>{" "}
             <button onClick={clickedBad}>-</button>
          </th>

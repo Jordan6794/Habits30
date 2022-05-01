@@ -1,5 +1,5 @@
 import './App.css';
-import Table from "./Table.jsx";
+import Table from "./Table.js";
 
 // const { MongoClient, ServerApiVersion } = require('mongodb');
 // const express = require("express");
@@ -22,7 +22,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-      <h1>Habbits</h1>
+      <h1>Habits</h1>
       </header>
       <Table />
     </div>
