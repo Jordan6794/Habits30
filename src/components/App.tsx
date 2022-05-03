@@ -1,10 +1,6 @@
 import './App.css';
-import Table from "./Table.js";
 
-// const { MongoClient, ServerApiVersion } = require('mongodb');
-// const express = require("express");
-// const bodyParser = require("body-parser");
-// const mongoose = require("mongoose");
+import Table from "./Table";
 
 // const uri = "";
 
