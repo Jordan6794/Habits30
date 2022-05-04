@@ -1,31 +1,36 @@
 import React, { useState, useEffect } from 'react'
-import { updateHabit } from '../actions/habbits'
 
-function Habbit(props) {
+import { updateHabit } from '../actions/habbits'
+import { hasTooManyRedsConsecutive, hasTooManyReds, colorCounter } from '../services/colorsChecks.service'
+
+function HabbitRow(props) {
 	const [colors, setColors] = useState<string[]>([])
 	const daysToValidateStep: number = 13
 	const [previousArray, setPreviousArray] = useState<string[]>([])
 	const [undidStreak, setUndidStreak] = useState(false)
 	const [hasInitialized, setHasInitialized] = useState(false)
+   const [haveColorsInitialized, setHaveColorsInitialized] = useState(false)
 
 	useEffect(() => {
-		// console.log('in habit habit object is : ', props.habitObject)
 		setColors(props.habitObject.colors)
 		setHasInitialized(true)
-	}, [])
+	}, [props.habitObject.colors])
 
 
 	useEffect(() => {
 		if (hasInitialized) {
-			// console.log(colors)
-			const { name, _id } = props.habitObject
-			updateHabit({ name, _id, colors }).then((response) =>
-				console.log(response)
-			)
+         if(haveColorsInitialized){
+            const { name, _id } = props.habitObject
+            updateHabit({ name, _id, colors }).then((response) =>
+               console.log('update : ', response)
+            )
+         } else {
+            setHaveColorsInitialized(true)
+         }
 		}
 	}, [colors])
 
-	function clickedGood() {
+	function handleClickedGood() {
 		setColors((prevValue) => {
 			if (prevValue[0] === 'r' || prevValue[0] === 'dr') {
 				return ['g']
@@ -43,7 +48,7 @@ function Habbit(props) {
 		greenStreakChecks()
 	}
 
-	function clickedBad() {
+	function handleClickedBad() {
 		setColors((prevValue) => {
 			if (prevValue[0] === 'dr') {
 				return ['dr']
@@ -112,7 +117,7 @@ function Habbit(props) {
 	function redStreakChecks() {
 		setColors((prevValue) => {
 			//checking for 2 red consequtive or 3 reds in first 14 days : reset the habbits to 0
-			if (hasTooManyRedConsecutive(prevValue) || hasTooManyRed(prevValue)) {
+			if (hasTooManyRedsConsecutive(prevValue) || hasTooManyReds(prevValue)) {
 				const fgCount = colorCounter(prevValue, 'f')
 				if (fgCount === 1) {
 					setPreviousArray(prevValue)
@@ -130,67 +135,12 @@ function Habbit(props) {
 		})
 	}
 
-	function hasTooManyRedConsecutive(arr) {
-		const dgCount = colorCounter(arr, 'dg')
-		const fgCount = colorCounter(arr, 'f')
-		let maxConsecutiveNumber = 2
-		if (dgCount >= 2 || fgCount === 1) {
-			maxConsecutiveNumber = 3
-		}
-
-		let previous = null
-		let count = 0
-		for (let i = 0; i < arr.length; i++) {
-			if (arr[i] !== previous) {
-				previous = arr[i]
-				count = 0
-			}
-			count += 1
-			if (maxConsecutiveNumber <= count) {
-				if (arr[i] === 'r' || arr[i] === 'dr') {
-					return true
-				}
-			}
-		}
-		return false
-	}
-
-	function hasTooManyRed(array: string[]) {
-		const dgCount = colorCounter(array, 'dg')
-		const fgCount = colorCounter(array, 'f')
-		const redCount = colorCounter(array, 'r')
-
-		if (dgCount < 2 && fgCount === 0) {
-			if (redCount >= 3) {
-				return true
-			} else {
-				return false
-			}
-		} else {
-			if (redCount >= 4) {
-				return true
-			} else {
-				return false
-			}
-		}
-	}
-
-	function colorCounter(array: string[], color: string) {
-		let counter = 0
-		for (let i = 0; i < array.length; i++) {
-			if (array[i] === color) {
-				counter++
-			}
-		}
-		return counter
-	}
-
-	function deleteButton() {
+	function handleDeleteButtonClick() {
 		const id = props.index
 		props.delete(id)
 	}
 
-	function clearButton() {
+	function handleClearButtonClick() {
 		setColors([])
 	}
 
@@ -244,11 +194,11 @@ function Habbit(props) {
 	return (
 		<tr>
 			<th>
-				<button onClick={clearButton}>Clear</button>{' '}
-				<button onClick={deleteButton}>Delete</button>
+				<button onClick={handleClearButtonClick}>Clear</button>{' '}
+				<button onClick={handleDeleteButtonClick}>Delete</button>
 				<span>{props.name}</span>
-				<button onClick={clickedGood}>+</button>{' '}
-				<button onClick={clickedBad}>-</button>
+				<button onClick={handleClickedGood}>+</button>{' '}
+				<button onClick={handleClickedBad}>-</button>
 			</th>
 			{colors.map(putColors)}
 			<th>
@@ -258,4 +208,4 @@ function Habbit(props) {
 	)
 }
 
-export default Habbit
+export default HabbitRow

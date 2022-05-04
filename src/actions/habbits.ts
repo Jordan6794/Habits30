@@ -1,7 +1,7 @@
 import * as api from '../api/index'
-import { HabitModel } from '../components/habits.model'
+import { Habit } from '../components/habits.model'
 
-export const getHabits = async (): Promise<HabitModel[] | undefined> => {
+export const getHabits = async (): Promise<Habit[] | undefined> => {
     try {
         const {data} = await api.fetchHabits()
         return data
@@ -12,7 +12,7 @@ export const getHabits = async (): Promise<HabitModel[] | undefined> => {
     
 }
 
-export const postHabit = async (habit: HabitModel) => {
+export const postHabit = async (habit: Habit) => {
     try {
         const response = await api.postHabit(habit)
         return response
@@ -21,7 +21,7 @@ export const postHabit = async (habit: HabitModel) => {
     }
 }
 
-export const updateHabit = async (habit: HabitModel) => {
+export const updateHabit = async (habit: Habit) => {
     try {
         const response = await api.updateHabit(habit)
         return response
