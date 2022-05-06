@@ -1,39 +1,168 @@
+html {
+  box-sizing: border-box;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th { 
+  border: 1px solid white;
+}
+
+h4 {
+  margin: 0
+}
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* =====
+COMMON 
+==== */
+.btn {
+  border: none;
+  cursor: pointer;
+  background-color: #282c34;
+  color: white;
+  padding: 0.5em 1.25em;
+  border-radius: 5px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.btn-icon {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  padding: 0.6em
 }
 
+.btn:hover {
+  opacity: 0.7
+}
+
+.btn-icon:hover {
+  opacity: 0.7
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* =====
+HEADER 
+==== */
 .App-header {
   background-color: #282c34;
   min-height: 10vh;
   display: flex;
-  /* flex-direction: column;
-  align-items: center;
-  justify-content: center; */
-  padding-left: 5%;
-  font-size: calc(10px + 2vmin);
+  text-align: left;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.header-title {
+  font-size: 2.5em;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* =====
+Form 
+==== */
+.habit-form {
+  margin: 2em 0;
+  min-width: 380px;
+  width: 30%;
+  padding: 1em;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.15);
+}
+
+.habit-input {
+  margin-right: 1em;
+}
+
+/* =====
+Table 
+==== */
+.habit-table {
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+.table-first-row {
+  background-color: #282c34;
+  color: white;
+}
+
+.table-first-row > * {
+  border: none;
+}
+
+.table-habit-title-row {
+  width: 500px;
+}
+
+.table-habit-title-row > * {
+  margin: auto 0;
+}
+
+.days-title {
+  text-align: right;
+}
+
+.table-day-cell {
+  width: 30px;
+  padding: 1em 0;
+}
+
+
+.habit-row {
+  border-bottom: 1px solid #dddddd;
+}
+
+.habit-row:last-of-type {
+  border-bottom: 1px solid #282c34;
+}
+
+.habit-row:last-of-type > th {
+  border-bottom: 1px solid #282c34;
+}
+
+.habit-row:last-of-type > .habit-row-infos {
+  border-bottom: none
+}
+
+.habit-row-infos {
+  
+  display: flex;
+  justify-content: space-between;
+}
+
+.th-habit-name{
+  margin: 0;
+  padding: 0.5em 0.5em;
+}
+
+.th-undo-clear-div {
+  display: flex;
+}
+
+.th-undo-btn {
+  border-bottom: 1px solid #dddddd;
+}
+
+.th-plus-minus-div {
+  display: flex;
+}
+
+.btn-minus {
+  color: red
+}
+
+.btn-plus {
+  color: green
+}
+
+.btn-undo {
+  padding: 0;
 }

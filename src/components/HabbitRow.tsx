@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react'
 
 import { updateHabit } from '../actions/habbits'
-import { hasTooManyRedsConsecutive, hasTooManyReds, colorCounter } from '../services/colorsChecks.service'
+import {
+	hasTooManyRedsConsecutive,
+	hasTooManyReds,
+	colorCounter,
+} from '../services/colorsChecks.service'
 
 function HabbitRow(props) {
 	const [colors, setColors] = useState<string[]>([])
@@ -9,24 +13,23 @@ function HabbitRow(props) {
 	const [previousArray, setPreviousArray] = useState<string[]>([])
 	const [undidStreak, setUndidStreak] = useState(false)
 	const [hasInitialized, setHasInitialized] = useState(false)
-   const [haveColorsInitialized, setHaveColorsInitialized] = useState(false)
+	const [haveColorsInitialized, setHaveColorsInitialized] = useState(false)
 
 	useEffect(() => {
 		setColors(props.habitObject.colors)
 		setHasInitialized(true)
 	}, [props.habitObject.colors])
 
-
 	useEffect(() => {
 		if (hasInitialized) {
-         if(haveColorsInitialized){
-            const { name, _id } = props.habitObject
-            updateHabit({ name, _id, colors }).then((response) =>
-               console.log('update : ', response)
-            )
-         } else {
-            setHaveColorsInitialized(true)
-         }
+			if (haveColorsInitialized) {
+				const { name, _id } = props.habitObject
+				updateHabit({ name, _id, colors }).then((response) =>
+					console.log('update : ', response)
+				)
+			} else {
+				setHaveColorsInitialized(true)
+			}
 		}
 	}, [colors])
 
@@ -117,7 +120,10 @@ function HabbitRow(props) {
 	function redStreakChecks() {
 		setColors((prevValue) => {
 			//checking for 2 red consequtive or 3 reds in first 14 days : reset the habbits to 0
-			if (hasTooManyRedsConsecutive(prevValue) || hasTooManyReds(prevValue)) {
+			if (
+				hasTooManyRedsConsecutive(prevValue) ||
+				hasTooManyReds(prevValue)
+			) {
 				const fgCount = colorCounter(prevValue, 'f')
 				if (fgCount === 1) {
 					setPreviousArray(prevValue)
@@ -192,17 +198,33 @@ function HabbitRow(props) {
 	}
 
 	return (
-		<tr>
-			<th>
-				<button onClick={handleClearButtonClick}>Clear</button>{' '}
-				<button onClick={handleDeleteButtonClick}>Delete</button>
-				<span>{props.name}</span>
-				<button onClick={handleClickedGood}>+</button>{' '}
-				<button onClick={handleClickedBad}>-</button>
+		<tr className='habit-row'>
+			<th className="habit-row-infos">
+				<div className='th-undo-clear-div'>	
+					<button className="btn-icon" onClick={handleClearButtonClick}>
+						<i className="fa-solid fa-broom"></i>
+					</button>{' '}
+					<button className="btn-icon" onClick={handleDeleteButtonClick}>
+						<i className="fa-solid fa-trash"></i>
+					</button>
+				</div>
+
+				<p className='th-habit-name'>{props.name}</p>
+
+				<div className='th-plus-minus-div'>
+					<button className="btn-icon btn-plus" onClick={handleClickedGood}>
+						<i className="fa-solid fa-plus"></i>
+					</button>{' '}
+					<button className="btn-icon btn-minus" onClick={handleClickedBad}>
+						<i className="fa-solid fa-minus"></i>
+					</button>
+				</div>
 			</th>
 			{colors.map(putColors)}
-			<th>
-				<button onClick={undoButton}>Undo</button>
+			<th className='th-undo-btn'>
+				<button className="btn-icon btn-undo" onClick={undoButton}>
+					<i className="fa-solid fa-rotate-left"></i>
+				</button>
 			</th>
 		</tr>
 	)

@@ -6,24 +6,24 @@ import { makeDayArray } from '../services/effects.service'
 
 import HabbitRow from './HabbitRow'
 
-import {
-	getHabits,
-	postHabit,
-	deleteHabit,
-} from '../actions/habbits'
+import { getHabits, postHabit, deleteHabit } from '../actions/habbits'
 import { Habit } from './habits.model'
 import { NUMBER_OF_DAYS } from '../consts/consts'
 
-// TODO Refacto all code
-// design
-// refacto code a bit (allcaps nonchanging const that are exported, not allcaps if stays within the file)
+// TODO design
+// fix le undo sur streak
+// add loading state et skeleton
+// recheck/add one template habit si 0 habit fetched
+// finish refacto
+// undo clear ?
 // add login and make database user based
 
 // Improvements : Make a second part "finished" habbits bellow, et faire un array de finished habbits rendered en bas, quand l'habit passe finished elle est add au finishedHabbitArray et vice versa si elle refail
 // faire un petit explanation paragraph on top (2 reds or 3 reds in 14 = back to day 1, 14 green = bigGreen etc)
 // put first habit with few days already done if habbits array nul in begining
+// get une favicon
 // Add un counter de added streak en darkred/finished
-// Make name editable (popup edit habit ?) (ou alors contenteditable + manually onChange qui update in state & db ?) 
+// Make name editable (popup edit habit ?) (ou alors contenteditable + manually onChange qui update in state & db ?)
 // + maybe add arrows to move up/down habits in the list
 
 function Table() {
@@ -34,7 +34,7 @@ function Table() {
 	makeDayArray(daysArray, NUMBER_OF_DAYS)
 
 	useEffect(() => {
-		if(habits.length === 0){
+		if (habits.length === 0) {
 			getHabits().then((response) => {
 				response.forEach((habit) => {
 					addHabitToState({
@@ -92,19 +92,33 @@ function Table() {
 	}
 
 	function makeDaysHtml(day: number) {
-		return <th key={day}>Day {day}</th>
+		return (
+			<th className="table-day-cell" key={day}>
+				{day}
+			</th>
+		)
 	}
 
 	return (
-		<div>
-			<form>
-				<input onChange={onChangeInput} value={habitInput}></input>
-				<button onClick={onSubmitHabit}>Submit</button>
+		<div className='container'>
+			<form className="habit-form">
+				<label htmlFor="habit-input">New Habit : </label>
+				<input
+					id="habit-input"
+					className='habit-input'
+					onChange={onChangeInput}
+					value={habitInput}
+				></input>
+				<button className="btn" onClick={onSubmitHabit}>
+					Submit
+				</button>
 			</form>
-			<table>
+			<table className="habit-table">
 				<thead>
-					<tr>
-						<th>Habbit</th>
+					<tr className="table-first-row">
+						<th className="table-habit-title-row">
+							<h4>Habbit</h4>
+						</th>
 						{daysArray.map(makeDaysHtml)}
 					</tr>
 				</thead>
