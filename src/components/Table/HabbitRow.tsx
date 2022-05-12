@@ -1,37 +1,30 @@
 import React, { useState, useEffect } from 'react'
 
-import { updateHabit } from '../actions/habbits'
+import { updateHabit } from '../../actions/habits'
 import {
 	hasTooManyRedsConsecutive,
 	hasTooManyReds,
 	colorCounter,
-} from '../services/colorsChecks.service'
+} from '../../services/colorsChecks.service'
 
 function HabbitRow(props) {
-	const [colors, setColors] = useState<string[]>([])
+	const [colors, setColors] = useState<string[]>(props.habitObject?.colors)
 	const daysToValidateStep: number = 13
 	const [previousArray, setPreviousArray] = useState<string[]>([])
 	const [undidStreak, setUndidStreak] = useState(false)
 	const [hasInitialized, setHasInitialized] = useState(false)
-	const [haveColorsInitialized, setHaveColorsInitialized] = useState(false)
-
-	useEffect(() => {
-		setColors(props.habitObject.colors)
-		setHasInitialized(true)
-	}, [props.habitObject.colors])
 
 	useEffect(() => {
 		if (hasInitialized) {
-			if (haveColorsInitialized) {
 				const { name, _id } = props.habitObject
 				updateHabit({ name, _id, colors }).then((response) =>
 					console.log('update : ', response)
 				)
 			} else {
-				setHaveColorsInitialized(true)
+				setHasInitialized(true)
 			}
-		}
-	}, [colors])
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [colors, props.habitObject])
 
 	function handleClickedGood() {
 		setColors((prevValue) => {
@@ -158,7 +151,7 @@ function HabbitRow(props) {
 				prevValue[lastIndex] === 'dr' ||
 				prevValue[lastIndex] === 'f'
 			) {
-				if (!undidStreak) {
+				if (!undidStreak && previousArray.length > 0) {
 					setUndidStreak(true)
 					return previousArray.filter((prevValue, index) => {
 						const lastPreviousIndex = previousArray.length - 1
@@ -201,12 +194,12 @@ function HabbitRow(props) {
 		<tr className='habit-row'>
 			<th className="habit-row-infos">
 				<div className='th-undo-clear-div'>	
-					<button className="btn-icon" onClick={handleClearButtonClick}>
-						<i className="fa-solid fa-broom"></i>
-					</button>{' '}
 					<button className="btn-icon" onClick={handleDeleteButtonClick}>
 						<i className="fa-solid fa-trash"></i>
 					</button>
+					<button className="btn-icon" onClick={handleClearButtonClick}>
+						<i className="fa-solid fa-broom"></i>
+					</button>{' '}
 				</div>
 
 				<p className='th-habit-name'>{props.name}</p>
@@ -216,7 +209,7 @@ function HabbitRow(props) {
 						<i className="fa-solid fa-plus"></i>
 					</button>{' '}
 					<button className="btn-icon btn-minus" onClick={handleClickedBad}>
-						<i className="fa-solid fa-minus"></i>
+						<i className="fa-solid fa-plus"></i>
 					</button>
 				</div>
 			</th>

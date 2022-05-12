@@ -1,5 +1,5 @@
 import * as api from '../api/index'
-import { Habit } from '../components/habits.model'
+import { Habit } from '../components/Table/habits.model'
 
 export const getHabits = async (): Promise<Habit[] | undefined> => {
     try {

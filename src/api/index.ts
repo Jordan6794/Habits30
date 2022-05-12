@@ -1,10 +1,22 @@
 import axios from 'axios'
-import { Habit } from '../components/habits.model'
+import { Habit } from '../components/Table/habits.model'
 
-const url = 'https://habits-project-backend.herokuapp.com/posts'
-// const url = 'http://localhost:5000/posts'
+const API = axios.create({baseURL: 'http://localhost:5000'})
+// baseUrl: 'https://habits-project-backend.herokuapp.com'
+// baseUrl: 'http://localhost:5000'
 
-export const fetchHabits = () => axios.get(url)
-export const postHabit = (habit: Habit) => axios.post(url, habit)
-export const updateHabit = (habit: Habit) => axios.patch(`${url}/${habit._id}`, habit)
-export const deleteHabit = (id: string) => axios.delete(`${url}/${id}`)
+API.interceptors.request.use((req) => {
+    if(localStorage.getItem('User')){
+        req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('User')).token}`
+    }
+
+    return req
+})
+
+export const fetchHabits = () => API.get('/posts')
+export const postHabit = (habit: Habit) => API.post('/posts', habit)
+export const updateHabit = (habit: Habit) => API.patch(`${'/posts'}/${habit._id}`, habit)
+export const deleteHabit = (id: string) => API.delete(`${'/posts'}/${id}`)
+
+export const signIn = (formData) => API.post('/user/signin', formData)
+export const signUp = (formData) => API.post('/user/signup', formData)
