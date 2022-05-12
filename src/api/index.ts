@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Habit } from '../components/Table/habits.model'
 
-const API = axios.create({baseURL: 'http://localhost:5000'})
+const API = axios.create({baseURL: 'https://habits-project-backend.herokuapp.com'})
 // baseUrl: 'https://habits-project-backend.herokuapp.com'
 // baseUrl: 'http://localhost:5000'
 

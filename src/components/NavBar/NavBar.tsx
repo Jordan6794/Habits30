@@ -8,11 +8,10 @@ export default function NavBar() {
 	const [showLoginModal, setShowLoginModal] = useState(false)
 	const [isSignup, setIsSignup] = useState(false)
 
-	const {user, setUser} = useContext(UserContext)
+	const {user} = useContext(UserContext)
 
 	useEffect(() => {
 		const token = user?.token
-		console.log('token from nav : ', token)
 
 		if(token){
 			const decodedToken = decode<JwtPayload>(token)
@@ -22,8 +21,6 @@ export default function NavBar() {
 			}
 		}
 	},[user])
-
-	console.log("user from nav : ", user)
 
 	function handleOpenLogin() {
 		setIsSignup(false)
@@ -40,7 +37,6 @@ export default function NavBar() {
 	}
 
 	function handleLogout() {
-		setUser(null)
 		localStorage.removeItem('User')
 		window.location.reload()
 	}
@@ -54,10 +50,10 @@ export default function NavBar() {
 				<div className="container nav-container">
 					<h4 className="header-title">Habits streak manager</h4>
 					<ul className="nav-links">
-						{user && <li>{user?.result?.username}</li>}
-						<li onClick={handleOpenSignup}>Signup</li>
-						<li onClick={handleOpenLogin}>Login</li>
-						<li onClick={handleLogout}>Logout</li>
+						{user ? <li>{user?.result?.username}</li> : <li>Public Account</li>}
+						{!user && <li onClick={handleOpenSignup}>Signup</li>}
+						{!user && <li onClick={handleOpenLogin}>Login</li>}
+						{user && <li onClick={handleLogout}>Logout</li>}
 					</ul>
 				</div>
 			</header>

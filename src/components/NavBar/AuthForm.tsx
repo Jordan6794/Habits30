@@ -1,12 +1,10 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { signup, signin } from '../../actions/auth'
-import { UserContext } from '../../context/userContext'
 
 export default function AuthForm({ p_isSignup, exitModal }) {
 	const [isSignup, setIsSignup] = useState(p_isSignup)
     const [formData, setFormdata] = useState({username: '', password: '', repeatPassword: ''})
 
-	const {setUser} = useContext(UserContext)
 
 	function onChangeUsername(event) {
 		const inputValue: string = event.target.value
@@ -27,7 +25,7 @@ export default function AuthForm({ p_isSignup, exitModal }) {
 		const data = await signup(formInfos)
 		if(data){
 			localStorage.setItem('User', JSON.stringify(data))
-			setUser(data)
+			window.location.reload()
 		}
 	}
 
@@ -35,7 +33,7 @@ export default function AuthForm({ p_isSignup, exitModal }) {
 		const data = await signin(formInfos)
 		if(data){
 			localStorage.setItem('User', JSON.stringify(data))
-			setUser(data)
+			window.location.reload()
 		}
 	}
 
