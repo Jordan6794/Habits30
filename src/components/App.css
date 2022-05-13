@@ -28,6 +28,7 @@ COMMON
 ==== */
 .btn {
 	border: none;
+	outline: none;
 	cursor: pointer;
 	background-color: #282c34;
 	color: white;
@@ -42,11 +43,13 @@ COMMON
 	padding: 0.6em;
 }
 
-.btn:hover {
-	opacity: 0.7;
+.btn:hover,
+.btn:focus {
+	opacity: 0.9;
 }
 
-.btn-icon:hover {
+.btn-icon:hover,
+.btn-icon:focus {
 	opacity: 0.7;
 }
 
@@ -82,11 +85,13 @@ NAVBAR
 /* =====Modals====== */
 .modal {
 	position: fixed;
-	width: 60%;
-	left: 20%;
-	top: 30vh;
+	width: 25%;
+	left: 37.5%;
+	top: 15vh;
 	z-index: 100;
-	background-color: pink;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+	border-radius: 10px;
+	background-color: white;
 }
 
 .backdrop {
@@ -100,8 +105,9 @@ NAVBAR
 }
 
 /* =====
-Form 
+Forms
 ==== */
+/* ====NEW HABIT FORM==== */
 .habit-form {
 	margin: 2em 0;
 	min-width: 380px;
@@ -112,6 +118,94 @@ Form
 
 .habit-input {
 	margin-right: 1em;
+}
+
+/* ====AUTH FORM===== */
+.auth-form {
+	padding: 0 2.5em;
+}
+
+.auth-form-title {
+	font-size: 2em;
+	margin: 0 auto;
+	margin-bottom: 0.5em;
+	padding: 0.5em 0;
+	border-bottom: 1px solid silver;
+}
+
+.auth-form-text-field {
+	position: relative;
+	border-bottom: 2px solid #adadad;
+	margin: 1.85em 0;
+}
+
+
+.auth-form-text-field input {
+	width: 100%;
+	padding: 0 0.3em;
+	height: 2.5em;
+	font-size: 1rem;
+	border: none;
+	background: none;
+	outline: none;
+}
+
+.auth-form-text-field label {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	left: 5px;
+	font-size: 1rem;
+	color: #adadad;
+	transition: top 0.5s;
+	pointer-events: none;
+}
+
+.auth-form-text-field span::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	width: 0%;
+	height: 2px;
+	background: #2691d9;
+	transition: 0.5s;
+}
+
+.auth-form-text-field input:focus ~ label,
+.auth-form-text-field input:valid ~ label{
+	top: -5px;
+	color: #2691d9;
+}
+
+.auth-form-text-field input:focus ~ span::before,
+.auth-form-text-field input:valid ~ span::before{
+	width: 100%;
+}
+
+.auth-btn {
+	width: 100%;
+	font-size: 1.3em;
+	font-weight: bold;
+	margin-bottom: 0.5em;
+	border-radius: 25px;
+}
+
+.switch-login_signup {
+	margin-bottom: 2em;
+}
+
+.auth-link {
+	background: none;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	font-size: 1em;
+	color: #2691d9;
+}
+
+.auth-link:hover,
+.auth-link:focus {
+	text-decoration: underline;
 }
 
 /* =====
