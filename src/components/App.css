@@ -104,6 +104,30 @@ NAVBAR
 	background-color: rgb(0, 0, 0, 0.8);
 }
 
+.close {
+	cursor: pointer;
+}
+.close:after,
+.close:before {
+	content: '';
+	height: 20px;
+	width: 20px;
+	border-top: 1px solid #000;
+	position: absolute;
+	top: 13px;
+	right: 0;
+	transform: rotate(-45deg);
+}
+
+.close:before {
+	right: 14px;
+	transform: rotate(45deg);
+}
+
+.close:hover {
+	opacity: 0.7;
+}
+
 /* =====
 Forms
 ==== */
@@ -139,7 +163,6 @@ Forms
 	margin: 1.85em 0;
 }
 
-
 .auth-form-text-field input {
 	width: 100%;
 	padding: 0 0.3em;
@@ -172,13 +195,13 @@ Forms
 }
 
 .auth-form-text-field input:focus ~ label,
-.auth-form-text-field input:valid ~ label{
+.auth-form-text-field input:valid ~ label {
 	top: -5px;
 	color: #2691d9;
 }
 
 .auth-form-text-field input:focus ~ span::before,
-.auth-form-text-field input:valid ~ span::before{
+.auth-form-text-field input:valid ~ span::before {
 	width: 100%;
 }
 

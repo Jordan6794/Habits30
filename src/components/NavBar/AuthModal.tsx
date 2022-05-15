@@ -12,6 +12,7 @@ export default function AuthModal({ exitModal, isSignup }) {
 		<>
 			<div className="backdrop" onClick={onExitModal}></div>
 			<div className="modal">
+				<span className='close' onClick={onExitModal}></span>
 				<AuthForm p_isSignup={isSignup} exitModal={exitModal} />
 			</div>
 		</>

@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { makeDayArray } from '../../services/effects.service'
 
-import HabbitRow from './HabbitRow'
+import HabitRow from './HabitRow'
 import NewHabitForm from './NewHabitForm'
 
 import { getHabits, postHabit, deleteHabit } from '../../actions/habits'
@@ -63,7 +63,7 @@ function Table() {
 
 	function createHabitComponent(habit: Habit, index: number) {
 		return (
-			<HabbitRow
+			<HabitRow
 				habitObject={habit}
 				name={habit.name}
 				key={habit._id}
