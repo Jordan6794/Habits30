@@ -3,12 +3,13 @@ import decode, { JwtPayload } from 'jwt-decode'
 import { UserContext } from '../../context/userContext'
 
 import AuthModal from './AuthModal'
+import { User } from '../user.model'
 
 export default function NavBar() {
 	const [showLoginModal, setShowLoginModal] = useState(false)
 	const [isSignup, setIsSignup] = useState(false)
 
-	const {user} = useContext(UserContext)
+	const {user}: {user: User | null} = useContext(UserContext)
 
 	useEffect(() => {
 		const token = user?.token
@@ -32,7 +33,7 @@ export default function NavBar() {
 		setShowLoginModal(true)
 	}
 
-	function handleExitLogin() {
+	function handleExitAuth() {
 		setShowLoginModal(false)
 	}
 
@@ -44,7 +45,7 @@ export default function NavBar() {
 	return (
 		<>
 			{showLoginModal && (
-				<AuthModal isSignup={isSignup} exitModal={handleExitLogin} />
+				<AuthModal isSignup={isSignup} exitModal={handleExitAuth} />
 			)}
 			<header className="App-navbar">
 				<div className="container nav-container">

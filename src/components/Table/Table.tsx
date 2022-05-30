@@ -29,6 +29,9 @@ function Table() {
 						name: habit.name,
 						_id: habit._id,
 						colors: habit.colors,
+						successCounter: habit.successCounter,
+						failCounter: habit.failCounter,
+						previousArrays: habit.previousArrays,
 					})
 				})
 				setIsLoadingHabits(false)
@@ -40,14 +43,17 @@ function Table() {
 		setHabits((prevHabits) => [...prevHabits, newHabit])
 	}
 
-	function handleSubmitHabit(habitName: string) {
+	async function handleSubmitHabit(habitName: string) {
 		const newHabit: Habit = {
 			name: habitName,
 			_id: uuidv4(),
 			colors: [],
+			successCounter: 0,
+			failCounter: 0,
+			previousArrays: [],
 		}
 		addHabitToState(newHabit)
-		postHabit(newHabit)
+		await postHabit(newHabit)
 	}
 
 	function onDeleteHabit(deleteIndex: number) {
@@ -86,21 +92,23 @@ function Table() {
 	return (
 		<div className="container">
 			<NewHabitForm handleSubmitHabit={handleSubmitHabit} />
-			<table className="habit-table">
-				<thead>
-					<tr className="table-first-row">
-						<th className="table-habit-title-cell">
-							<h4 className="table-habit-title">Habit</h4>
-						</th>
-						{daysArray.map(makeDaysHtml)}
-					</tr>
-				</thead>
+			<div className="habit-table-container">
+				<table className="habit-table">
+					<thead>
+						<tr className="table-first-row">
+							<th className="table-habit-title-cell">
+								<h4 className="table-habit-title">Habit</h4>
+							</th>
+							{daysArray.map(makeDaysHtml)}
+						</tr>
+					</thead>
 
-				<tbody>
-					{isLoadingHabits && <TableSkeleton />}
-					{habits.map(createHabitComponent)}
-				</tbody>
-			</table>
+					<tbody>
+						{isLoadingHabits && <TableSkeleton />}
+						{habits.map(createHabitComponent)}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	)
 }

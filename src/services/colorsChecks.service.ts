@@ -52,7 +52,7 @@ export function hasTooManyReds(array: string[]) {
 
 export function colorCounter(array: string[], color: string) {
 	let counter = 0
-	for (let i = 0; i < array.length; i++) {
+	for (let i = 0; i < array?.length; i++) {
 		if (array[i] === color) {
 			counter++
 		}

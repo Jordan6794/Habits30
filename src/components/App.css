@@ -40,7 +40,7 @@ COMMON
 	border: none;
 	cursor: pointer;
 	background-color: transparent;
-	padding: 0.6em;
+	padding: 0.5em;
 }
 
 .btn:hover,
@@ -83,6 +83,11 @@ NAVBAR
 }
 
 /* =====Modals====== */
+@keyframes backdrop-opacity {
+	0% {
+		opacity: 0
+	}
+}
 .modal {
 	position: fixed;
 	width: 25%;
@@ -101,7 +106,11 @@ NAVBAR
 	width: 100%;
 	height: 100vh;
 	z-index: 50;
-	background-color: rgb(0, 0, 0, 0.8);
+	background-color: rgb(0, 0, 0);
+	opacity: 0.8;
+
+	animation-name: backdrop-opacity;
+    animation-duration: 0.3s;
 }
 
 .close {
@@ -191,7 +200,7 @@ Forms
 	width: 0%;
 	height: 2px;
 	background: #2691d9;
-	transition: 0.5s;
+	transition: width 0.5s;
 }
 
 .auth-form-text-field input:focus ~ label,
@@ -211,6 +220,11 @@ Forms
 	font-weight: bold;
 	margin-bottom: 0.5em;
 	border-radius: 25px;
+}
+
+.auth-btn:disabled {
+	opacity: 0.5;
+	cursor:initial;
 }
 
 .switch-login_signup {
@@ -291,6 +305,7 @@ Table
 .habit-row-infos {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 }
 
 .th-habit-name {
@@ -305,6 +320,21 @@ Table
 .th-undo-btn {
 	border-top: 1px solid #dddddd;
 	border-bottom: 1px solid #dddddd;
+}
+
+.green-counter,
+.red-counter {
+	font-weight: 600;
+	margin: 0;
+	padding: 0.5em;
+}
+
+.green-counter{
+	color: green;
+}
+
+.red-counter{
+	color: red;
 }
 
 .th-plus-minus-div {
@@ -325,7 +355,7 @@ Table
 
 /* To make table scrollable : (and wrap with div 'habit-table-container')
 ======================== */
-/* .habit-table-container {
+.habit-table-container {
 	max-height: 500px;
 	overflow: auto;
 	margin-bottom: 6em;
@@ -360,4 +390,4 @@ Table
 	overflow: unset;
 	width: 100%;
 	margin-bottom: 0;
-} */
+}

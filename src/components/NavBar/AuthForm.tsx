@@ -1,13 +1,26 @@
 import React, { useState } from 'react'
-import { signup, signin } from '../../actions/auth'
 
-export default function AuthForm({ p_isSignup, exitModal }) {
-	const [isSignup, setIsSignup] = useState(p_isSignup)
-	const [formData, setFormdata] = useState({
+import { signup, signin } from '../../actions/auth'
+import { formData } from './formData.model'
+
+export default function AuthForm({
+	p_isSignup,
+	exitModal,
+}: {
+	p_isSignup: boolean
+	exitModal: () => void
+}) {
+	const [isSignup, setIsSignup] = useState<boolean>(p_isSignup)
+	//? duplicate name formdata okay ? lololol l'interface qui duplicate le name
+	const [formData, setFormdata] = useState<formData>({
 		username: '',
 		password: '',
-		repeatPassword: '',
+		repeatPassword: ''
 	})
+	const isFormValid =
+		formData.username !== '' &&
+		formData.password !== '' &&
+		(formData.repeatPassword !== '' || !isSignup)
 
 	function onChangeUsername(event) {
 		const inputValue: string = event.target.value
@@ -24,15 +37,15 @@ export default function AuthForm({ p_isSignup, exitModal }) {
 		setFormdata((prevData) => ({ ...prevData, repeatPassword: inputValue }))
 	}
 
-	async function handleSignup(formInfos) {
-		const data = await signup(formInfos)
-		if (data) {
-			localStorage.setItem('User', JSON.stringify(data))
+	async function handleSignup(inputs: formData) {
+		const response = await signup(inputs)
+		if (response) {
+			localStorage.setItem('User', JSON.stringify(response))
 			window.location.reload()
 		}
 	}
 
-	async function handleSignin(formInfos) {
+	async function handleSignin(formInfos: formData) {
 		const data = await signin(formInfos)
 		if (data) {
 			localStorage.setItem('User', JSON.stringify(data))
@@ -42,7 +55,6 @@ export default function AuthForm({ p_isSignup, exitModal }) {
 
 	function onSubmit(event) {
 		event.preventDefault()
-		console.log('formData from form ; ', formData)
 		if (isSignup) {
 			handleSignup(formData)
 		} else {
@@ -95,7 +107,11 @@ export default function AuthForm({ p_isSignup, exitModal }) {
 					</div>
 				)}
 				<div>
-					<button className="btn auth-btn" onClick={onSubmit}>
+					<button
+						disabled={!isFormValid}
+						className="btn auth-btn"
+						onClick={onSubmit}
+					>
 						{isSignup ? 'Signup' : 'Login'}
 					</button>
 					<div className="switch-login_signup">
