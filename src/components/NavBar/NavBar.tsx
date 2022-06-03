@@ -1,15 +1,14 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import decode, { JwtPayload } from 'jwt-decode'
-import { UserContext } from '../../context/userContext'
 
 import AuthModal from './AuthModal'
-import { User } from '../user.model'
+import { useAppSelector } from '../../hooks'
 
 export default function NavBar() {
 	const [showLoginModal, setShowLoginModal] = useState(false)
 	const [isSignup, setIsSignup] = useState(false)
 
-	const {user}: {user: User | null} = useContext(UserContext)
+	const user = useAppSelector(state => state.auth)
 
 	useEffect(() => {
 		const token = user?.token

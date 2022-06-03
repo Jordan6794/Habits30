@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
-import { makeDayArray } from '../../services/effects.service'
+import { makeDayArray as makeDaysArray } from '../../services/effects.service'
 
 import HabitRow from './HabitRow'
 import NewHabitForm from './NewHabitForm'
@@ -11,37 +11,36 @@ import { getHabits, postHabit, deleteHabit } from '../../actions/habits'
 import { Habit } from './habits.model'
 import { NUMBER_OF_DAYS } from '../../consts/consts'
 import { TableSkeleton } from '../../shared/skeletons'
+import { useAppDispatch, useAppSelector } from '../../hooks'
+import { habitsActions } from '../../store/habits'
 
 function Table() {
-	const [habits, setHabits] = useState<Habit[]>([])
 	const [isLoadingHabits, setIsLoadingHabits] = useState(false)
+
+	const habits = useAppSelector(state => state.habits)
+	const dispatch = useAppDispatch()
 
 	let daysArray: number[] = []
 
-	makeDayArray(daysArray, NUMBER_OF_DAYS)
+	makeDaysArray(daysArray, NUMBER_OF_DAYS)
 
 	useEffect(() => {
-		if (habits.length === 0) {
+		const fetchHabits = async () => {
 			setIsLoadingHabits(true)
-			getHabits().then((response) => {
-				response.forEach((habit) => {
-					addHabitToState({
-						name: habit.name,
-						_id: habit._id,
-						colors: habit.colors,
-						successCounter: habit.successCounter,
-						failCounter: habit.failCounter,
-						previousArrays: habit.previousArrays,
-					})
-				})
-				setIsLoadingHabits(false)
-			})
-		}
-	}, [])
+			try {
+				const response = await getHabits()
+				dispatch(habitsActions.set(response))
 
-	function addHabitToState(newHabit: Habit) {
-		setHabits((prevHabits) => [...prevHabits, newHabit])
-	}
+			} catch (error) {
+				console.log('error in table : ', error)
+			}
+			setIsLoadingHabits(false)
+		}
+
+		if (habits.length === 0) {
+			fetchHabits()
+		}
+	}, [dispatch])
 
 	async function handleSubmitHabit(habitName: string) {
 		const newHabit: Habit = {
@@ -52,31 +51,17 @@ function Table() {
 			failCounter: 0,
 			previousArrays: [],
 		}
-		addHabitToState(newHabit)
 		await postHabit(newHabit)
+		dispatch(habitsActions.add(newHabit))
 	}
 
 	function onDeleteHabit(deleteIndex: number) {
-		setHabits((prevHabits) => {
-			return prevHabits.filter((habit, index) => {
-				if (index === deleteIndex) {
-					deleteHabit(habit._id)
-				}
-				return index !== deleteIndex
-			})
-		})
+		deleteHabit(habits[deleteIndex]._id)
+		dispatch(habitsActions.delete(deleteIndex))
 	}
 
-	function createHabitComponent(habit: Habit, index: number) {
-		return (
-			<HabitRow
-				habitObject={habit}
-				name={habit.name}
-				key={habit._id}
-				index={index}
-				delete={onDeleteHabit}
-			/>
-		)
+	function createHabitRow(habit: Habit, index: number) {
+		return <HabitRow habitObject={habit} name={habit.name} key={habit._id} index={index} delete={onDeleteHabit} />
 	}
 
 	function makeDaysHtml(day: number) {
@@ -92,7 +77,7 @@ function Table() {
 	return (
 		<div className="container">
 			<NewHabitForm handleSubmitHabit={handleSubmitHabit} />
-			<div className="habit-table-container">
+			{/* <div className="habit-table-container"> */}
 				<table className="habit-table">
 					<thead>
 						<tr className="table-first-row">
@@ -105,10 +90,10 @@ function Table() {
 
 					<tbody>
 						{isLoadingHabits && <TableSkeleton />}
-						{habits.map(createHabitComponent)}
+						{habits.map(createHabitRow)}
 					</tbody>
 				</table>
-			</div>
+			{/* </div> */}
 		</div>
 	)
 }

@@ -355,7 +355,7 @@ Table
 
 /* To make table scrollable : (and wrap with div 'habit-table-container')
 ======================== */
-.habit-table-container {
+/* .habit-table-container {
 	max-height: 500px;
 	overflow: auto;
 	margin-bottom: 6em;
@@ -390,4 +390,4 @@ Table
 	overflow: unset;
 	width: 100%;
 	margin-bottom: 0;
-}
+} */

@@ -1,17 +1,18 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import './App.css'
 
 import Table from './Table/Table'
 import NavBar from './NavBar/NavBar'
-import { UserContext } from '../context/userContext'
+import { useAppDispatch } from '../hooks'
+import { authActions } from '../store/auth'
 
 function App() {
-	const {setUser} = useContext(UserContext)
+	const dispatch = useAppDispatch()
 
 	useEffect(() => {
-		setUser(JSON.parse(localStorage.getItem('User')))
-	},[setUser])
+		dispatch(authActions.setUser(JSON.parse(localStorage.getItem('User'))))
+	},[dispatch])
 
 	return (
 		<div className="App">

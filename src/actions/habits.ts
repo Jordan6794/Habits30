@@ -7,7 +7,7 @@ export const getHabits = async (): Promise<Habit[] | undefined> => {
         return data
     } catch (error) {
         console.log(error.message)
-        return []
+        throw new Error(error.message)
     }
     
 }
