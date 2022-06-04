@@ -1,81 +1,93 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Habit } from '../components/Table/habits.model'
 import { addFailColor, addSuccessColor } from '../services/colorsAdd.service'
-import { DAYS_TO_VALIDATE_STEP, FAIL_COLOR, FAIL_STREAK_COLOR, SUCCESS_COLOR, SUCCESS_FINISH_COLOR, SUCCESS_STREAK_COLOR } from '../consts/consts'
+import { ONGOING, DAYS_TO_VALIDATE_STEP, FAIL_COLOR, FAIL_STREAK_COLOR, SUCCESS_COLOR, SUCCESS_FINISH_COLOR, SUCCESS_STREAK_COLOR, FINISHED } from '../consts/consts'
 import { colorCounter, hasTooManyReds, hasTooManyRedsConsecutive } from '../services/colorsChecks.service'
 
-const initialHabits: Habit[] = []
+const initialHabits: {[ONGOING]: Habit[], [FINISHED]: Habit[]} = {[ONGOING]: [], [FINISHED]: []}
 
 const habitsSlice = createSlice({
 	name: 'habits',
 	initialState: initialHabits,
 	reducers: {
-		set(state, action: PayloadAction<Habit[]>) {
-			return action.payload
+		set(state, action: PayloadAction<{habits: Habit[], collection: string}>) {
+			state[action.payload.collection] = action.payload.habits
 		},
-		add(state, action: PayloadAction<Habit>) {
-			state.push(action.payload)
+		add(state, action: PayloadAction<{habit: Habit, collection: string}>) {
+			state[action.payload.collection].push(action.payload.habit)
 		},
-		delete(state, action: PayloadAction<number>) {
-			return state.filter((_, index) => index !== action.payload)
+		delete(state, action: PayloadAction<{index: number, collection: string}>) {
+			const { collection , index} = action.payload
+			state[collection].splice(index, 1)
 		},
-		addSuccessColor(state, action: PayloadAction<number>) {
-			state[action.payload].colors = addSuccessColor(state[action.payload].colors)
+		addSuccessColor(state, action: PayloadAction<{index: number, collection: string}>) {
+			const {collection, index } = action.payload
+			state[collection][index].colors = addSuccessColor(state[collection][index].colors )
 
 			// checking for new streaks
-			const successStreakCount = colorCounter(state[action.payload].colors, SUCCESS_STREAK_COLOR)
-			const successCount = colorCounter(state[action.payload].colors, SUCCESS_COLOR)
-			const successFinishCount = colorCounter(state[action.payload].colors, SUCCESS_FINISH_COLOR)
+			const successStreakCount = colorCounter(state[collection][index].colors, SUCCESS_STREAK_COLOR)
+			const successCount = colorCounter(state[collection][index].colors, SUCCESS_COLOR)
+			const successFinishCount = colorCounter(state[collection][index].colors, SUCCESS_FINISH_COLOR)
 			if (successFinishCount === 0) {
 				if (successStreakCount === 0) {
 					if (successCount >= DAYS_TO_VALIDATE_STEP) {
-						state[action.payload].previousArrays.push(state[action.payload].colors)
-						state[action.payload].colors = [SUCCESS_STREAK_COLOR]
+						state[collection][index].previousArrays.push(state[collection][index].colors)
+						state[collection][index].colors = [SUCCESS_STREAK_COLOR]
 					}
 				} else if (successStreakCount === 1) {
 					if (successCount >= DAYS_TO_VALIDATE_STEP) {
-						const redCount = colorCounter(state[action.payload].colors, FAIL_COLOR)
+						const redCount = colorCounter(state[collection][index].colors, FAIL_COLOR)
 						if (redCount === 0) {
 							// if 0 fail upgrade to finish color directly
-							state[action.payload].previousArrays.push(state[action.payload].colors)
-							state[action.payload].colors = [SUCCESS_FINISH_COLOR]
+							state[collection][index].previousArrays.push(state[collection][index].colors)
+							state[collection][index].colors = [SUCCESS_FINISH_COLOR]
 						} else {
-							state[action.payload].previousArrays.push(state[action.payload].colors)
-							state[action.payload].colors = [SUCCESS_STREAK_COLOR, SUCCESS_STREAK_COLOR]
+							state[collection][index].previousArrays.push(state[collection][index].colors)
+							state[collection][index].colors = [SUCCESS_STREAK_COLOR, SUCCESS_STREAK_COLOR]
 						}
 					}
 				} else if (successStreakCount === 2) {
 					if (successCount >= DAYS_TO_VALIDATE_STEP) {
-						state[action.payload].previousArrays.push(state[action.payload].colors)
-						state[action.payload].colors = [SUCCESS_FINISH_COLOR]
+						state[collection][index].previousArrays.push(state[collection][index].colors)
+						state[collection][index].colors = [SUCCESS_FINISH_COLOR]
 					}
 				} else {
 					console.log('success streak count not in boundaries, successStreakCount : ' + successStreakCount)
 				}
-			} else {
-				const failCount = colorCounter(state[action.payload].colors, FAIL_COLOR)
+				
+			} else { 
+				//successfinishcount === 1 here
+				const failCount = colorCounter(state[collection][index].colors, FAIL_COLOR)
 				if (successCount > failCount * 3) {
-					state[action.payload].previousArrays.push(state[action.payload].colors)
-					state[action.payload].colors = [SUCCESS_FINISH_COLOR]
+					state[collection][index].previousArrays.push(state[collection][index].colors)
+					state[collection][index].colors = [SUCCESS_FINISH_COLOR]
 				}
 			}
 
 			//updating success and fail counters
-			state[action.payload].failCounter = colorCounter(state[action.payload].colors, FAIL_COLOR)
-			state[action.payload].successCounter += 1
+			state[collection][index].failCounter = colorCounter(state[collection][index].colors, FAIL_COLOR)
+			state[collection][index].successCounter += 1
+
+			//If needed moving habit into finished collection
+			if(collection === ONGOING){
+				if(colorCounter(state[collection][index].colors, SUCCESS_FINISH_COLOR)){
+					state[ONGOING][index].shouldSwitchCollection = true
+				}
+			}
 		},
-		addFailColor(state, action: PayloadAction<number>) {
-			state[action.payload].colors = addFailColor(state[action.payload].colors)
+		addFailColor(state, action: PayloadAction<{index: number, collection: string}>) {
+			const { index, collection } = action.payload
+			state[collection][index].colors = addFailColor(state[collection][index].colors)
 
 			//checking for new streaks
-			if (hasTooManyRedsConsecutive(state[action.payload].colors) || hasTooManyReds(state[action.payload].colors)) {
-				const successFinishCount = colorCounter(state[action.payload].colors, SUCCESS_FINISH_COLOR)
+			if (hasTooManyRedsConsecutive(state[collection][index].colors) || hasTooManyReds(state[collection][index].colors)) {
+				const successFinishCount = colorCounter(state[collection][index].colors, SUCCESS_FINISH_COLOR)
 				if (successFinishCount === 1) {
-					state[action.payload].previousArrays.push(state[action.payload].colors)
-					state[action.payload].colors = [SUCCESS_STREAK_COLOR]
+					state[collection][index].previousArrays.push(state[collection][index].colors)
+					state[collection][index].colors = [SUCCESS_STREAK_COLOR]
 				} else {
-					state[action.payload].previousArrays.push(state[action.payload].colors)
-					state[action.payload].colors = [FAIL_STREAK_COLOR]
+					state[collection][index].previousArrays.push(state[collection][index].colors)
+					state[collection][index].colors = [FAIL_STREAK_COLOR]
 				}
 			}
 
@@ -83,7 +95,7 @@ const habitsSlice = createSlice({
 			//! remove duplicate definition calculateSuccessCount ? (need to access state and action.payload)
 			function calculateSuccessCount(colors: string[]) {
 				if (colorCounter(colors, SUCCESS_FINISH_COLOR) === 1) {
-					return state[action.payload].successCounter
+					return state[collection][index].successCounter
 				} else if (colorCounter(colors, SUCCESS_STREAK_COLOR) === 0) {
 					return colorCounter(colors, SUCCESS_COLOR)
 				} else {
@@ -92,44 +104,59 @@ const habitsSlice = createSlice({
 					return successStreakCount * DAYS_TO_VALIDATE_STEP + successCount
 				}
 			}
-			state[action.payload].successCounter = calculateSuccessCount(state[action.payload].colors)
-			state[action.payload].failCounter += 1
+			state[collection][index].successCounter = calculateSuccessCount(state[collection][index].colors)
+			state[collection][index].failCounter += 1
+
+			//If needed moving habit down into ongoing collection
+			if(collection === FINISHED){
+				if(colorCounter(state[collection][index].colors, SUCCESS_FINISH_COLOR) === 0){
+					state[FINISHED][index].shouldSwitchCollection = true
+				}
+			}
 		},
-		clearColors(state, action: PayloadAction<number>) {
-			state[action.payload].colors = []
-			state[action.payload].successCounter = 0
-			state[action.payload].failCounter = 0
-			state[action.payload].previousArrays = []
+		clearColors(state, action: PayloadAction<{index: number, collection: string}>) {
+			const { index, collection } = action.payload
+			state[collection][index].colors = []
+			state[collection][index].successCounter = 0
+			state[collection][index].failCounter = 0
+			state[collection][index].previousArrays = []
+			state[collection][index].shouldSwitchCollection = false
+
+			//move habit to current if it was finished
+			if(collection === FINISHED){
+				state[FINISHED][index].shouldSwitchCollection = true
+			}
 		},
-		undoColors(state, action: PayloadAction<number>) {
-			const previousArrays = state[action.payload].previousArrays
-			const colors = state[action.payload].colors
+		undoColors(state, action: PayloadAction<{index: number, collection: string}>) {
+			const { index, collection } = action.payload
+			const previousArrays = state[collection][index].previousArrays
+			const colors = state[collection][index].colors
 
 			// updating success and fail counters
 			if (previousArrays.length > 0 && previousArrays[previousArrays.length - 1][0] === SUCCESS_FINISH_COLOR) {
-				state[action.payload].successCounter = 25
-				state[action.payload].failCounter = colorCounter(previousArrays[previousArrays.length - 1], FAIL_COLOR)
+				state[collection][index].successCounter = 25
+				state[collection][index].failCounter = colorCounter(previousArrays[previousArrays.length - 1], FAIL_COLOR)
 			} else {
 				const previousArray = previousArrays[previousArrays.length - 1]
 				const lastColor = colors[colors.length - 1]
 				switch (lastColor) {
 					case SUCCESS_COLOR:
-						state[action.payload].successCounter -= 1
+						state[collection][index].successCounter -= 1
 						break
 					case FAIL_COLOR:
-						state[action.payload].failCounter -= 1
+						state[collection][index].failCounter -= 1
 						break
 					case SUCCESS_STREAK_COLOR:
-						state[action.payload].successCounter -= 1
-						state[action.payload].failCounter = colorCounter(previousArray, FAIL_COLOR)
+						state[collection][index].successCounter -= 1
+						state[collection][index].failCounter = colorCounter(previousArray, FAIL_COLOR)
 						break
 					case FAIL_STREAK_COLOR:
-						state[action.payload].failCounter -= 1
-						state[action.payload].successCounter = calculateSuccessCount(previousArray)
+						state[collection][index].failCounter -= 1
+						state[collection][index].successCounter = calculateSuccessCount(previousArray)
 						break
 					case SUCCESS_FINISH_COLOR:
-						state[action.payload].successCounter -= 1
-						state[action.payload].failCounter = colorCounter(previousArray, FAIL_COLOR)
+						state[collection][index].successCounter -= 1
+						state[collection][index].failCounter = colorCounter(previousArray, FAIL_COLOR)
 						break
 				}
 			}
@@ -137,7 +164,7 @@ const habitsSlice = createSlice({
 			//! remove duplicate definition calculateSuccessCount ? (need to access state and action.payload)
 			function calculateSuccessCount(colors: string[]) {
 				if (colorCounter(colors, SUCCESS_FINISH_COLOR) === 1) {
-					return state[action.payload].successCounter
+					return state[collection][index].successCounter
 				} else if (colorCounter(colors, SUCCESS_STREAK_COLOR) === 0) {
 					return colorCounter(colors, SUCCESS_COLOR)
 				} else {
@@ -154,24 +181,32 @@ const habitsSlice = createSlice({
 					const previousArray = previousArrays[previousArrays.length - 1]
 
                     //updating previousArrays
-                    //! replace by pop()?
-					state[action.payload].previousArrays = previousArrays.filter((array, index) => {
-						return index !== previousArrays.length - 1
-					})
-
-                    //! replace by pop()?
-					state[action.payload].colors = previousArray.filter((colors, index) => {
-						const lastPreviousIndex = previousArray.length - 1
-						return index !== lastPreviousIndex
-					})
+					state[collection][index].previousArrays.pop()
+					
+					previousArray.pop()
+					state[collection][index].colors = previousArray
 				} 
 			} else {
-                //! replace by pop()?
-				state[action.payload].colors = colors.filter((prevValue, index) => {
-					return index !== lastIndex
-				})
+				state[collection][index].colors.pop()
+			}
+
+			//moving to the coresponding collection if needed
+			if(collection === ONGOING){
+				if(colorCounter(state[collection][index].colors, SUCCESS_FINISH_COLOR)){
+					state[ONGOING][index].shouldSwitchCollection = true
+				}
+			} else if(collection === FINISHED){
+				if(colorCounter(state[collection][index].colors, SUCCESS_FINISH_COLOR) === 0){
+					state[FINISHED][index].shouldSwitchCollection = true
+				}
 			}
 		},
+		switchCollection(state, action: PayloadAction<{index: number, fromCollection: string, toCollection: string}>){
+			const {index, fromCollection, toCollection} = action.payload
+			state[fromCollection][index].shouldSwitchCollection = false
+			state[toCollection].push(state[fromCollection][index])
+			state[fromCollection].splice(index, 1)
+		}
 	},
 })
 

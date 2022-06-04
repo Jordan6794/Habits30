@@ -2,54 +2,74 @@ import React, { useState, useEffect, FunctionComponent } from 'react'
 
 import HabitCell from './HabitCell'
 
-import { updateHabit } from '../../actions/habits'
+import { switchCollection, updateHabit } from '../../actions/habits'
 import { Habit } from './habits.model'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import { habitsActions } from '../../store/habits'
+import { FINISHED, ONGOING } from '../../consts/consts'
 
-const HabitRow: FunctionComponent<{ habitObject: Habit; index: number; name: string; delete: (deleteIndex: number) => void }> = (props) => {
+const HabitRow: FunctionComponent<{
+	habitObject: Habit
+	index: number
+	collection: string
+	name: string
+	delete: (deleteIndex: number, collection: string) => void
+}> = (props) => {
 	const [hasInitialized, setHasInitialized] = useState(false)
 
-	const {colors, successCounter, failCounter, previousArrays} = useAppSelector(state => state.habits[props.index])
+	const { colors, successCounter, failCounter, previousArrays } = useAppSelector((state) => state.habits[props.collection][props.index])
 	const dispatch = useAppDispatch()
 
 	useEffect(() => {
-		if (hasInitialized) {
-			const { name, _id } = props.habitObject
+		async function handleUpdate() {
+			const { name, _id, shouldSwitchCollection } = props.habitObject
 
-			updateHabit({
-				name,
-				_id,
-				colors,
-				successCounter,
-				failCounter,
-				previousArrays,
-			}).then((response) => console.log('update : ', response))
+			if (shouldSwitchCollection) {
+				const toCollection = props.collection === ONGOING ? FINISHED : ONGOING
+				const response = await switchCollection(props.habitObject, _id, props.collection, toCollection)
+				const {index} = props
+				dispatch(habitsActions.switchCollection({index, fromCollection: props.collection, toCollection}))
+				console.log('switched collection: ', response)
+			} else {
+				const updatedHabit = {
+					name,
+					_id,
+					colors,
+					successCounter,
+					failCounter,
+					previousArrays,
+				}
+				const response = await updateHabit(updatedHabit, props.collection)
+				console.log('update : ', response)
+			}
+		}
+		if (hasInitialized) {
+			handleUpdate()
 		} else {
 			setHasInitialized(true)
 		}
-		
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [colors, failCounter, successCounter, previousArrays, props.habitObject])
 
 	//? move all the handles in onClick arrow funct ?
 	function handleClickedGood() {
-		dispatch(habitsActions.addSuccessColor(props.index))
+		//? put payload as an object for more clarity in param name ?
+		dispatch(habitsActions.addSuccessColor({ index: props.index, collection: props.collection }))
 	}
 	function handleClickedBad() {
-		dispatch(habitsActions.addFailColor(props.index))
+		dispatch(habitsActions.addFailColor({ index: props.index, collection: props.collection }))
 	}
 	function handleDeleteButtonClick() {
-		props.delete(props.index)
+		props.delete(props.index, props.collection)
 	}
 	function handleClearButtonClick() {
-		dispatch(habitsActions.clearColors(props.index))
+		dispatch(habitsActions.clearColors({ index: props.index, collection: props.collection }))
 	}
 	function undoButton() {
-		dispatch(habitsActions.undoColors(props.index))
+		dispatch(habitsActions.undoColors({ index: props.index, collection: props.collection }))
 	}
 
-	const colorsCells = colors.map((color, index) => <HabitCell key={index} color={color} index={index} />)
+	const colorsCells = colors.map((color: string, index: number) => <HabitCell key={index} color={color} index={index} />)
 
 	const streakCounterDisplay =
 		successCounter >= failCounter ? <p className="green-counter">({successCounter})</p> : <p className="red-counter">({failCounter})</p>

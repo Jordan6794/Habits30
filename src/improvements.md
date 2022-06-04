@@ -1,17 +1,16 @@
+- change collection from string type to enum
 - Finish design add grey profile pic ?:  et make footer ; undo et clear en plain text btn ?
 - Make name editable (popup edit habit onclick sur le name ?) (ou alors contenteditable + manually onChange qui update in state & db ?)
-- remove side effects in undo button the same way I did with add colors
 - move le form input en last row du table ?
 - make un explanation / title area
-- implement le show password feature
-- Gerer les user auth req erreurs et display dans le form
 - finish refacto
-- switch en redux
-- Update le state client AFTER les http request et manage les errors dans l'UX si error
 - add email to signup (and login with email too)
-- changer mon undo/history into un array de colors
+- changer mon undo/history into un array de habits
 
 Improvements :
+- implement le show password feature
+- Update le state client AFTER les http request et manage les errors dans l'UX si error
+- Gerer les user auth req erreurs et display dans le form
 - Make a second part "finished" habbits bellow, et faire un array de finished habbits rendered en bas, quand l'habit passe finished elle est add au finishedHabbitArray et vice versa si elle refail
 - get une favicon
 - Make un truc pour move up/down habits in the list
