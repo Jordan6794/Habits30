@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import { signup, signin } from '../../actions/auth'
-import { formData } from './formData.model'
+import { FormData } from './formData.model'
 
 export default function AuthForm({
 	p_isSignup,
@@ -12,7 +12,7 @@ export default function AuthForm({
 }) {
 	const [isSignup, setIsSignup] = useState<boolean>(p_isSignup)
 	//? duplicate name formdata okay ? lololol l'interface qui duplicate le name
-	const [formData, setFormdata] = useState<formData>({
+	const [formData, setFormdata] = useState<FormData>({
 		username: '',
 		password: '',
 		repeatPassword: ''
@@ -22,22 +22,22 @@ export default function AuthForm({
 		formData.password !== '' &&
 		(formData.repeatPassword !== '' || !isSignup)
 
-	function onChangeUsername(event) {
+	function onChangeUsername(event: React.ChangeEvent<HTMLInputElement>) {
 		const inputValue: string = event.target.value
 		setFormdata((prevData) => ({ ...prevData, username: inputValue }))
 	}
 
-	function onChangePassword(event) {
+	function onChangePassword(event: React.ChangeEvent<HTMLInputElement>) {
 		const inputValue: string = event.target.value
 		setFormdata((prevData) => ({ ...prevData, password: inputValue }))
 	}
 
-	function onChangeRepeatPassword(event) {
+	function onChangeRepeatPassword(event: React.ChangeEvent<HTMLInputElement>) {
 		const inputValue: string = event.target.value
 		setFormdata((prevData) => ({ ...prevData, repeatPassword: inputValue }))
 	}
 
-	async function handleSignup(inputs: formData) {
+	async function handleSignup(inputs: FormData) {
 		const response = await signup(inputs)
 		if (response) {
 			localStorage.setItem('User', JSON.stringify(response))
@@ -45,7 +45,7 @@ export default function AuthForm({
 		}
 	}
 
-	async function handleSignin(formInfos: formData) {
+	async function handleSignin(formInfos: FormData) {
 		const data = await signin(formInfos)
 		if (data) {
 			localStorage.setItem('User', JSON.stringify(data))
@@ -53,7 +53,7 @@ export default function AuthForm({
 		}
 	}
 
-	function onSubmit(event) {
+	function onSubmit(event: React.FormEvent) {
 		event.preventDefault()
 		if (isSignup) {
 			handleSignup(formData)

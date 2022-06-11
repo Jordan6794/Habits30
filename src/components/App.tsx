@@ -11,7 +11,9 @@ function App() {
 	const dispatch = useAppDispatch()
 
 	useEffect(() => {
-		dispatch(authActions.setUser(JSON.parse(localStorage.getItem('User'))))
+		const userStorage = localStorage.getItem('User')
+		dispatch(authActions.setUser(userStorage ? JSON.parse(userStorage) : null))
+
 	},[dispatch])
 
 	return (

@@ -8,7 +8,7 @@ export default function NavBar() {
 	const [showLoginModal, setShowLoginModal] = useState(false)
 	const [isSignup, setIsSignup] = useState(false)
 
-	const user = useAppSelector(state => state.auth)
+	const user = useAppSelector(state => state.auth.user)
 
 	useEffect(() => {
 		const token = user?.token
@@ -16,7 +16,7 @@ export default function NavBar() {
 		if(token){
 			const decodedToken = decode<JwtPayload>(token)
 
-			if(decodedToken.exp * 1000 < new Date().getTime()){
+			if(decodedToken.exp && decodedToken.exp * 1000 < new Date().getTime()){
 				handleLogout()
 			}
 		}

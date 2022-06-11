@@ -8,6 +8,8 @@ table {
 
 th {
 	border: 1px solid white;
+	/*? debatable, put border top again ? */
+	border-top: none;
 }
 
 h4 {
@@ -66,6 +68,7 @@ NAVBAR
 	display: flex;
 	text-align: left;
 	color: white;
+	box-shadow: 3px 3px 5px rgba(0,0,0,0.05);
 }
 
 .nav-container {
@@ -302,6 +305,10 @@ Table
 	border-bottom: none;
 }
 
+.lastCellChanged{
+	opacity: 0.75
+}
+
 .habit-row-infos {
 	display: flex;
 	justify-content: space-between;
@@ -318,7 +325,6 @@ Table
 }
 
 .th-undo-btn {
-	border-top: 1px solid #dddddd;
 	border-bottom: 1px solid #dddddd;
 }
 
@@ -327,6 +333,10 @@ Table
 	font-weight: 600;
 	margin: 0;
 	padding: 0.5em;
+}
+
+.changedCounter {
+	font-weight: 700;
 }
 
 .green-counter{

@@ -9,7 +9,7 @@ import NewHabitForm from './NewHabitForm'
 
 import { getHabits, postHabit, deleteHabit } from '../../actions/habits'
 import { Habit } from './habits.model'
-import { ONGOING, NUMBER_OF_DAYS, FINISHED } from '../../consts/consts'
+import { NUMBER_OF_DAYS, Collection } from '../../consts/consts'
 import { TableSkeleton } from '../../shared/skeletons'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import { habitsActions } from '../../store/habits'
@@ -17,8 +17,8 @@ import { habitsActions } from '../../store/habits'
 function Table() {
 	const [isLoadingHabits, setIsLoadingHabits] = useState(false)
 
-	const ongoingHabits = useAppSelector(state => state.habits[ONGOING])
-	const finishedHabits = useAppSelector(state => state.habits[FINISHED])
+	const ongoingHabits = useAppSelector(state => state.habits[Collection.Ongoing])
+	const finishedHabits = useAppSelector(state => state.habits[Collection.Finished])
 	const dispatch = useAppDispatch()
 
 	let daysArray: number[] = []
@@ -26,24 +26,25 @@ function Table() {
 	makeDaysArray(daysArray, NUMBER_OF_DAYS)
 
 	useEffect(() => {
-		const fetchHabits = async (collection: string) => {
+		const fetchHabits = async (collection: Collection) => {
 
-			if(collection === ONGOING){setIsLoadingHabits(true)}
+			if(collection === Collection.Ongoing){setIsLoadingHabits(true)}
 			try {
 				const response = await getHabits(collection)
-				if(response.length > 0){
+				//? correct way obligé de recheck response ici ?
+				if(response && response.length > 0){
 					dispatch(habitsActions.set({habits: response, collection}))
 				}
 
 			} catch (error) {
 				console.log('error fetching habits in table : ', error)
 			}
-			if(collection === ONGOING){setIsLoadingHabits(false)}
+			if(collection === Collection.Ongoing){setIsLoadingHabits(false)}
 		}
 
 		if (ongoingHabits.length === 0) {
-			fetchHabits(ONGOING)
-			fetchHabits(FINISHED)
+			fetchHabits(Collection.Ongoing)
+			fetchHabits(Collection.Finished)
 		}
 	}, [dispatch])
 
@@ -55,19 +56,20 @@ function Table() {
 			successCounter: 0,
 			failCounter: 0,
 			previousArrays: [],
-			shouldSwitchCollection: false
+			shouldSwitchCollection: false,
+			didChange: false
 		}
-		await postHabit(newHabit, ONGOING)
-		dispatch(habitsActions.add({habit: newHabit, collection: ONGOING}))
+		await postHabit(newHabit, Collection.Ongoing)
+		dispatch(habitsActions.add({habit: newHabit, collection: Collection.Ongoing}))
 	}
 
-	function onDeleteHabit(deleteIndex: number, collection: string) {
-		const _id = collection === ONGOING ? ongoingHabits[deleteIndex]._id : finishedHabits[deleteIndex]._id
+	function onDeleteHabit(deleteIndex: number, collection: Collection) {
+		const _id = collection === Collection.Ongoing ? ongoingHabits[deleteIndex]._id : finishedHabits[deleteIndex]._id
 		deleteHabit(_id, collection)
 		dispatch(habitsActions.delete({index: deleteIndex, collection}))
 	}
 
-	function createHabitRow(habit: Habit, index: number, collection: string) {
+	function createHabitRow(habit: Habit, index: number, collection: Collection) {
 		return <HabitRow collection={collection} habitObject={habit} name={habit.name} key={habit._id} index={index} delete={onDeleteHabit} />
 	}
 
@@ -97,7 +99,7 @@ function Table() {
 
 					<tbody>
 						{isLoadingHabits && <TableSkeleton />}
-						{ongoingHabits.map((habit, index) => createHabitRow(habit, index, ONGOING))}
+						{ongoingHabits.map((habit, index) => createHabitRow(habit, index, Collection.Ongoing))}
 					</tbody>
 				</table>
 			{/* </div> */}
@@ -113,8 +115,7 @@ function Table() {
 					</thead>
 
 					<tbody>
-						{isLoadingHabits && <TableSkeleton />}
-						{finishedHabits.map((habit, index) => createHabitRow(habit, index, FINISHED))}
+						{finishedHabits.map((habit, index) => createHabitRow(habit, index, Collection.Finished))}
 					</tbody>
 				</table>}
 		</div>

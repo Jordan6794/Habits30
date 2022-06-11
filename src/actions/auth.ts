@@ -1,6 +1,7 @@
 import * as api from '../api/index'
+import { FormData } from '../components/NavBar/formData.model'
 
-export const signup = async (formData) => {
+export const signup = async (formData: FormData) => {
     try {
         const { data } = await api.signUp(formData)
         return data
@@ -10,7 +11,7 @@ export const signup = async (formData) => {
     }
 }
 
-export const signin = async (formData) => {
+export const signin = async (formData: FormData) => {
     try {
         const { data } = await api.signIn(formData)
         return data

@@ -1,28 +1,29 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Habit } from '../components/Table/habits.model'
 import { addFailColor, addSuccessColor } from '../services/colorsAdd.service'
-import { ONGOING, DAYS_TO_VALIDATE_STEP, FAIL_COLOR, FAIL_STREAK_COLOR, SUCCESS_COLOR, SUCCESS_FINISH_COLOR, SUCCESS_STREAK_COLOR, FINISHED } from '../consts/consts'
+import { DAYS_TO_VALIDATE_STEP, FAIL_COLOR, FAIL_STREAK_COLOR, SUCCESS_COLOR, SUCCESS_FINISH_COLOR, SUCCESS_STREAK_COLOR, Collection } from '../consts/consts'
 import { colorCounter, hasTooManyReds, hasTooManyRedsConsecutive } from '../services/colorsChecks.service'
 
-const initialHabits: {[ONGOING]: Habit[], [FINISHED]: Habit[]} = {[ONGOING]: [], [FINISHED]: []}
+const initialHabits: {[Collection.Ongoing]: Habit[], [Collection.Finished]: Habit[]} = {[Collection.Ongoing]: [], [Collection.Finished]: []}
 
 const habitsSlice = createSlice({
 	name: 'habits',
 	initialState: initialHabits,
 	reducers: {
-		set(state, action: PayloadAction<{habits: Habit[], collection: string}>) {
+		set(state, action: PayloadAction<{habits: Habit[], collection: Collection}>) {
 			state[action.payload.collection] = action.payload.habits
 		},
-		add(state, action: PayloadAction<{habit: Habit, collection: string}>) {
+		add(state, action: PayloadAction<{habit: Habit, collection: Collection}>) {
 			state[action.payload.collection].push(action.payload.habit)
 		},
-		delete(state, action: PayloadAction<{index: number, collection: string}>) {
+		delete(state, action: PayloadAction<{index: number, collection: Collection}>) {
 			const { collection , index} = action.payload
 			state[collection].splice(index, 1)
 		},
-		addSuccessColor(state, action: PayloadAction<{index: number, collection: string}>) {
+		addSuccessColor(state, action: PayloadAction<{index: number, collection: Collection}>) {
 			const {collection, index } = action.payload
 			state[collection][index].colors = addSuccessColor(state[collection][index].colors )
+			state[collection][index].didChange = true
 
 			// checking for new streaks
 			const successStreakCount = colorCounter(state[collection][index].colors, SUCCESS_STREAK_COLOR)
@@ -69,15 +70,16 @@ const habitsSlice = createSlice({
 			state[collection][index].successCounter += 1
 
 			//If needed moving habit into finished collection
-			if(collection === ONGOING){
+			if(collection === Collection.Ongoing){
 				if(colorCounter(state[collection][index].colors, SUCCESS_FINISH_COLOR)){
-					state[ONGOING][index].shouldSwitchCollection = true
+					state[Collection.Ongoing][index].shouldSwitchCollection = true
 				}
 			}
 		},
-		addFailColor(state, action: PayloadAction<{index: number, collection: string}>) {
+		addFailColor(state, action: PayloadAction<{index: number, collection: Collection}>) {
 			const { index, collection } = action.payload
 			state[collection][index].colors = addFailColor(state[collection][index].colors)
+			state[collection][index].didChange = true
 
 			//checking for new streaks
 			if (hasTooManyRedsConsecutive(state[collection][index].colors) || hasTooManyReds(state[collection][index].colors)) {
@@ -108,13 +110,13 @@ const habitsSlice = createSlice({
 			state[collection][index].failCounter += 1
 
 			//If needed moving habit down into ongoing collection
-			if(collection === FINISHED){
+			if(collection === Collection.Finished){
 				if(colorCounter(state[collection][index].colors, SUCCESS_FINISH_COLOR) === 0){
-					state[FINISHED][index].shouldSwitchCollection = true
+					state[Collection.Finished][index].shouldSwitchCollection = true
 				}
 			}
 		},
-		clearColors(state, action: PayloadAction<{index: number, collection: string}>) {
+		clearColors(state, action: PayloadAction<{index: number, collection: Collection}>) {
 			const { index, collection } = action.payload
 			state[collection][index].colors = []
 			state[collection][index].successCounter = 0
@@ -123,12 +125,14 @@ const habitsSlice = createSlice({
 			state[collection][index].shouldSwitchCollection = false
 
 			//move habit to current if it was finished
-			if(collection === FINISHED){
-				state[FINISHED][index].shouldSwitchCollection = true
+			if(collection === Collection.Finished){
+				state[Collection.Finished][index].shouldSwitchCollection = true
 			}
 		},
-		undoColors(state, action: PayloadAction<{index: number, collection: string}>) {
+		undoColors(state, action: PayloadAction<{index: number, collection: Collection}>) {
 			const { index, collection } = action.payload
+			state[collection][index].didChange = false
+			
 			const previousArrays = state[collection][index].previousArrays
 			const colors = state[collection][index].colors
 
@@ -191,17 +195,17 @@ const habitsSlice = createSlice({
 			}
 
 			//moving to the coresponding collection if needed
-			if(collection === ONGOING){
+			if(collection === Collection.Ongoing){
 				if(colorCounter(state[collection][index].colors, SUCCESS_FINISH_COLOR)){
-					state[ONGOING][index].shouldSwitchCollection = true
+					state[Collection.Ongoing][index].shouldSwitchCollection = true
 				}
-			} else if(collection === FINISHED){
+			} else if(collection === Collection.Finished){
 				if(colorCounter(state[collection][index].colors, SUCCESS_FINISH_COLOR) === 0){
-					state[FINISHED][index].shouldSwitchCollection = true
+					state[Collection.Finished][index].shouldSwitchCollection = true
 				}
 			}
 		},
-		switchCollection(state, action: PayloadAction<{index: number, fromCollection: string, toCollection: string}>){
+		switchCollection(state, action: PayloadAction<{index: number, fromCollection: Collection, toCollection: Collection}>){
 			const {index, fromCollection, toCollection} = action.payload
 			state[fromCollection][index].shouldSwitchCollection = false
 			state[toCollection].push(state[fromCollection][index])

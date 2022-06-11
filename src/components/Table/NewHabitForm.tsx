@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React, { FunctionComponent, useState } from 'react'
 
-export default function NewHabitForm({ handleSubmitHabit }) {
+const NewHabitForm: FunctionComponent<{handleSubmitHabit: (habitName: string) => Promise<void>}> = ({ handleSubmitHabit }) => {
 	const [habitInput, setHabitInput] = useState('')
 
-	function onChangeInput(event) {
+	function onChangeInput(event: React.ChangeEvent<HTMLInputElement>) {
 		const inputValue: string = event.target.value
 		setHabitInput(inputValue)
 	}
 
-	function onSubmitHabit(event) {
+	function onSubmitHabit(event: React.FormEvent) {
 		handleSubmitHabit(habitInput)
 		event.preventDefault()
 		setHabitInput('')
@@ -29,3 +29,5 @@ export default function NewHabitForm({ handleSubmitHabit }) {
 		</form>
 	)
 }
+
+export default NewHabitForm

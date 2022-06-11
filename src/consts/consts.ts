@@ -12,6 +12,7 @@ export const MAX_CONSECUTIVE_RED_NUMBER_WHILE_GREEN_STREAK: number = 3
 export const TOO_MANY_REDS_NUMBER: number = 3
 export const TOO_MANY_REDS_NUMBER_WHILE_GREEN_STREAK: number = 4
 
-// need to match names on database!
-export const ONGOING = 'habits'
-export const FINISHED = 'finished_habits'
+export enum Collection {
+    Ongoing = 'habits',
+    Finished = 'finished_habits',
+}

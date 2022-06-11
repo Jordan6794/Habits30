@@ -6,31 +6,30 @@ import { switchCollection, updateHabit } from '../../actions/habits'
 import { Habit } from './habits.model'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import { habitsActions } from '../../store/habits'
-import { FINISHED, ONGOING } from '../../consts/consts'
+import { Collection } from '../../consts/consts'
 
 const HabitRow: FunctionComponent<{
 	habitObject: Habit
 	index: number
-	collection: string
+	collection: Collection
 	name: string
-	delete: (deleteIndex: number, collection: string) => void
+	delete: (deleteIndex: number, collection: Collection) => void
 }> = (props) => {
 	const [hasInitialized, setHasInitialized] = useState(false)
 
-	const { colors, successCounter, failCounter, previousArrays } = useAppSelector((state) => state.habits[props.collection][props.index])
+	const { colors, successCounter, failCounter, previousArrays, name, _id, shouldSwitchCollection, didChange } = useAppSelector((state) => state.habits[props.collection][props.index])
 	const dispatch = useAppDispatch()
 
 	useEffect(() => {
 		async function handleUpdate() {
-			const { name, _id, shouldSwitchCollection } = props.habitObject
-
 			if (shouldSwitchCollection) {
-				const toCollection = props.collection === ONGOING ? FINISHED : ONGOING
-				const response = await switchCollection(props.habitObject, _id, props.collection, toCollection)
+				const toCollection = props.collection === Collection.Ongoing ? Collection.Finished : Collection.Ongoing
 				const {index} = props
 				dispatch(habitsActions.switchCollection({index, fromCollection: props.collection, toCollection}))
+				const response = await switchCollection(props.habitObject, _id, props.collection, toCollection)
 				console.log('switched collection: ', response)
 			} else {
+				// we always put didChange: false in the database
 				const updatedHabit = {
 					name,
 					_id,
@@ -38,6 +37,8 @@ const HabitRow: FunctionComponent<{
 					successCounter,
 					failCounter,
 					previousArrays,
+					shouldSwitchCollection,
+					didChange: false
 				}
 				const response = await updateHabit(updatedHabit, props.collection)
 				console.log('update : ', response)
@@ -69,10 +70,11 @@ const HabitRow: FunctionComponent<{
 		dispatch(habitsActions.undoColors({ index: props.index, collection: props.collection }))
 	}
 
-	const colorsCells = colors.map((color: string, index: number) => <HabitCell key={index} color={color} index={index} />)
+	const colorsCells = colors.map((color: string, index: number) => <HabitCell lastIndex={colors.length -1} key={index} color={color} index={index} didChange={didChange}/>)
 
+	const didChangeClass = didChange ? 'changedCounter' : ''
 	const streakCounterDisplay =
-		successCounter >= failCounter ? <p className="green-counter">({successCounter})</p> : <p className="red-counter">({failCounter})</p>
+		successCounter >= failCounter ? <p className={`${didChangeClass} green-counter`}>({successCounter})</p> : <p className={`${didChangeClass} red-counter`}>({failCounter})</p>
 
 	return (
 		<tr className="habit-row">
