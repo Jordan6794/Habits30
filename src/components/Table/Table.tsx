@@ -24,7 +24,7 @@ function Table() {
 	let daysArray: number[] = []
 
 	makeDaysArray(daysArray, NUMBER_OF_DAYS)
-
+	
 	useEffect(() => {
 		const fetchHabits = async (collection: Collection) => {
 

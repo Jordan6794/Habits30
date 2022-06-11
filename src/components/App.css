@@ -1,5 +1,16 @@
+:root {
+	--main-color: #20C98B
+}
+
 html {
 	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 table {
@@ -12,7 +23,12 @@ th {
 	border-top: none;
 }
 
-h4 {
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+h4, h3, h2, h1, p {
 	margin: 0;
 }
 
@@ -32,6 +48,7 @@ COMMON
 	border: none;
 	outline: none;
 	cursor: pointer;
+	font-family: inherit;
 	background-color: #282c34;
 	color: white;
 	padding: 0.5em 1.25em;
@@ -316,7 +333,6 @@ Table
 }
 
 .th-habit-name {
-	margin: 0;
 	padding: 0.5em 0.5em;
 }
 

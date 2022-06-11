@@ -3,6 +3,7 @@ import decode, { JwtPayload } from 'jwt-decode'
 
 import AuthModal from './AuthModal'
 import { useAppSelector } from '../../hooks'
+import { Link } from 'react-router-dom'
 
 export default function NavBar() {
 	const [showLoginModal, setShowLoginModal] = useState(false)
@@ -50,6 +51,7 @@ export default function NavBar() {
 				<div className="container nav-container">
 					<h4 className="header-title">Habits streak manager</h4>
 					<ul className="nav-links">
+						<Link to='/landing'><li>To Landing</li></Link>
 						{user ? <li>{user?.result?.username}</li> : <li>Public Account</li>}
 						{!user && <li onClick={handleOpenSignup}>Signup</li>}
 						{!user && <li onClick={handleOpenLogin}>Login</li>}

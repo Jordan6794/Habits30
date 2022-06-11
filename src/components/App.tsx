@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Routes, Route } from 'react-router-dom'
 
 import './App.css'
 
@@ -6,6 +7,7 @@ import Table from './Table/Table'
 import NavBar from './NavBar/NavBar'
 import { useAppDispatch } from '../hooks'
 import { authActions } from '../store/auth'
+import LandingPage from './LandingPage/LandingPage'
 
 function App() {
 	const dispatch = useAppDispatch()
@@ -13,13 +15,15 @@ function App() {
 	useEffect(() => {
 		const userStorage = localStorage.getItem('User')
 		dispatch(authActions.setUser(userStorage ? JSON.parse(userStorage) : null))
-
-	},[dispatch])
+	}, [dispatch])
 
 	return (
 		<div className="App">
-			<NavBar />
-			<Table />
+			<Routes>
+				<Route path='/' element={<><NavBar /><Table /></>} />
+				<Route path='landing' element={<LandingPage />} />
+			</Routes>
+					
 		</div>
 	)
 }

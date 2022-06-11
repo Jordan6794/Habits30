@@ -21,6 +21,7 @@ Improvements :
 - Improve token check + refresh :
 : client-check each request; + une option : token refresh qui remplace pas le token mais qui va echanger contre un nouveau token la premiere fois que le token fail (si le token refresh est toujours valid) (need other than jwt then (ou check leur options))
 - Avoir un listener sur la db plutot que state
+- Add lazy loading for router
 
 
 Debatable ?

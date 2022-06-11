@@ -1,16 +1,20 @@
 //jshint esversion:6
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
-import App from './components/App'
 import reportWebVitals from './reportWebVitals'
+import { BrowserRouter } from 'react-router-dom'
+
+import App from './components/App'
 import { Provider } from 'react-redux'
 import store from './store'
+import './index.css'
 
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<App />
+			<BrowserRouter>
+				<App />
+			</BrowserRouter>
 		</Provider>
 	</React.StrictMode>,
 	document.getElementById('root')
