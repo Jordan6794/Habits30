@@ -1,8 +1,8 @@
-import { FunctionComponent } from "react"
+import { FunctionComponent, ReactElement } from "react"
 
 import styles from './LandingPage.module.css'
 
-const AreaOneCard: FunctionComponent<{icon: any, title: string, text: string}> = ({icon, title, text}) => {
+const AreaOneCard: FunctionComponent<{icon: ReactElement, title: string, text: string}> = ({icon, title, text}) => {
     return (
         <div className={styles.cardOneDiv}>
             {icon}
