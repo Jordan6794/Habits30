@@ -2,10 +2,12 @@ import { FAIL_COLOR, SUCCESS_COLOR, SUCCESS_FINISH_COLOR, SUCCESS_STREAK_COLOR, 
 
 export default function HabitCell({ color, index, lastIndex, didChange }
     : { color: string; index: number; lastIndex: number; didChange: boolean | undefined }) {
-	const lastClass = (didChange && index === lastIndex) ? 'lastCellChanged' : ''
+	//? remove different style for last cell of changed habit ?
+	// const lastClass = (didChange && index === lastIndex) ? 'lastCellChanged' : ''
 	return (
 		<th
-			className={lastClass}
+			// className={lastClass}
+
 			// @ts-ignore
 			bgcolor={
 				color === SUCCESS_COLOR

@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react"
+import { FunctionComponent, useEffect, useRef, useState } from "react"
 import AreaOneCard from "./AreaOneCard"
 
 import CheckCircle from './SVG/check_circle.svg'
@@ -8,9 +8,36 @@ import Smiley from './SVG/smiley.svg'
 import styles from './LandingPage.module.css'
 
 const BreakAreaOne: FunctionComponent = () => {
+    const [didIntersect, setDidIntersect] = useState(false)
+    const divRef = useRef(null)
+
+    useEffect(() => {
+        console.log('in effect')
+        const options = { root: null, rootMargin: '0px', threshold: 0.9 };
+        const observer = new IntersectionObserver(function (entries, observer) {
+            handleIntersect(entries, observer); 
+          }, options)
+        if(divRef.current){
+            observer.observe(divRef.current)
+        }
+
+        return (() => {
+            observer.disconnect()
+        })
+    }, [])
+
+    function handleIntersect(entries: any, observer: any){
+        entries.forEach((entry: any) => {
+            if(entry.isIntersecting){
+                console.log('intersected')
+                setDidIntersect(true)
+                observer.unobserve(entry.target);
+            }
+        })
+    }
 
     return(
-        <div className={styles.areaOneDiv}>
+        <div ref={divRef} className={`${styles.areaOneDiv} ${didIntersect && styles.intersected}`}>
             <AreaOneCard icon={<Smiley className={styles.googleIcon} />} title='Easy to use' text="Manage your habits everyday with a few clicks, enjoy the multiples features and fonctionalities" />
             <AreaOneCard icon={<CheckCircle className={styles.googleIcon} />} title='Very effective' text="Designed following reasearch backed up informations about habit building and habit maintening" />
             <AreaOneCard icon={<Heart className={styles.googleIcon} />} title='Entirely free' text="The whole app is entirely for free. You have access to all the features for free forever" />

@@ -322,9 +322,10 @@ Table
 	border-bottom: none;
 }
 
-.lastCellChanged{
+/*? remove style for last cell changed ? */
+/*.lastCellChanged{
 	opacity: 0.75
-}
+} */
 
 .habit-row-infos {
 	display: flex;

@@ -1,3 +1,26 @@
+/* === Animations
+============ */
+@keyframes slideLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px)
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0)
+    }
+}
+
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px)
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0)
+    }
+}
 
 /* === Layout
 ============ */
@@ -69,6 +92,9 @@
 
 .heroLeftDiv {
     width: 50%;
+    animation: slideLeft 0.55s ease-in-out;
+    animation-fill-mode: backwards;
+    animation-delay: 0.1s;
 }
 
 .heroTitle {
@@ -109,6 +135,13 @@
     display: flex;
     justify-content: center;
     margin-bottom: 10em;
+    opacity: 0;
+}
+
+.intersected {
+    opacity: 1;
+    animation: slideUp 0.4s ease-in-out;
+
 }
 
 .cardOneDiv {
@@ -138,6 +171,9 @@
 ============ */
 .ctaOneDiv {
     margin-bottom: 9em;
+    animation: slideLeft 0.55s ease-in-out;
+    animation-fill-mode: backwards;
+    animation-delay: 0.1s;
 }
 
 .bodyTitle {
