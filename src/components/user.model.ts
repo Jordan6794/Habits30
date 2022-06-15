@@ -11,13 +11,3 @@ export interface Result {
     password: string;
     habits: Array<Habit>
 }
-
-// export const nullUser = {
-//     result: {
-//         _id: '',
-//         username: '',
-//         password: '',
-//         habits: []
-//     },
-//     token: ''
-// }

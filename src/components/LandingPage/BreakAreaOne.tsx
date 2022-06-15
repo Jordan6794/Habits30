@@ -12,9 +12,8 @@ const BreakAreaOne: FunctionComponent = () => {
     const divRef = useRef(null)
 
     useEffect(() => {
-        console.log('in effect')
         const options = { root: null, rootMargin: '0px', threshold: 0.9 };
-        const observer = new IntersectionObserver(function (entries, observer) {
+        const observer = new IntersectionObserver((entries, observer) => {
             handleIntersect(entries, observer); 
           }, options)
         if(divRef.current){
@@ -26,10 +25,9 @@ const BreakAreaOne: FunctionComponent = () => {
         })
     }, [])
 
-    function handleIntersect(entries: any, observer: any){
-        entries.forEach((entry: any) => {
+    function handleIntersect(entries: IntersectionObserverEntry[], observer: IntersectionObserver){
+        entries.forEach(entry => {
             if(entry.isIntersecting){
-                console.log('intersected')
                 setDidIntersect(true)
                 observer.unobserve(entry.target);
             }

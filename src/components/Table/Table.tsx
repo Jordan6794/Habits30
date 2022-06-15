@@ -9,42 +9,43 @@ import NewHabitForm from './NewHabitForm'
 
 import { getHabits, postHabit, deleteHabit } from '../../actions/habits'
 import { Habit } from './habits.model'
-import { NUMBER_OF_DAYS, Collection } from '../../consts/consts'
+import { NUMBER_OF_DAYS, SUCCESS_FINISH_COLOR } from '../../consts/consts'
 import { TableSkeleton } from '../../shared/skeletons'
 import { useAppDispatch, useAppSelector } from '../../hooks'
-import { habitsActions } from '../../store/habits'
+import { habitsActions } from '../../store/habitsSlice'
 
 function Table() {
 	const [isLoadingHabits, setIsLoadingHabits] = useState(false)
 
-	const ongoingHabits = useAppSelector(state => state.habits[Collection.Ongoing])
-	const finishedHabits = useAppSelector(state => state.habits[Collection.Finished])
+	const habits = useAppSelector(state => state.habits)
 	const dispatch = useAppDispatch()
+
+	const ongoingHabits = habits.filter(habit => habit.colors[0] !== SUCCESS_FINISH_COLOR)
+	const finishedHabits = habits.filter(habit => habit.colors[0] === SUCCESS_FINISH_COLOR)
 
 	let daysArray: number[] = []
 
 	makeDaysArray(daysArray, NUMBER_OF_DAYS)
 	
 	useEffect(() => {
-		const fetchHabits = async (collection: Collection) => {
+		const fetchHabits = async () => {
 
-			if(collection === Collection.Ongoing){setIsLoadingHabits(true)}
+			setIsLoadingHabits(true)
 			try {
-				const response = await getHabits(collection)
+				const response = await getHabits()
 				//? correct way obligé de recheck response ici ?
 				if(response && response.length > 0){
-					dispatch(habitsActions.set({habits: response, collection}))
+					dispatch(habitsActions.set({habits: response}))
 				}
 
 			} catch (error) {
 				console.log('error fetching habits in table : ', error)
 			}
-			if(collection === Collection.Ongoing){setIsLoadingHabits(false)}
+			setIsLoadingHabits(false)
 		}
 
-		if (ongoingHabits.length === 0) {
-			fetchHabits(Collection.Ongoing)
-			fetchHabits(Collection.Finished)
+		if (habits.length === 0) {
+			fetchHabits()
 		}
 	}, [dispatch])
 
@@ -56,21 +57,21 @@ function Table() {
 			successCounter: 0,
 			failCounter: 0,
 			previousArrays: [],
-			shouldSwitchCollection: false,
+			didSwitchCollection: false,
 			didChange: false
 		}
-		await postHabit(newHabit, Collection.Ongoing)
-		dispatch(habitsActions.add({habit: newHabit, collection: Collection.Ongoing}))
+		await postHabit(newHabit)
+		dispatch(habitsActions.add({habit: newHabit}))
 	}
 
-	function onDeleteHabit(deleteIndex: number, collection: Collection) {
-		const _id = collection === Collection.Ongoing ? ongoingHabits[deleteIndex]._id : finishedHabits[deleteIndex]._id
-		deleteHabit(_id, collection)
-		dispatch(habitsActions.delete({index: deleteIndex, collection}))
+	function onDeleteHabit(deleteIndex: number) {
+		const _id = habits[deleteIndex]._id
+		deleteHabit(_id)
+		dispatch(habitsActions.delete({index: deleteIndex}))
 	}
 
-	function createHabitRow(habit: Habit, index: number, collection: Collection) {
-		return <HabitRow collection={collection} habitObject={habit} name={habit.name} key={habit._id} index={index} delete={onDeleteHabit} />
+	function createHabitRow(habit: Habit, index: number) {
+		return <HabitRow habitObject={habit} key={habit._id} delete={onDeleteHabit} />
 	}
 
 	function makeDaysHtml(day: number) {
@@ -99,7 +100,7 @@ function Table() {
 
 					<tbody>
 						{isLoadingHabits && <TableSkeleton />}
-						{ongoingHabits.map((habit, index) => createHabitRow(habit, index, Collection.Ongoing))}
+						{ongoingHabits.map((habit, index) => createHabitRow(habit, index))}
 					</tbody>
 				</table>
 			{/* </div> */}
@@ -115,7 +116,7 @@ function Table() {
 					</thead>
 
 					<tbody>
-						{finishedHabits.map((habit, index) => createHabitRow(habit, index, Collection.Finished))}
+						{finishedHabits.map((habit, index) => createHabitRow(habit, index))}
 					</tbody>
 				</table>}
 		</div>

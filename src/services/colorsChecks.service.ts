@@ -1,6 +1,10 @@
 import {
+	DAYS_TO_VALIDATE_STEP,
 	MAX_CONSECUTIVE_RED_NUMBER,
 	MAX_CONSECUTIVE_RED_NUMBER_WHILE_GREEN_STREAK,
+    SUCCESS_COLOR,
+    SUCCESS_FINISH_COLOR,
+    SUCCESS_STREAK_COLOR,
     TOO_MANY_REDS_NUMBER,
     TOO_MANY_REDS_NUMBER_WHILE_GREEN_STREAK
 } from '../consts/consts'
@@ -58,4 +62,16 @@ export function colorCounter(array: string[], color: string) {
 		}
 	}
 	return counter
+}
+
+export function calculateSuccessCount(colors: string[], successCounter: number) {
+	if (colorCounter(colors, SUCCESS_FINISH_COLOR) === 1) {
+		return successCounter
+	} else if (colorCounter(colors, SUCCESS_STREAK_COLOR) === 0) {
+		return colorCounter(colors, SUCCESS_COLOR)
+	} else {
+		const successStreakCount = colorCounter(colors, SUCCESS_STREAK_COLOR)
+		const successCount = colorCounter(colors, SUCCESS_COLOR)
+		return successStreakCount * DAYS_TO_VALIDATE_STEP + successCount
+	}
 }

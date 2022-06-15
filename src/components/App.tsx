@@ -6,7 +6,7 @@ import './App.css'
 import Table from './Table/Table'
 import NavBar from './NavBar/NavBar'
 import { useAppDispatch } from '../hooks'
-import { authActions } from '../store/auth'
+import { authActions } from '../store/authSlice'
 import LandingPage from './LandingPage/LandingPage'
 
 function App() {

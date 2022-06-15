@@ -5,7 +5,7 @@ export interface Habit {
     successCounter: number;
     failCounter: number;
     previousArrays: Array<Array<string>>
-    shouldSwitchCollection: boolean
+    didSwitchCollection: boolean
     didChange: boolean
 }
 

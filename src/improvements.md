@@ -1,4 +1,3 @@
-- change collection from string type to enum
 - Finish design add grey profile pic ?:  et make footer ; undo et clear en plain text btn ?
 - Make name editable (popup edit habit onclick sur le name ?) (ou alors contenteditable + manually onChange qui update in state & db ?)
 - move le form input en last row du table ?
@@ -6,7 +5,6 @@
 - recheck refacto
 - add email to signup (and login with email too)
 - changer mon undo/history into un array de habits
-- Switch en landing page mode
 - Make a demo user button instead of public account (same Zach Stone ?)
 
 Improvements :
@@ -16,6 +14,7 @@ Improvements :
 - Make une page statistics ?
 - Gerer les user auth req erreurs et display dans le form
 - get une favicon
+- Put Goath
 - Make un truc pour move up/down habits in the list
 - fix le bug où je met le counter a 25 après undo sur finish streak ? (need to keep in state history of greencount when finishStreak)
 - Improve token check + refresh :

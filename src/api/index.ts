@@ -17,10 +17,10 @@ API.interceptors.request.use((req) => {
     return req
 })
 
-export const fetchHabits = (collection: string) => API.get('/posts', {params: {collection}})
-export const postHabit = (habit: Habit, collection: string) => API.post('/posts', {habit, collection})
-export const updateHabit = (habit: Habit, collection: string) => API.patch(`${'/posts'}/${habit._id}`, {habit, collection})
-export const deleteHabit = (id: string, collection: string) => API.delete(`${'/posts'}/${id}`, {params: {collection}})
+export const fetchHabits = () => API.get('/posts')
+export const postHabit = (habit: Habit) => API.post('/posts', {habit})
+export const updateHabit = (habit: Habit) => API.patch(`${'/posts'}/${habit._id}`, {habit})
+export const deleteHabit = (id: string) => API.delete(`${'/posts'}/${id}`)
 
 export const signIn = (formData: FormData) => API.post('/user/signin', formData)
 export const signUp = (formData: FormData) => API.post('/user/signup', formData)
