@@ -70,8 +70,8 @@ function Table() {
 		dispatch(habitsActions.delete({index: deleteIndex}))
 	}
 
-	function createHabitRow(habit: Habit, index: number) {
-		return <HabitRow habitObject={habit} key={habit._id} delete={onDeleteHabit} />
+	function createHabitRow(habit: Habit, index: number, isFinished: boolean) {
+		return <HabitRow habitObject={habit} isFinished={isFinished} key={habit._id} delete={onDeleteHabit} />
 	}
 
 	function makeDaysHtml(day: number) {
@@ -100,7 +100,7 @@ function Table() {
 
 					<tbody>
 						{isLoadingHabits && <TableSkeleton />}
-						{ongoingHabits.map((habit, index) => createHabitRow(habit, index))}
+						{ongoingHabits.map((habit, index) => createHabitRow(habit, index, false))}
 					</tbody>
 				</table>
 			{/* </div> */}
@@ -116,7 +116,7 @@ function Table() {
 					</thead>
 
 					<tbody>
-						{finishedHabits.map((habit, index) => createHabitRow(habit, index))}
+						{finishedHabits.map((habit, index) => createHabitRow(habit, index, true))}
 					</tbody>
 				</table>}
 		</div>

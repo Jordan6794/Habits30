@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
-import './App.css'
-
-import Table from './Table/Table'
-import NavBar from './NavBar/NavBar'
 import { useAppDispatch } from '../hooks'
 import { authActions } from '../store/authSlice'
-import LandingPage from './LandingPage/LandingPage'
+
+import LandingPage from '../pages/LandingPage'
+import Main from '../pages/Main'
+import Login from '../pages/Login'
+import Signup from '../pages/Signup'
+import RegisterDemo from '../pages/RegisterDemo'
+
+import './App.css'
 
 function App() {
 	const dispatch = useAppDispatch()
@@ -20,8 +23,11 @@ function App() {
 	return (
 		<div className="App">
 			<Routes>
-				<Route path='/' element={<><NavBar /><Table /></>} />
+				<Route path='/' element={<Main />} />
 				<Route path='landing' element={<LandingPage />} />
+				<Route path='login' element={<Login />} />
+				<Route path='signup' element={<Signup />} />
+				<Route path='register-demo' element={<RegisterDemo />} />
 			</Routes>
 					
 		</div>

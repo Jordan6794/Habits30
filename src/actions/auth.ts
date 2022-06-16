@@ -1,5 +1,5 @@
 import * as api from '../api/index'
-import { FormData } from '../components/NavBar/formData.model'
+import { FormData } from '../components/Auth/formData.model'
 
 export const signup = async (formData: FormData) => {
     try {

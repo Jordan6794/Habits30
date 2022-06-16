@@ -9,8 +9,8 @@ const Nav: FunctionComponent = () => {
     <div className={styles.Nav}>
         <Link to='/'><h3 className={styles.title}>Habit Streak Manager</h3></Link>
         <div className="">
-            <button className={`btn ${styles.btn} ${styles.btnInvisible}`}>Log In</button>
-            <button className={`btn ${styles.btn} ${styles.btnPrimary}`}>Sign Up</button>
+        <Link to='/login'><button className={`${styles.btn} ${styles.btnInvisible}`}>Log In</button></Link>
+        <Link to='/signup'><button className={`${styles.btn} ${styles.btnPrimary}`}>Sign Up</button></Link>
         </div>
     </div>
     )

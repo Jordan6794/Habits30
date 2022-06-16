@@ -1,26 +1,70 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { signup, signin } from '../../actions/auth'
 import { FormData } from './formData.model'
 
+import styles from './Auth.module.css'
+import { useNavigate } from 'react-router-dom'
+
 export default function AuthForm({
-	p_isSignup,
-	exitModal,
+	isSignup, isDemo
 }: {
-	p_isSignup: boolean
-	exitModal: () => void
+	isSignup: boolean, isDemo: boolean
 }) {
-	const [isSignup, setIsSignup] = useState<boolean>(p_isSignup)
-	//? duplicate name formdata okay ? lololol l'interface qui duplicate le name
 	const [formData, setFormdata] = useState<FormData>({
 		username: '',
 		password: '',
 		repeatPassword: ''
 	})
+	const [demoMessage, setDemoMessage] = useState('')
+	const [demoSuccess, setDemoSuccess] = useState('')
+
 	const isFormValid =
 		formData.username !== '' &&
 		formData.password !== '' &&
 		(formData.repeatPassword !== '' || !isSignup)
+
+	const navigate = useNavigate()
+
+	useEffect(() => {
+		if(isDemo){
+			handleDemo()
+		}
+
+		async function handleDemo(){
+			console.log('creating')
+			setDemoMessage('Creating your demo account...')
+			const randomNumber = Math.round(Math.random()*10000)
+			const credentials = {
+				username: `Demo${randomNumber}`,
+				password: 'password',
+				repeatPassword: 'password'
+			}
+
+			setTimeout(() => {
+				setFormdata(prevData => ({...prevData, username: credentials.username}))
+			}, 300)
+			setTimeout(() => {
+				setFormdata(prevData => ({...prevData, password: credentials.password}))
+			}, 600)
+			setTimeout(() => {
+				setFormdata(credentials)
+			}, 900)
+
+		const response = await signup(credentials)
+
+		if (response) {
+			setDemoMessage('')
+			setDemoSuccess('Account created succesffully, redirecting soon...')
+
+			setTimeout(() => {
+				localStorage.setItem('User', JSON.stringify(response))
+				navigate('/', {replace: true})
+				window.location.reload()
+			}, 2500)
+		}
+		}
+	}, [isDemo, navigate])
 
 	function onChangeUsername(event: React.ChangeEvent<HTMLInputElement>) {
 		const inputValue: string = event.target.value
@@ -41,6 +85,7 @@ export default function AuthForm({
 		const response = await signup(inputs)
 		if (response) {
 			localStorage.setItem('User', JSON.stringify(response))
+			navigate('/', {replace: true})
 			window.location.reload()
 		}
 	}
@@ -49,6 +94,7 @@ export default function AuthForm({
 		const data = await signin(formInfos)
 		if (data) {
 			localStorage.setItem('User', JSON.stringify(data))
+			navigate('/', {replace: true})
 			window.location.reload()
 		}
 	}
@@ -61,18 +107,29 @@ export default function AuthForm({
 			handleSignin(formData)
 		}
 		resetForm()
-		exitModal()
+		// exitModal()
 	}
 
 	function resetForm() {
 		setFormdata({ username: '', password: '', repeatPassword: '' })
 	}
 
+	function handleSwitchAuth() {
+		if(isSignup){
+			navigate('/login', {replace: true})
+		} else {
+			navigate('/signup', {replace: true})
+		}
+	}
+
 	return (
-		<>
-			<h3 className="auth-form-title">{isSignup ? 'Signup' : 'Login'}</h3>
-			<form className="auth-form">
-				<div className="auth-form-text-field">
+		<div className={styles.formDiv}>
+			<h3 className={styles.logo}>Habit Streak Manager</h3>
+			<h3 className={styles.title}>{isSignup ? 'Signup' : 'Login'}</h3>
+			{demoMessage && <p className={styles.demoText}>{demoMessage}</p>}
+			{demoSuccess && <p className={styles.demoSuccess}>{demoSuccess}</p>}
+			<form className={styles.authForm}>
+				<div className={styles.textField}>
 					<input
 						id="username"
 						onChange={onChangeUsername}
@@ -82,7 +139,7 @@ export default function AuthForm({
 					<span></span>
 					<label htmlFor="username">Username </label>
 				</div>
-				<div className="auth-form-text-field">
+				<div className={styles.textField}>
 					<input
 						type="password"
 						id="password"
@@ -94,7 +151,7 @@ export default function AuthForm({
 					<label htmlFor="password">Password </label>
 				</div>
 				{isSignup && (
-					<div className="auth-form-text-field">
+					<div className={styles.textField}>
 						<input
 							type="password"
 							id="repeat-password"
@@ -108,29 +165,26 @@ export default function AuthForm({
 				)}
 				<div>
 					<button
-						disabled={!isFormValid}
-						className="btn auth-btn"
+						disabled={!isFormValid || isDemo}
+						className={`btn ${styles.btn}`}
 						onClick={onSubmit}
 					>
 						{isSignup ? 'Signup' : 'Login'}
 					</button>
-					<div className="switch-login_signup">
+					<div className={styles.switchLogin_signup}>
 						{isSignup
 							? 'Already have an account ?'
 							: "Don't have an account yet ?"}
 						<button
 							type="button"
-							className="auth-link"
-							onClick={() => {
-								setIsSignup((prev) => !prev)
-								resetForm()
-							}}
+							className={styles.link}
+							onClick={handleSwitchAuth}
 						>
 							{isSignup ? 'Login' : 'Signup'}
 						</button>
 					</div>
 				</div>
 			</form>
-		</>
+		</div>
 	)
 }

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Habit } from '../components/Table/habits.model'
-import { FormData } from '../components/NavBar/formData.model'
+import { FormData } from '../components/Auth/formData.model'
 
 const API = axios.create({baseURL: 'https://habits-project-backend.herokuapp.com'})
 // baseUrl: 'https://habits-project-backend.herokuapp.com'

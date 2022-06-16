@@ -5,7 +5,6 @@
 - recheck refacto
 - add email to signup (and login with email too)
 - changer mon undo/history into un array de habits
-- Make a demo user button instead of public account (same Zach Stone ?)
 
 Improvements :
 - Pour les await database UI faire un loading & success modal (see Zach Stone MAC)
@@ -15,6 +14,7 @@ Improvements :
 - Gerer les user auth req erreurs et display dans le form
 - get une favicon
 - Put Goath
+- Put un routing redirect si on est logged in redirect vers main (and then can remove le navigate de Auth et only laisser refresh)
 - Make un truc pour move up/down habits in the list
 - fix le bug où je met le counter a 25 après undo sur finish streak ? (need to keep in state history of greencount when finishStreak)
 - Improve token check + refresh :

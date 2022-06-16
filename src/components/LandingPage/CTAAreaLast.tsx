@@ -1,4 +1,5 @@
 import { FunctionComponent } from "react"
+import { Link } from "react-router-dom"
 
 import ActivityTracker from './SVG/activity_tracker.svg'
 import styles from "./LandingPage.module.css"
@@ -13,8 +14,8 @@ const CTAAreaLast: FunctionComponent = () => {
                 <p className={styles.heroSubtitle}>
                     Take back control of your life and build the lifestyle you've always wanted
                 </p>
-                <button className={`btn ${styles.btn} ${styles.btnPrimary} {styles.btnLastCTA}`}>Try our demo</button>
-                <button className={`btn ${styles.btn} ${styles.btnInvisible}`}>Sign Up</button>
+                <Link to='/register-demo'><button className={`${styles.btn} ${styles.btnPrimary} {styles.btnLastCTA}`}>Try our demo</button></Link>
+                <Link to='/signup'><button className={`${styles.btn} ${styles.btnInvisible}`}>Sign Up</button></Link>
             </div>
             <div>
                 <ActivityTracker className={styles.activitySVG} />
