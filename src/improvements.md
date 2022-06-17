@@ -1,5 +1,5 @@
-- Finish design add grey profile pic ?:  et make footer ; undo et clear en plain text btn ?
-- Make name editable (popup edit habit onclick sur le name ?) (ou alors contenteditable + manually onChange qui update in state & db ?)
+- Finish design add grey profile pic ?:  et make footer ;
+- Make name editable (popup edit habit onclick sur le name ?)
 - move le form input en last row du table ?
 - make un explanation / title area
 - recheck refacto
@@ -16,7 +16,7 @@ Improvements :
 - Put Goath
 - Put un routing redirect si on est logged in redirect vers main (and then can remove le navigate de Auth et only laisser refresh)
 - Make un truc pour move up/down habits in the list
-- fix le bug où je met le counter a 25 après undo sur finish streak ? (need to keep in state history of greencount when finishStreak)
+- fix le bug où je met le counter a 25 après undo sur finish streak ? (need to keep in state history of greencount when finishStreak) : will be good with undo/history into step array
 - Improve token check + refresh :
 : client-check each request; + une option : token refresh qui remplace pas le token mais qui va echanger contre un nouveau token la premiere fois que le token fail (si le token refresh est toujours valid) (need other than jwt then (ou check leur options))
 - Avoir un listener sur la db plutot que state

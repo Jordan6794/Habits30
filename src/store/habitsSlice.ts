@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { AnyAction, createSlice, PayloadAction, ThunkAction } from '@reduxjs/toolkit'
 import { Habit } from '../components/Table/habits.model'
 import { addFailColor, addSuccessColor } from '../services/colorsAdd.service'
 import {
@@ -10,6 +10,8 @@ import {
 	SUCCESS_STREAK_COLOR,
 } from '../consts/consts'
 import { calculateSuccessCount, colorCounter, hasTooManyReds, hasTooManyRedsConsecutive } from '../services/colorsChecks.service'
+import { updateHabit } from '../actions/habits'
+import { RootState } from '.'
 
 const initialHabits: Habit[] = []
 
@@ -203,6 +205,45 @@ const habitsSlice = createSlice({
 		},
 	},
 })
+
+
+export const addSuccessAction = ( index: number ):  ThunkAction<void, RootState, unknown, AnyAction> => {
+	return async (dispatch, getState) => {
+		dispatch(habitsActions.addSuccessColor({index}))
+		updateHabitFromThunk(getState, index)
+	}
+}
+
+export const addFailAction = ( index: number ):  ThunkAction<void, RootState, unknown, AnyAction> => {
+	return async (dispatch, getState) => {
+		dispatch(habitsActions.addFailColor({index}))
+		updateHabitFromThunk(getState, index)
+	}
+}
+
+export const clearColorsAction = ( index: number ):  ThunkAction<void, RootState, unknown, AnyAction> => {
+	return async (dispatch, getState) => {
+		dispatch(habitsActions.clearColors({index}))
+		updateHabitFromThunk(getState, index)
+	}
+}
+
+export const undoColorsAction = ( index: number ): ThunkAction<void, RootState, unknown, AnyAction> => {
+	return async (dispatch, getState) => {
+		dispatch(habitsActions.undoColors({index}))
+		updateHabitFromThunk(getState, index)
+	}
+}
+
+async function updateHabitFromThunk(getState: () => RootState, index: number) {
+	const state = getState()
+	const habit = state.habits[index]
+	// we always put didChange false in the database
+	const response = await updateHabit({...habit, didChange: false})
+	console.log('update : ', response)
+}
+
+export const habitsActionsThunk = { addSuccessAction, addFailAction, clearColorsAction, undoColorsAction}
 
 export default habitsSlice.reducer
 export const habitsActions = habitsSlice.actions

@@ -1,66 +1,68 @@
-import React, { useState, useEffect, FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react'
 
 import HabitCell from './HabitCell'
 
-import { updateHabit } from '../../actions/habits'
+// import { updateHabit } from '../../actions/habits'
 import { Habit } from './habits.model'
 import { useAppDispatch, useAppSelector } from '../../hooks'
-import { habitsActions } from '../../store/habitsSlice'
+import { habitsActionsThunk } from '../../store/habitsSlice'
 
 const HabitRow: FunctionComponent<{
 	habitObject: Habit
 	isFinished: boolean
 	delete: (deleteIndex: number) => void
 }> = (props) => {
-	const [hasInitialized, setHasInitialized] = useState(false)
+	// const [hasInitialized, setHasInitialized] = useState(false)
 	const dispatch = useAppDispatch()
 
 	// const { colors, successCounter, failCounter, previousArrays, name, _id, shouldSwitchCollection, didChange } = useAppSelector((state) => state.habits[props.collection][props.index])
 	const habit = useAppSelector((state) => state.habits.find((habit) => habit._id === props.habitObject._id)) as Habit
-	const { colors, successCounter, failCounter, previousArrays, name, _id, didSwitchCollection, didChange } = habit
+	const { colors, successCounter, failCounter, didChange } = habit
+	// const { colors, successCounter, failCounter, previousArrays, name, _id, didSwitchCollection, didChange } = habit
 	const index = useAppSelector((state) => state.habits.findIndex((habit) => habit._id === props.habitObject._id))
 
-	useEffect(() => {
-		async function handleUpdate() {
-			// we always put didChange: false in the database
-			const updatedHabit = {
-				name,
-				_id,
-				colors,
-				successCounter,
-				failCounter,
-				previousArrays,
-				didSwitchCollection,
-				didChange: false,
-			}
-			const response = await updateHabit(updatedHabit)
-			console.log('update : ', response)
-		}
-		if (hasInitialized || props.habitObject.didSwitchCollection) {
-			handleUpdate()
-			if (props.habitObject.didSwitchCollection) {
-				setHasInitialized(true)
-			}
-		} else {
-			setHasInitialized(true)
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [colors, failCounter, successCounter, previousArrays, props.habitObject])
+	// useEffect(() => {
+	// 	async function handleUpdate() {
+	// 		// we always put didChange: false in the database
+	// 		const updatedHabit = {
+	// 			name,
+	// 			_id,
+	// 			colors,
+	// 			successCounter,
+	// 			failCounter,
+	// 			previousArrays,
+	// 			didSwitchCollection,
+	// 			didChange: false,
+	// 		}
+	// 		const response = await updateHabit(updatedHabit)
+	// 		console.log('update : ', response)
+	// 	}
+	// 	if (hasInitialized || props.habitObject.didSwitchCollection) {
+	// 		handleUpdate()
+	// 		if (props.habitObject.didSwitchCollection) {
+	// 			setHasInitialized(true)
+	// 		}
+	// 	} else {
+	// 		setHasInitialized(true)
+	// 	}
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [colors, failCounter, successCounter, previousArrays, props.habitObject])
 
 	function handleClickedGood() {
-		dispatch(habitsActions.addSuccessColor({ index }))
+		dispatch(habitsActionsThunk.addSuccessAction(index))
 	}
 	function handleClickedBad() {
-		dispatch(habitsActions.addFailColor({ index }))
+		dispatch(habitsActionsThunk.addFailAction(index))
 	}
+	//? name handleDeleteButtonClick too long ?
 	function handleDeleteButtonClick() {
 		props.delete(index)
 	}
 	function handleClearButtonClick() {
-		dispatch(habitsActions.clearColors({ index }))
+		dispatch(habitsActionsThunk.clearColorsAction(index))
 	}
-	function undoButton() {
-		dispatch(habitsActions.undoColors({ index }))
+	function handleUndoButtonClick() {
+		dispatch(habitsActionsThunk.undoColorsAction(index))
 	}
 
 	const colorsCells = colors.map((color: string, index: number) => (
@@ -102,7 +104,7 @@ const HabitRow: FunctionComponent<{
 			</th>
 			{colorsCells}
 			<th className="th-undo-btn">
-				<button className="btn-icon btn-undo" onClick={undoButton}>
+				<button className="btn-icon btn-undo" onClick={handleUndoButtonClick}>
 					<i className="fa-solid fa-rotate-left"></i>
 				</button>
 			</th>
