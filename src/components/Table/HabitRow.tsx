@@ -16,10 +16,11 @@ const HabitRow: FunctionComponent<{
 	const dispatch = useAppDispatch()
 
 	// const { colors, successCounter, failCounter, previousArrays, name, _id, shouldSwitchCollection, didChange } = useAppSelector((state) => state.habits[props.collection][props.index])
-	const habit = useAppSelector((state) => state.habits.find((habit) => habit._id === props.habitObject._id)) as Habit
+	const habit = useAppSelector((state) => state.habits.find((habit) => habit._id === props.habitObject._id))!
 	const { colors, successCounter, failCounter, didChange } = habit
 	// const { colors, successCounter, failCounter, previousArrays, name, _id, didSwitchCollection, didChange } = habit
 	const index = useAppSelector((state) => state.habits.findIndex((habit) => habit._id === props.habitObject._id))
+
 
 	// useEffect(() => {
 	// 	async function handleUpdate() {

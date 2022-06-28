@@ -14,6 +14,7 @@ import { updateHabit } from '../actions/habits'
 import { RootState } from '.'
 
 const initialHabits: Habit[] = []
+// record string habit
 
 const habitsSlice = createSlice({
 	name: 'habits',

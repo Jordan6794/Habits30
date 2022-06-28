@@ -9,7 +9,7 @@ const Hero: FunctionComponent = () => {
 		<div className={styles.heroDiv}>
 			<div className={styles.heroLeftDiv}>
 				<h1 className={styles.heroTitle}>
-					Manage your habits <br />like a fucking <span className={styles.mainColor}>boss.</span>
+					Manage your habits <br />like a <span className={styles.mainColor}>professional.</span>
 				</h1>
 				<p className={styles.heroSubtitle}>
 					Inovative system to track and manage your habits.<br />So that you can finally put in place the new habits that you want in your life.

@@ -1,10 +1,13 @@
 - Finish design add grey profile pic ?:  et make footer ;
 - Make name editable (popup edit habit onclick sur le name ?)
-- move le form input en last row du table ?
-- make un explanation / title area
+- move le form input en last row du table
+- make un explanation / title area (put rules/details same as daniel healy trivia game )
 - recheck refacto
 - add email to signup (and login with email too)
 - changer mon undo/history into un array de habits
+-  Add stats (biggest streak all time/current, total win/lose ratio, total wins, longest habit monitored, camembert of ongoing/finished/failing habits%)
+- Make it responsive in mobil (smaller fonts + reduce padding + habit details in column with 2 raws) (check si je peux faire les days jusque only 15/16 from mediaQ ?)
+- Initialise didChange at false
 
 Improvements :
 - Pour les await database UI faire un loading & success modal (see Zach Stone MAC)
@@ -13,12 +16,16 @@ Improvements :
 - Make une page statistics ?
 - Gerer les user auth req erreurs et display dans le form
 - get une favicon
+- Faire un readme pour git (check zach stone and others)
 - Put Goath
 - Put un routing redirect si on est logged in redirect vers main (and then can remove le navigate de Auth et only laisser refresh)
+- Remove public acc
+- Get a domain name and spend a few 10s$ for marketing : SO WORTH for portfolio to have a real app with (few) active users
 - Make un truc pour move up/down habits in the list
 - fix le bug où je met le counter a 25 après undo sur finish streak ? (need to keep in state history of greencount when finishStreak) : will be good with undo/history into step array
 - Improve token check + refresh :
 : client-check each request; + une option : token refresh qui remplace pas le token mais qui va echanger contre un nouveau token la premiere fois que le token fail (si le token refresh est toujours valid) (need other than jwt then (ou check leur options))
+- Make a score/gamifying ?
 - Avoir un listener sur la db plutot que state
 - Add lazy loading for router
 

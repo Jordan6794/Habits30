@@ -2,14 +2,14 @@
 import React, { useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
-import { makeDayArray as makeDaysArray } from '../../services/effects.service'
+import { makeDaysArray } from '../../services/effects.service'
 
 import HabitRow from './HabitRow'
 import NewHabitForm from './NewHabitForm'
 
 import { getHabits, postHabit, deleteHabit } from '../../actions/habits'
 import { Habit } from './habits.model'
-import { NUMBER_OF_DAYS, SUCCESS_FINISH_COLOR } from '../../consts/consts'
+import { SUCCESS_FINISH_COLOR } from '../../consts/consts'
 import { TableSkeleton } from '../../shared/skeletons'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import { habitsActions } from '../../store/habitsSlice'
@@ -25,7 +25,7 @@ function Table() {
 
 	let daysArray: number[] = []
 
-	makeDaysArray(daysArray, NUMBER_OF_DAYS)
+	makeDaysArray(daysArray)
 	
 	useEffect(() => {
 		const fetchHabits = async () => {

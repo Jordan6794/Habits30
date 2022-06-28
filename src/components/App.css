@@ -74,6 +74,7 @@ COMMON
 
 .container {
 	width: 90%;
+	max-width: 1600px;
 	margin: 0 auto;
 }
 
@@ -175,12 +176,8 @@ Table
 	border-bottom: none;
 }
 
-/*? remove style for last cell changed ? */
-/*.lastCellChanged{
-	opacity: 0.75
-} */
-
 .habit-row-infos {
+	position: relative;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -188,7 +185,7 @@ Table
 
 .fa-star {
 	position: absolute;
-    left: 9%;
+    left: 12%;
     transform: rotate(20deg);
     color: var(--main-color);
     opacity: 0.3;
@@ -214,12 +211,9 @@ Table
 	padding: 0.5em;
 }
 
-.changedCounter {
-	font-weight: 700;
-}
-
 .green-counter{
 	color: green;
+	stroke: var(--main-color)
 }
 
 .red-counter{
@@ -236,10 +230,38 @@ Table
 
 .btn-plus {
 	color: green;
+	stroke: var(--main-color)
 }
 
 .btn-undo {
 	padding: 0;
+}
+
+.habitCell{
+	border-bottom: 1px solid #dddddd;
+}
+
+.habitCellIcon {
+	width: 24px;
+}
+
+.successColor {
+	stroke: green;
+	stroke: var(--main-color);
+	filter: brightness(0.85)
+}
+
+.failColor {
+	stroke: red;
+}
+
+.lastCellChanged{
+	filter: brightness(70%);
+}
+
+.changedCounter {
+	/* font-weight: 700; */
+	filter: brightness(75%);
 }
 
 /* To make table scrollable : (and wrap with div 'habit-table-container')

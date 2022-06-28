@@ -26,6 +26,7 @@
 ============ */
 .container {
     width: 80%;
+    max-width: 1500px;
     margin: 0 auto;
     font-family: Manrope;
     color: #242739;

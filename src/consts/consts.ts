@@ -1,4 +1,5 @@
 export const NUMBER_OF_DAYS: number = 20
+export const NUMBER_OF_DAYS_MOBIL: number = 15
 
 export const SUCCESS_COLOR: string = 'g'
 export const SUCCESS_STREAK_COLOR: string = 'dg'
