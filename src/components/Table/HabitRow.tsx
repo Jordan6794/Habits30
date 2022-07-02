@@ -81,7 +81,6 @@ const HabitRow: FunctionComponent<{
 	return (
 		<tr className="habit-row">
 			<th className="habit-row-infos">
-				{props.isFinished && <i className="fa-solid fa-star"></i>}
 				<div className="th-undo-clear-div">
 					<button className="btn-icon" onClick={handleDeleteButtonClick}>
 						<i className="fa-solid fa-trash"></i>

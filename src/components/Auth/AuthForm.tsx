@@ -39,7 +39,7 @@ export default function AuthForm({
 			const randomNumber = Math.round(Math.random()*10000)
 			const credentials = {
 				email: `Demo${randomNumber}@demo.com`,
-				username: `Demo${randomNumber}`,
+				username: `Demo Account`,
 				password: 'password',
 				repeatPassword: 'password'
 			}
@@ -149,7 +149,7 @@ export default function AuthForm({
 					<span></span>
 					<label htmlFor="username">Email </label>
 				</div>
-				{true && (<div className={styles.textField}>
+				{isSignup && (<div className={styles.textField}>
 					<input
 						id="username"
 						onChange={onChangeUsername}

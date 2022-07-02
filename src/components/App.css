@@ -218,8 +218,8 @@ Table
 }
 
 .green-counter{
-	color: green;
-	stroke: var(--main-color)
+	color: var(--main-color);
+	filter: brightness(0.85);
 }
 
 .red-counter{
@@ -235,8 +235,8 @@ Table
 }
 
 .btn-plus {
-	color: green;
-	stroke: var(--main-color)
+	color: var(--main-color);
+	filter: brightness(0.85);
 }
 
 .btn-undo {
@@ -252,9 +252,8 @@ Table
 }
 
 .successColor {
-	stroke: green;
 	stroke: var(--main-color);
-	filter: brightness(0.85)
+	filter: brightness(0.85);
 }
 
 .failColor {
