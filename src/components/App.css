@@ -44,6 +44,12 @@ li {
 /* =====
 COMMON 
 ==== */
+.center-container{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 .btn {
 	border: none;
 	outline: none;

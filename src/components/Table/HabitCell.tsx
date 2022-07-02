@@ -36,5 +36,9 @@ export default function HabitCell({
 	}
 	const lastClass = didChange && index === lastIndex ? 'lastCellChanged' : ''
 
-	return (<th className={`habitCell ${lastClass}`}>{content}</th>)
+	return (
+		<th className={`habitCell ${lastClass}`}>
+			<div className="center-container">{content}</div>
+		</th>
+	)
 }

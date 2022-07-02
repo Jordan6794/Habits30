@@ -12,6 +12,7 @@ export default function AuthForm({
 	isSignup: boolean, isDemo: boolean
 }) {
 	const [formData, setFormdata] = useState<FormData>({
+		email: '',
 		username: '',
 		password: '',
 		repeatPassword: ''
@@ -20,8 +21,9 @@ export default function AuthForm({
 	const [demoSuccess, setDemoSuccess] = useState('')
 
 	const isFormValid =
-		formData.username !== '' &&
+		formData.email !== '' &&
 		formData.password !== '' &&
+		(formData.username !== '' || !isSignup) &&
 		(formData.repeatPassword !== '' || !isSignup)
 
 	const navigate = useNavigate()
@@ -36,17 +38,21 @@ export default function AuthForm({
 			setDemoMessage('Creating your demo account...')
 			const randomNumber = Math.round(Math.random()*10000)
 			const credentials = {
+				email: `Demo${randomNumber}@demo.com`,
 				username: `Demo${randomNumber}`,
 				password: 'password',
 				repeatPassword: 'password'
 			}
 
 			setTimeout(() => {
-				setFormdata(prevData => ({...prevData, username: credentials.username}))
+				setFormdata(prevData => ({...prevData, email: credentials.email}))
 			}, 300)
 			setTimeout(() => {
-				setFormdata(prevData => ({...prevData, password: credentials.password}))
+				setFormdata(prevData => ({...prevData, username: credentials.username}))
 			}, 600)
+			setTimeout(() => {
+				setFormdata(prevData => ({...prevData, password: credentials.password}))
+			}, 800)
 			setTimeout(() => {
 				setFormdata(credentials)
 			}, 900)
@@ -65,6 +71,11 @@ export default function AuthForm({
 		}
 		}
 	}, [isDemo, navigate])
+	
+	function onChangeEmail(event: React.ChangeEvent<HTMLInputElement>) {
+		const inputValue: string = event.target.value
+		setFormdata((prevData) => ({ ...prevData, email: inputValue }))
+	}
 
 	function onChangeUsername(event: React.ChangeEvent<HTMLInputElement>) {
 		const inputValue: string = event.target.value
@@ -107,11 +118,10 @@ export default function AuthForm({
 			handleSignin(formData)
 		}
 		resetForm()
-		// exitModal()
 	}
 
 	function resetForm() {
-		setFormdata({ username: '', password: '', repeatPassword: '' })
+		setFormdata({ email: '', username: '', password: '', repeatPassword: '' })
 	}
 
 	function handleSwitchAuth() {
@@ -129,7 +139,17 @@ export default function AuthForm({
 			{demoMessage && <p className={styles.demoText}>{demoMessage}</p>}
 			{demoSuccess && <p className={styles.demoSuccess}>{demoSuccess}</p>}
 			<form className={styles.authForm}>
-				<div className={styles.textField}>
+			<div className={styles.textField}>
+					<input
+						id="email"
+						onChange={onChangeEmail}
+						value={formData.email}
+						required
+					/>
+					<span></span>
+					<label htmlFor="username">Email </label>
+				</div>
+				{true && (<div className={styles.textField}>
 					<input
 						id="username"
 						onChange={onChangeUsername}
@@ -138,7 +158,7 @@ export default function AuthForm({
 					/>
 					<span></span>
 					<label htmlFor="username">Username </label>
-				</div>
+				</div>)}
 				<div className={styles.textField}>
 					<input
 						type="password"

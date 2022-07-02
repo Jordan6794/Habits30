@@ -4,10 +4,10 @@
 - make un explanation / title area (put rules/details same as daniel healy trivia game )
 - recheck refacto
 - add email to signup (and login with email too)
-- changer mon undo/history into un array de habits
+- changer mon undo/history into un array de habits : without puting it in database
 -  Add stats (biggest streak all time/current, total win/lose ratio, total wins, longest habit monitored, camembert of ongoing/finished/failing habits%)
-- Make it responsive in mobil (smaller fonts + reduce padding + habit details in column with 2 raws) (check si je peux faire les days jusque only 15/16 from mediaQ ?)
-- Initialise didChange at false
+- Make it responsive in mobil (smaller fonts + reduce padding + habit details in column with 2 raws)
+- Initialise didChange at false ? or just not put in DB ?
 
 Improvements :
 - Pour les await database UI faire un loading & success modal (see Zach Stone MAC)

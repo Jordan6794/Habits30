@@ -105,9 +105,11 @@ const HabitRow: FunctionComponent<{
 			</th>
 			{colorsCells}
 			<th className="th-undo-btn">
-				<button className="btn-icon btn-undo" onClick={handleUndoButtonClick}>
-					<i className="fa-solid fa-rotate-left"></i>
-				</button>
+				<div className='center-container'>
+					<button className="btn-icon btn-undo" onClick={handleUndoButtonClick}>
+						<i className="fa-solid fa-rotate-left"></i>
+					</button>
+				</div>
 			</th>
 		</tr>
 	)
