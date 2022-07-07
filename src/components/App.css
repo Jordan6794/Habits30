@@ -84,6 +84,47 @@ COMMON
 	margin: 0 auto;
 }
 
+/* ==== Modals ==== */
+@keyframes backdrop-opacity {
+	0% {
+		opacity: 0;
+	}
+}
+
+.backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	z-index: 50;
+	background-color: rgb(0, 0, 0);
+	opacity: 0.8;
+
+	animation-name: backdrop-opacity;
+	animation-duration: 0.3s;
+}
+
+
+.editModal {
+	position: absolute;
+	width: 100%;
+	height: 125px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: -115%;
+	z-index: 100;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+	border-radius: 10px;
+	background-color: white;
+}
+
+.habit-row:last-of-type th .editModal {
+	top:initial;
+	bottom: 0;
+}
+
 /* =====
 NAVBAR 
 ==== */
@@ -200,6 +241,11 @@ Table
 
 .th-habit-name {
 	padding: 0.5em 0.5em;
+	cursor: pointer;
+}
+
+.th-habit-name:hover {
+	opacity: 0.87;
 }
 
 .th-undo-clear-div {

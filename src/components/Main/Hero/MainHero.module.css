@@ -1,0 +1,17 @@
+
+.title {
+    margin-top: 2em;
+    text-align: left;
+    /* color: var(--main-color) */
+}
+
+.infosModal {
+    position: fixed;
+	width: 25%;
+	left: 37.5%;
+	top: 15vh;
+	z-index: 100;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+	border-radius: 10px;
+	background-color: white;
+}

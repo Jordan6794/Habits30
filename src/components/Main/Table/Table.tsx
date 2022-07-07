@@ -2,17 +2,17 @@
 import React, { useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
-import { makeDaysArray } from '../../services/effects.service'
+import { makeDaysArray } from '../../../services/effects.service'
 
 import HabitRow from './HabitRow'
 import NewHabitForm from './NewHabitForm'
 
-import { getHabits, postHabit, deleteHabit } from '../../actions/habits'
+import { getHabits, postHabit, deleteHabit } from '../../../actions/habits'
 import { Habit } from './habits.model'
-import { SUCCESS_FINISH_COLOR } from '../../consts/consts'
-import { TableSkeleton } from '../../shared/skeletons'
-import { useAppDispatch, useAppSelector } from '../../hooks'
-import { habitsActions } from '../../store/habitsSlice'
+import { SUCCESS_FINISH_COLOR } from '../../../consts/consts'
+import { TableSkeleton } from '../../../shared/skeletons'
+import { useAppDispatch, useAppSelector } from '../../../hooks'
+import { habitsActions } from '../../../store/habitsSlice'
 
 function Table() {
 	const [isLoadingHabits, setIsLoadingHabits] = useState(false)
@@ -57,8 +57,9 @@ function Table() {
 			successCounter: 0,
 			failCounter: 0,
 			previousArrays: [],
-			didSwitchCollection: false,
-			didChange: false
+			didChange: false,
+			history: [],
+			historyStep: 0
 		}
 		await postHabit(newHabit)
 		dispatch(habitsActions.add({habit: newHabit}))
@@ -92,7 +93,7 @@ function Table() {
 					<thead>
 						<tr className="table-first-row">
 							<th className="table-habit-title-cell">
-								<h4 className="table-habit-title">Habit</h4>
+								<h4 className="table-habit-title">Habits</h4>
 							</th>
 							{daysArray.map(makeDaysHtml)}
 						</tr>
@@ -109,7 +110,7 @@ function Table() {
 					<thead>
 						<tr className="table-first-row">
 							<th className="table-habit-title-cell">
-								<h4 className="table-habit-title">Finished Habit ⭐</h4>
+								<h4 className="table-habit-title">Solidified Habits</h4>
 							</th>
 							{daysArray.map(makeDaysHtml)}
 						</tr>

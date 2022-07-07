@@ -1,4 +1,4 @@
-import { Habit } from "./Table/habits.model";
+import { Habit } from "./Main/Table/habits.model";
 
 export interface User {
     result: Result

@@ -1,53 +1,24 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useState } from 'react'
 
 import HabitCell from './HabitCell'
 
-// import { updateHabit } from '../../actions/habits'
 import { Habit } from './habits.model'
-import { useAppDispatch, useAppSelector } from '../../hooks'
-import { habitsActionsThunk } from '../../store/habitsSlice'
+import { useAppDispatch, useAppSelector } from '../../../hooks'
+import { habitsActionsThunk } from '../../../store/habitsSlice'
+import HabitEditModal from './HabitEditModal'
 
 const HabitRow: FunctionComponent<{
 	habitObject: Habit
 	isFinished: boolean
 	delete: (deleteIndex: number) => void
 }> = (props) => {
-	// const [hasInitialized, setHasInitialized] = useState(false)
+	const [isEditModalOpen, setIsEditModalOpen] = useState(false)
 	const dispatch = useAppDispatch()
 
-	// const { colors, successCounter, failCounter, previousArrays, name, _id, shouldSwitchCollection, didChange } = useAppSelector((state) => state.habits[props.collection][props.index])
 	const habit = useAppSelector((state) => state.habits.find((habit) => habit._id === props.habitObject._id))!
 	const { colors, successCounter, failCounter, didChange } = habit
-	// const { colors, successCounter, failCounter, previousArrays, name, _id, didSwitchCollection, didChange } = habit
 	const index = useAppSelector((state) => state.habits.findIndex((habit) => habit._id === props.habitObject._id))
 
-
-	// useEffect(() => {
-	// 	async function handleUpdate() {
-	// 		// we always put didChange: false in the database
-	// 		const updatedHabit = {
-	// 			name,
-	// 			_id,
-	// 			colors,
-	// 			successCounter,
-	// 			failCounter,
-	// 			previousArrays,
-	// 			didSwitchCollection,
-	// 			didChange: false,
-	// 		}
-	// 		const response = await updateHabit(updatedHabit)
-	// 		console.log('update : ', response)
-	// 	}
-	// 	if (hasInitialized || props.habitObject.didSwitchCollection) {
-	// 		handleUpdate()
-	// 		if (props.habitObject.didSwitchCollection) {
-	// 			setHasInitialized(true)
-	// 		}
-	// 	} else {
-	// 		setHasInitialized(true)
-	// 	}
-	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [colors, failCounter, successCounter, previousArrays, props.habitObject])
 
 	function handleClickedGood() {
 		dispatch(habitsActionsThunk.addSuccessAction(index))
@@ -65,6 +36,13 @@ const HabitRow: FunctionComponent<{
 	function handleUndoButtonClick() {
 		dispatch(habitsActionsThunk.undoColorsAction(index))
 	}
+	function handleRedoButtonClick() {
+		dispatch(habitsActionsThunk.redoColorsAction(index))
+	}
+	function handleUpdateName(newName: string){
+		dispatch(habitsActionsThunk.updateNameAction(index, newName))
+	}
+	
 
 	const colorsCells = colors.map((color: string, index: number) => (
 		<HabitCell lastIndex={colors.length - 1} key={index} color={color} index={index} didChange={didChange} />
@@ -90,7 +68,8 @@ const HabitRow: FunctionComponent<{
 					</button>{' '}
 				</div>
 
-				<p className="th-habit-name">{props.habitObject.name}</p>
+				{isEditModalOpen && <HabitEditModal saveName={handleUpdateName} name={habit.name} exitModal={() => setIsEditModalOpen(false)} />}
+				<p className="th-habit-name" onClick={() => setIsEditModalOpen(prev => !prev)}>{props.habitObject.name}</p>
 
 				<div className="th-plus-minus-div">
 					{streakCounterDisplay}
@@ -103,13 +82,24 @@ const HabitRow: FunctionComponent<{
 				</div>
 			</th>
 			{colorsCells}
+			{habit.historyStep > 0 && 
 			<th className="th-undo-btn">
 				<div className='center-container'>
+					
 					<button className="btn-icon btn-undo" onClick={handleUndoButtonClick}>
 						<i className="fa-solid fa-rotate-left"></i>
 					</button>
 				</div>
-			</th>
+			</th>}
+			{(habit.history.length > 0 && habit.historyStep < habit.history.length - 1) &&
+			<th className="th-undo-btn">
+				<div className='center-container'>
+					
+					<button className="btn-icon btn-undo" onClick={handleRedoButtonClick}>
+						<i className="fa-solid fa-rotate-right"></i>
+					</button>
+				</div>
+			</th>}
 		</tr>
 	)
 }

@@ -1,4 +1,4 @@
-import { FAIL_COLOR, SUCCESS_COLOR, SUCCESS_FINISH_COLOR, SUCCESS_STREAK_COLOR, FAIL_STREAK_COLOR } from '../../consts/consts'
+import { FAIL_COLOR, SUCCESS_COLOR, SUCCESS_FINISH_COLOR, SUCCESS_STREAK_COLOR, FAIL_STREAK_COLOR } from '../../../consts/consts'
 import Check from './SVG/check.svg'
 import CheckCircle from './SVG/check-circle.svg'
 import CheckShield from './SVG/check-shield.svg'
