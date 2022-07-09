@@ -5,6 +5,7 @@
 -  Add stats (biggest streak all time/current, total win/lose ratio, total wins, longest habit monitored, camembert of ongoing/finished/failing habits%) (charts.js?)
 - Make it responsive in mobil (smaller fonts + reduce padding + habit details in column with 2 raws)
 - Initialise didChange at false ? or just not put in DB ?
+- Find a name for branding
 
 Improvements :
 - Pour les await database UI faire un loading & success modal (see Zach Stone MAC)
