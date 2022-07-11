@@ -321,6 +321,13 @@ Table
 	filter: brightness(75%);
 }
 
+/* =====
+Other common 
+==== */
+.no-padding {
+	padding: 0;
+}
+
 /* To make table scrollable : (and wrap with div 'habit-table-container')
 ======================== */
 /* .habit-table-container {

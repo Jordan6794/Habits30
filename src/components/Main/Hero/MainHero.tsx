@@ -9,9 +9,9 @@ const MainHero: FunctionComponent = () => {
 
     return(
         <div className="container">
-            <h3 className={styles.title}>Manage your habits here</h3>
-            <p>For more infos on how it works click</p> <button onClick={() => setShowInfos(true)}>Here</button>
-            {showInfos && <InfosModal onExitModal={() => setShowInfos(false)} />}
+            <h3 className={styles.title}>Manage your habits</h3>
+            <p className={styles.moreInfoParagraph}>For more infos on how it works click<button onClick={() => setShowInfos(true)}>Here</button>
+            {showInfos && <InfosModal onExitModal={() => setShowInfos(false)} />}</p> 
         </div>
     )
 }

@@ -6,7 +6,7 @@ const ModalPart: FunctionComponent<{ icon: ReactElement; title: string; content:
 	return (
 		<div className={styles.modalPartDiv}>
 			{icon}
-			<h3>{title}</h3>
+			<h3 className={styles.partTitle}>{title}</h3>
 			{content}
 		</div>
 	)

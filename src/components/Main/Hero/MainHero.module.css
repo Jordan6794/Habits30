@@ -1,29 +1,76 @@
+.verticalAlign {
+	vertical-align: middle;
+}
+
+.close {
+	cursor: pointer;
+}
+.close:after,
+.close:before {
+	content: '';
+	height: 30px;
+	width: 30px;
+	border-top: 3px solid #000;
+	position: absolute;
+	top: 23px;
+	right: 10px;
+	transform: rotate(-45deg);
+}
+
+.close:before {
+	right: 31px;
+	transform: rotate(45deg);
+}
+
+.close:hover {
+	opacity: 0.7;
+}
 
 .title {
-    margin-top: 2em;
+	margin: 2em 0;
     text-align: left;
     /* color: var(--main-color) */
 }
 
+.moreInfoParagraph {
+	text-align: left;
+}
+
 .infosModal {
     position: fixed;
-	width: 50%;
-	left: 25%;
-	top: 15vh;
+	text-align: center;
+	width: 54%;
+	left: 23%;
+	height: 80vh;
+	top: 10vh;
+	padding: 1em 0;
 	z-index: 100;
 	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
 	border-radius: 10px;
 	background-color: white;
+	overflow: scroll;
 }
 
 .modalPartDiv {
 	width: 75%;
 	margin: 0 auto;
 	margin-top: 2em;
+	padding-bottom: 1em;
 	border-bottom: 1px solid gray;
 }
 
 .infoIcon {
 	font-size: 3rem;
 	color: var(--main-color);
+	margin-bottom: 0.2em;
+}
+
+.partTitle {
+	text-transform: uppercase;
+	font-size: 1.4rem;
+	margin-bottom: 0.6em;
+}
+
+.infoParagraph {
+	margin-bottom: 0.4em;
 }

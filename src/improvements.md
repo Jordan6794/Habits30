@@ -1,4 +1,4 @@
-- Finish design add grey profile pic ?:  et make footer ;
+- Make footer
 - move le form input en last row du table
 - make un explanation / title area + put rules/details same as daniel healy trivia game
 - recheck refacto
