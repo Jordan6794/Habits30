@@ -1,3 +1,35 @@
+.heroDiv {
+	margin-bottom: 2em;
+}
+
+.title {
+	margin: 2em 0;
+    text-align: left;
+    /* color: var(--main-color) */
+}
+
+.moreInfoParagraph {
+	text-align: left;
+}
+
+/* ================
+More infos MODAL
+================= */
+.infosModal {
+    position: fixed;
+	text-align: center;
+	width: 54%;
+	left: 23%;
+	height: 80vh;
+	top: 10vh;
+	padding: 1em 0;
+	z-index: 100;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+	border-radius: 10px;
+	background-color: white;
+	overflow: scroll;
+}
+
 .verticalAlign {
 	vertical-align: middle;
 }
@@ -24,31 +56,6 @@
 
 .close:hover {
 	opacity: 0.7;
-}
-
-.title {
-	margin: 2em 0;
-    text-align: left;
-    /* color: var(--main-color) */
-}
-
-.moreInfoParagraph {
-	text-align: left;
-}
-
-.infosModal {
-    position: fixed;
-	text-align: center;
-	width: 54%;
-	left: 23%;
-	height: 80vh;
-	top: 10vh;
-	padding: 1em 0;
-	z-index: 100;
-	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
-	border-radius: 10px;
-	background-color: white;
-	overflow: scroll;
 }
 
 .modalPartDiv {

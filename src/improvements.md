@@ -1,6 +1,4 @@
 - Make footer
-- move le form input en last row du table
-- make un explanation / title area + put rules/details same as daniel healy trivia game
 - recheck refacto
 -  Add stats (biggest streak all time/current, total win/lose ratio, total wins, longest habit monitored, camembert of ongoing/finished/failing habits%) (charts.js?)
 - Make it responsive in mobil (smaller fonts + reduce padding + habit details in column with 2 raws)

@@ -87,7 +87,6 @@ function Table() {
 
 	return (
 		<div className="container">
-			<NewHabitForm handleSubmitHabit={handleSubmitHabit} />
 			{/* <div className="habit-table-container"> */}
 				<table className="habit-table">
 					<thead>
@@ -102,6 +101,7 @@ function Table() {
 					<tbody>
 						{isLoadingHabits && <TableSkeleton />}
 						{ongoingHabits.map((habit, index) => createHabitRow(habit, index, false))}
+						<NewHabitForm handleSubmitHabit={handleSubmitHabit} />
 					</tbody>
 				</table>
 			{/* </div> */}
