@@ -1,15 +1,21 @@
-- Make footer
+- Finish footer
 - recheck refacto
--  Add stats (biggest streak all time/current, total win/lose ratio, total wins, longest habit monitored, camembert of ongoing/finished/failing habits%) (charts.js?)
+-  Add stats :
+: Camembert of habits (finished/streak/fail/normal)
+: Stats (total wins, longest habit, biggest success, number of habits?), win/lose ratio
+: some bars about streaks : longest/average/smallest ?
+: all time/current biggest streak (and other stats maybe) ?
 - Make it responsive in mobil (smaller fonts + reduce padding + habit details in column with 2 raws)
 - Initialise didChange at false ? or just not put in DB ?
 - Find a name for branding
+- Redirect/guard from landing if logged in
+- make lifetime counters for stats ?
 
 Improvements :
 - Pour les await database UI faire un loading & success modal (see Zach Stone MAC)
 - Update le state client AFTER les http request et manage les errors dans l'UX si error (certains put en await + UI, d'autres update client first mais ensuite make error modal si error)
 - implement le show password feature
-- Make une page statistics ?
+- Spellcheck everything
 - Gerer les user auth req erreurs et display dans le form
 - get une favicon
 - Faire un readme pour git (check zach stone and others)

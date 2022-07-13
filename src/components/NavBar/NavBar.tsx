@@ -33,6 +33,8 @@ export default function NavBar() {
 					<h4 className="header-title">Habits streak manager</h4>
 					<ul className="nav-links">
 						<Link to='/landing'><li>To Landing</li></Link>
+						<Link to='/dashboard'><li>Dasboard</li></Link>
+						{<Link to='/'><li>Habits</li></Link>}
 						{user ? <li>{user?.result?.username}</li> : <li>Public Account</li>}
 						{!user && <Link to='/signup'><li>Signup</li></Link>}
 						{!user && <Link to='/login'><li>Login</li></Link>}

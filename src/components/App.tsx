@@ -9,6 +9,7 @@ import Main from '../pages/Main'
 import Login from '../pages/Login'
 import Signup from '../pages/Signup'
 import RegisterDemo from '../pages/RegisterDemo'
+import Dashboard from '../pages/Dashboard'
 
 import './App.css'
 
@@ -24,6 +25,7 @@ function App() {
 		<div className="App">
 			<Routes>
 				<Route path='/' element={<Main />} />
+				<Route path='dashboard' element={<Dashboard />} />
 				<Route path='landing' element={<LandingPage />} />
 				<Route path='login' element={<Login />} />
 				<Route path='signup' element={<Signup />} />

@@ -36,7 +36,6 @@ const habitsSlice = createSlice({
 		},
 		addSuccessColor(state, action: PayloadAction<{ index: number }>) {
 			const { index } = action.payload
-			//? Fine to have this repeat right ? or not ?
 			const habit = state[index]
 
 			//If we did undo already we drop the history
@@ -147,18 +146,18 @@ const habitsSlice = createSlice({
 			const { index } = action.payload
 			state[index].didChange = false
 
-			//? Si je met que le undo btn apparait que quand history lenght > 0 je skip le if ici right ?
-			if(state[index].history.length > 0){
-				const step = state[index].historyStep
-				//If we're on the first undo we add the history into the array so we can redo to it
-				if (step === state[index].history.length){
-					const habit = state[index]
-					const historyObject: HistoryObject = { colors: habit.colors, successCounter: habit.successCounter, failCounter: habit.failCounter }
-					state[index].history.push(historyObject)
-				}
-				state[index] = {...state[index], ...state[index].history[step - 1]}
-				state[index].historyStep--
+			if(state[index].history.length === 0){
+				return
 			}
+			const step = state[index].historyStep
+			//If we're on the first undo we add the history into the array so we can redo to it
+			if (step === state[index].history.length){
+				const habit = state[index]
+				const historyObject: HistoryObject = { colors: habit.colors, successCounter: habit.successCounter, failCounter: habit.failCounter }
+				state[index].history.push(historyObject)
+			}
+			state[index] = {...state[index], ...state[index].history[step - 1]}
+			state[index].historyStep--
 		},
 		redoColors(state, action: PayloadAction<{ index: number }>) {
 			const { index } = action.payload
