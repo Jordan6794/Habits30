@@ -1,0 +1,72 @@
+
+.topStatsDiv {
+    display: flex;
+    justify-content: center;
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
+.topStatsContainer {
+    max-width: 90%;
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.15), -2px -2px 4px rgba(0,0,0,0.03);
+    padding: 1.5em;
+    border-radius: 10px;
+}
+
+.topTitleDiv{
+    margin-bottom: 1em;
+}
+
+.topContentDiv {
+    display: flex;
+}
+
+.textStats {
+    display: flex;
+}
+.statBoxDiv {
+    background-color: var(--main-color);
+    color: white;
+    padding: 1em 2em;
+    border-radius: 10px;
+}
+
+.marginRight {
+    margin-right: 1em;
+}
+
+.bottomStatsDiv {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4em;
+}
+
+.pieDiv,
+.barChartDiv {
+    padding: 1em;
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.15), -2px -2px 4px rgba(0,0,0,0.03);
+    border-radius: 10px;
+}
+
+.pieDiv {
+    margin-right: 3em;
+}
+
+.pieTextStats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+}
+
+.chartDiv {
+    height: 250px;
+    margin-top: 100px;
+    display: flex;
+    align-items: baseline;
+}
+
+.barTextStats {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1em;
+}

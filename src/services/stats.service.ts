@@ -77,3 +77,19 @@ export function calculateAverageSuccesses(habits: Habit[]){
     const average = sum / habits.length
     return average.toFixed(2)
 }
+
+export function calculateMedianSuccesses(habits: Habit[]){
+	if(habits.length === 0) { return 0 }
+	const sortedArray = habits.map(habit => habit.successCounter)
+	sortedArray.sort()
+	console.log(sortedArray)
+	if(sortedArray.length % 2 !== 0){
+		const index = Math.floor(sortedArray.length / 2)
+		return sortedArray[index]
+	} else {
+		const belowMedianIndex = (sortedArray.length / 2 ) - 1
+		const belowMedian = sortedArray[belowMedianIndex]
+		const aboveMedian = sortedArray[belowMedianIndex + 1]
+		return ((belowMedian + aboveMedian) / 2).toFixed(2)
+	}
+}

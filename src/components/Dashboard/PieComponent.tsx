@@ -12,7 +12,7 @@ const PieComponent: FunctionComponent<{ data: Array<{ name: string; value: numbe
 
 	return (
 		// <ResponsiveContainer>
-		<PieChart width={400} height={400}>
+		<PieChart width={400} height={350}>
 			<Pie
 				activeIndex={activeIndex}
 				activeShape={renderActiveShape}

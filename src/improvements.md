@@ -1,15 +1,13 @@
 - Finish footer
 - recheck refacto
--  Add stats :
-: Camembert of habits (finished/streak/fail/normal)
-: Stats (total wins, longest habit, biggest success, number of habits?), win/lose ratio
-: some bars about streaks : longest/average/smallest ?
+-  Add stats : design it
 : all time/current biggest streak (and other stats maybe) ?
 - Make it responsive in mobil (smaller fonts + reduce padding + habit details in column with 2 raws)
 - Initialise didChange at false ? or just not put in DB ?
 - Find a name for branding
 - Redirect/guard from landing if logged in
 - make lifetime counters for stats ?
+- load habits on top level rather than in table
 
 Improvements :
 - Pour les await database UI faire un loading & success modal (see Zach Stone MAC)
@@ -18,7 +16,7 @@ Improvements :
 - Spellcheck everything
 - Gerer les user auth req erreurs et display dans le form
 - get une favicon
-- Faire un readme pour git (check zach stone and others)
+- Faire un readme pour git (check zach stone and others) : https://www.makeareadme.com/
 - Put Goath
 - Put un routing redirect si on est logged in redirect vers main (and then can remove le navigate de Auth et only laisser refresh)
 - Remove public acc

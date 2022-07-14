@@ -6,8 +6,8 @@ const BarChartComponent: FunctionComponent<{data: Array<{name: string, Successes
 	return (
 		// <ResponsiveContainer width="100%" height="100%">
 			<BarChart
-				width={500}
-				height={300}
+				width={400}
+				height={240}
 				data={data}
 				margin={{
 					top: 5,
@@ -16,7 +16,7 @@ const BarChartComponent: FunctionComponent<{data: Array<{name: string, Successes
 					bottom: 5,
 				}}
 			>
-				<CartesianGrid strokeDasharray="3 3" />
+				{/* <CartesianGrid strokeDasharray="3 3" /> */}
 				<XAxis dataKey="name" />
 				<YAxis />
 				<Tooltip />
