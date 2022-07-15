@@ -1,7 +1,5 @@
 -  Get good desktop screen for preview (or go carousel/video ?)
-- add lifetime success/fail for stats ?
 - Upgrade design of habit page (need to fill blank/titles etc)
-- Initialise didChange at false ? or just not put in DB ?
 - Find a name for branding
 - Update ma nav
 - Redirect/guard from landing if logged in
@@ -10,6 +8,8 @@
 
 Improvements :
 - recheck refacto
+- add lifetime success/fail for stats ?
+- Initialise didChange at false ? or just not put in DB ?
 - Put loading text/skeleton on dashboard too
 - Make it responsive in mobil (smaller fonts + reduce padding + habit details in column with 2 raws)
 - Pour les await database UI faire un loading & success modal (see Zach Stone MAC)

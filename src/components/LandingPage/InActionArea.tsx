@@ -11,6 +11,9 @@ const InActionArea: FunctionComponent = () => {
                 <div className={styles.laptopDivMargin}>
                     <img className={`${styles.imgScreenshot} ${styles.img1}`}src='dashboard.png' alt='habits in action' />
                     <img className={`${styles.imgScreenshot} ${styles.img2}`} src='localhost.png' alt='habits in action' />
+                    <img className={`${styles.phoneMockup}`} src='phone.png' alt='phone mockup' />
+                    <img className={`${styles.imgScreenshotPhone} ${styles.img1}`}src='dashboard.png' alt='habits in action' />
+                    <img className={`${styles.imgScreenshotPhone} ${styles.img2}`} src='localhost_3000_signup_phone.png' alt='habits in action' />
                 </div>
             </div>
         </div>

@@ -275,7 +275,6 @@
 
 .laptopDiv {
     background-image: url(../../../public/macbook.png);
-    background-size: 800px 550px;
     background-size: 1280px 813px;
     /* position: relative; */
     width: 1280px;
@@ -292,10 +291,25 @@
     width: 948px;
     height: 590px;
     position: absolute;
-    /* top: 62px;
-    left: 55px; */
     top: 0;
     left: 0;
+}
+
+.phoneMockup {
+    position: absolute;
+    top: 70px;
+    right: -40px;
+    height: 650px;
+    z-index: 10;
+}
+
+.imgScreenshotPhone {
+    width: 267px;
+    height: 582px;
+    position: absolute;
+    top: 105px;
+    left: 807px;
+    z-index: 5;
 }
 
 @keyframes fadeO {
