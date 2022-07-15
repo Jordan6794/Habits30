@@ -21,7 +21,7 @@ const BarChartComponent: FunctionComponent<{data: Array<{name: string, Successes
 				<YAxis />
 				<Tooltip />
 				{/* <Legend /> */}
-				<Bar dataKey="Successes" fill="#82ca9d" />
+				<Bar dataKey="Successes" fill="#20C98B" />
 			</BarChart>
 		// </ResponsiveContainer>
 	)

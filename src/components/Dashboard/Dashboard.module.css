@@ -7,7 +7,8 @@
 }
 
 .topStatsContainer {
-    max-width: 90%;
+    width: 90%;
+    max-width: 920px;
     box-shadow: 3px 3px 6px rgba(0,0,0,0.15), -2px -2px 4px rgba(0,0,0,0.03);
     padding: 1.5em;
     border-radius: 10px;
@@ -19,6 +20,7 @@
 
 .topContentDiv {
     display: flex;
+    justify-content: center;
 }
 
 .textStats {
@@ -31,6 +33,17 @@
     border-radius: 10px;
 }
 
+.neutralColor {
+    /* background-color: #9B9EA3; */
+    background-color: #16B1FF;
+}
+.greenColor {
+    background-color: #56CA00;
+}
+.redColor {
+    background-color: #FF4C51;
+}
+
 .marginRight {
     margin-right: 1em;
 }
@@ -41,15 +54,18 @@
     margin-bottom: 4em;
 }
 
+.bottomStatsContainer {
+    width: 90%;
+    max-width: 920px;
+    display: flex;
+    justify-content: space-between;
+}
+
 .pieDiv,
 .barChartDiv {
     padding: 1em;
     box-shadow: 3px 3px 6px rgba(0,0,0,0.15), -2px -2px 4px rgba(0,0,0,0.03);
     border-radius: 10px;
-}
-
-.pieDiv {
-    margin-right: 3em;
 }
 
 .pieTextStats {

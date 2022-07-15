@@ -77,7 +77,7 @@
 
 .textField input:focus ~ label,
 .textField input:valid ~ label {
-	top: -5px;
+	top: -12px;
 	color: #2691d9;
 }
 

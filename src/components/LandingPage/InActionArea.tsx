@@ -9,7 +9,7 @@ const InActionArea: FunctionComponent = () => {
 
             <div className={styles.laptopDiv}>
                 <div className={styles.laptopDivMargin}>
-                    <img className={`${styles.imgScreenshot} ${styles.img1}`}src='habitsChrome.png' alt='habits in action' />
+                    <img className={`${styles.imgScreenshot} ${styles.img1}`}src='dashboard.png' alt='habits in action' />
                     <img className={`${styles.imgScreenshot} ${styles.img2}`} src='localhost.png' alt='habits in action' />
                 </div>
             </div>

@@ -2,7 +2,7 @@
 	--main-color: #20C98B
 }
 
-html {
+html, * {
 	box-sizing: border-box;
 }
 
@@ -82,6 +82,10 @@ COMMON
 	width: 90%;
 	max-width: 1600px;
 	margin: 0 auto;
+}
+
+.flex {
+	display: flex;
 }
 
 /* ==== Modals ==== */

@@ -1,5 +1,5 @@
 //jshint esversion:6
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 import { makeDaysArray } from '../../../services/effects.service'
@@ -7,7 +7,7 @@ import { makeDaysArray } from '../../../services/effects.service'
 import HabitRow from './HabitRow'
 import NewHabitForm from './NewHabitForm'
 
-import { getHabits, postHabit, deleteHabit } from '../../../actions/habits'
+import { postHabit, deleteHabit } from '../../../actions/habits'
 import { Habit } from './habits.model'
 import { SUCCESS_FINISH_COLOR } from '../../../consts/consts'
 import { TableSkeleton } from '../../../shared/skeletons'
@@ -15,39 +15,15 @@ import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { habitsActions } from '../../../store/habitsSlice'
 
 function Table() {
-	const [isLoadingHabits, setIsLoadingHabits] = useState(false)
-
 	const habits = useAppSelector(state => state.habits)
+	const isLoadingHabits = useAppSelector(state => state.loading)
 	const dispatch = useAppDispatch()
 
 	const ongoingHabits = habits.filter(habit => habit.colors[0] !== SUCCESS_FINISH_COLOR)
 	const finishedHabits = habits.filter(habit => habit.colors[0] === SUCCESS_FINISH_COLOR)
 
 	let daysArray: number[] = []
-
 	makeDaysArray(daysArray)
-	
-	useEffect(() => {
-		const fetchHabits = async () => {
-
-			setIsLoadingHabits(true)
-			try {
-				const response = await getHabits()
-				//? correct way obligé de recheck response ici ?
-				if(response && response.length > 0){
-					dispatch(habitsActions.set({habits: response}))
-				}
-
-			} catch (error) {
-				console.log('error fetching habits in table : ', error)
-			}
-			setIsLoadingHabits(false)
-		}
-
-		if (habits.length === 0) {
-			fetchHabits()
-		}
-	}, [dispatch])
 
 	async function handleSubmitHabit(habitName: string) {
 		const newHabit: Habit = {

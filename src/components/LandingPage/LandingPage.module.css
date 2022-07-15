@@ -274,23 +274,26 @@
 }
 
 .laptopDiv {
-    background-image: url(../../../public/laptop.png);
+    background-image: url(../../../public/macbook.png);
     background-size: 800px 550px;
+    background-size: 1280px 813px;
     /* position: relative; */
-    height: 550px;
-    width: 800px;
+    width: 1280px;
+    height: 813px;
 }
 
 .laptopDivMargin {
     position: relative;
-    margin-left: 112px;
-    margin-top: 49px;
+    margin-left: 166px;
+    margin-top: 111px;
 }
 
 .imgScreenshot {
-    width: 582px;
-    height: 412px;
+    width: 948px;
+    height: 590px;
     position: absolute;
+    /* top: 62px;
+    left: 55px; */
     top: 0;
     left: 0;
 }

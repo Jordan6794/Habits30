@@ -16,7 +16,6 @@ import { SUCCESS_STREAK_COLOR, SUCCESS_FINISH_COLOR, FAIL_STREAK_COLOR } from '.
 
 import PieComponent from './PieComponent'
 import BarChartComponent from './BarChartComponent'
-import StatBox from './StatBox'
 
 import styles from './Dashboard.module.css'
 
@@ -43,8 +42,9 @@ const Dasboard: FunctionComponent = () => {
 		{ name: 'Fail streak', value: failStreakHabits },
 		{ name: 'Solidified', value: solidifiedHabits },
 	]
-	const pieColors = ['gray', 'green', 'red', '#20C98B']
-
+	// const pieColors = ['gray', 'green', 'red', '#20C98B']
+	const pieColors = ['#16B1FF', '#56CA00', '#FF4C51', '#20C98B'] // first gray : 9B9EA3
+	
 	const barData = [
 		{ name: 'Smallest', Successes: smallestSuccessHabit },
 		{ name: 'Median', Successes: medianSuccesses },
@@ -57,16 +57,16 @@ const Dasboard: FunctionComponent = () => {
 			<div className={styles.topStatsDiv}>
 				<div className={styles.topStatsContainer}>
 					<div className={styles.topTitleDiv}>
-						<h3>Habits number</h3>
+						<h3>General stats</h3>
 					</div>
 					<div className={styles.topContentDiv}>
-						<div className={`${styles.statBoxDiv} ${styles.marginRight}`}>
+						<div className={`${styles.statBoxDiv} ${styles.marginRight} ${styles.neutralColor}`}>
 							<p>Number of habits : {habits.length}</p>
 						</div>
-						<StatBox>
+						<div className={`${styles.statBoxDiv} ${styles.marginRight} ${styles.greenColor}`}>
 							<p>Total successes : {totalSuccesses}</p>
-						</StatBox>
-						<div className={`${styles.statBoxDiv} ${styles.marginRight}`}>
+						</div>
+						<div className={`${styles.statBoxDiv} ${styles.marginRight} ${styles.redColor}`}>
 							<p>Total fails : {totalFails}</p>
 						</div>
 						<div className={styles.statBoxDiv}>
@@ -77,44 +77,46 @@ const Dasboard: FunctionComponent = () => {
 			</div>
 
 			<div className={styles.bottomStatsDiv}>
-				<div className={styles.pieDiv}>
-					<h3>Habits repartition</h3>
-					<div className={styles.charttDiv}>
-						<PieComponent data={pieData} colors={pieColors} />
+				<div className={styles.bottomStatsContainer}>
+					<div className={styles.pieDiv}>
+						<h3>Habits repartition</h3>
+						<div className={styles.charttDiv}>
+							<PieComponent data={pieData} colors={pieColors} />
+						</div>
+						<div className={styles.pieTextStats}>
+							<div className={`${styles.statBoxDiv} ${styles.neutralColor}`}>
+								<p>No streak : {noStreakHabits}</p>
+							</div>
+							<div className={`${styles.statBoxDiv} ${styles.greenColor}`}>
+								<p>Success Streak : {successStreakHabits}</p>
+							</div>
+							<div className={`${styles.statBoxDiv} ${styles.redColor}`}>
+								<p>Fail streak : {failStreakHabits}</p>
+							</div>
+							<div className={styles.statBoxDiv}>
+								<p>Solidified : {solidifiedHabits}</p>
+							</div>
+						</div>
 					</div>
-					<div className={styles.pieTextStats}>
-						<div className={styles.statBoxDiv}>
-							<p>No streak : {noStreakHabits}</p>
-						</div>
-						<div className={styles.statBoxDiv}>
-							<p>Success Streak : {successStreakHabits}</p>
-						</div>
-						<div className={styles.statBoxDiv}>
-							<p>Fail streak : {failStreakHabits}</p>
-						</div>
-						<div className={styles.statBoxDiv}>
-							<p>Solidified : {solidifiedHabits}</p>
-						</div>
-					</div>
-				</div>
 
-				<div className={styles.barChartDiv}>
-					<h3>Streak durations</h3>
-					<div className={styles.chartDiv}>
-						<BarChartComponent data={barData} />
-					</div>
-					<div className={styles.pieTextStats}>
-						<div className={styles.statBoxDiv}>
-							<p>Smallest : {smallestSuccessHabit}</p>
+					<div className={styles.barChartDiv}>
+						<h3>Streak durations</h3>
+						<div className={styles.chartDiv}>
+							<BarChartComponent data={barData} />
 						</div>
-						<div className={styles.statBoxDiv}>
-							<p>Median : {medianSuccesses}</p>
-						</div>
-						<div className={styles.statBoxDiv}>
-							<p>Average : {averageSuccesses}</p>
-						</div>
-						<div className={styles.statBoxDiv}>
-							<p>Most : {mostSuccessHabit}</p>
+						<div className={styles.pieTextStats}>
+							<div className={styles.statBoxDiv}>
+								<p>Smallest : {smallestSuccessHabit}</p>
+							</div>
+							<div className={styles.statBoxDiv}>
+								<p>Median : {medianSuccesses}</p>
+							</div>
+							<div className={styles.statBoxDiv}>
+								<p>Average : {averageSuccesses}</p>
+							</div>
+							<div className={styles.statBoxDiv}>
+								<p>Most : {mostSuccessHabit}</p>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -19,16 +19,7 @@ export function calculateSuccessesFailRatio(habits: Habit[]) {
 	return Math.round((successes / (successes + fails)) * 100)
 }
 
-export function calculateMostSuccessfulHabit(habits: Habit[]) {
-	let mostSuccessfulCount = 0
-	habits.forEach((habit) => {
-		if (habit.successCounter > mostSuccessfulCount) {
-			mostSuccessfulCount = habit.successCounter
-		}
-	})
-	return mostSuccessfulCount
-}
-
+//? need streak as enum here
 export function calculateStreakedHabits(habits: Habit[], streak: string) {
 	let streakedHabits = habits.filter((habit) => habit.colors[0] === streak)
 	return streakedHabits.length
@@ -82,7 +73,6 @@ export function calculateMedianSuccesses(habits: Habit[]){
 	if(habits.length === 0) { return 0 }
 	const sortedArray = habits.map(habit => habit.successCounter)
 	sortedArray.sort()
-	console.log(sortedArray)
 	if(sortedArray.length % 2 !== 0){
 		const index = Math.floor(sortedArray.length / 2)
 		return sortedArray[index]

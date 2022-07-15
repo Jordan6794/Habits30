@@ -62,6 +62,7 @@ export const contentP2 = (
 			</button>
 			{' '}to delete a habit
 		</p>
+		<p className={styles.infoParagraph}>Click on the name of a habit to edit its name</p>
 	</>
 )
 

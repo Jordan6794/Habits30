@@ -12,6 +12,9 @@ import RegisterDemo from '../pages/RegisterDemo'
 import Dashboard from '../pages/Dashboard'
 
 import './App.css'
+import { habitsActions } from '../store/habitsSlice'
+import { getHabits } from '../actions/habits'
+import { loadingActions } from '../store/loadingSlice'
 
 function App() {
 	const dispatch = useAppDispatch()
@@ -19,6 +22,24 @@ function App() {
 	useEffect(() => {
 		const userStorage = localStorage.getItem('User')
 		dispatch(authActions.setUser(userStorage ? JSON.parse(userStorage) : null))
+	}, [dispatch])
+
+	useEffect(() => {
+		const fetchHabits = async () => {
+
+			dispatch(loadingActions.set(true))
+			try {
+				const response = await getHabits()
+				if(response && response.length > 0){
+					dispatch(habitsActions.set({habits: response}))
+				}
+
+			} catch (error) {
+				console.log('error fetching habits in table : ', error)
+			}
+			dispatch(loadingActions.set(false))
+		}
+		fetchHabits()
 	}, [dispatch])
 
 	return (
