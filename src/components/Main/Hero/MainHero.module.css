@@ -1,11 +1,6 @@
 .heroDiv {
-	margin-bottom: 2em;
-}
-
-.title {
-	margin: 2em 0;
-    text-align: left;
-    /* color: var(--main-color) */
+	margin-top: 3em;
+	margin-bottom: 1.5em;
 }
 
 .moreInfoParagraph {

@@ -115,7 +115,7 @@ const Dasboard: FunctionComponent = () => {
 								<p>Average : {averageSuccesses}</p>
 							</div>
 							<div className={styles.statBoxDiv}>
-								<p>Most : {mostSuccessHabit}</p>
+								<p>Biggest : {mostSuccessHabit}</p>
 							</div>
 						</div>
 					</div>

@@ -68,6 +68,17 @@ COMMON
 	padding: 0.5em;
 }
 
+.btn-how {
+	background-color: var(--main-color);
+}
+
+.btn-sign {
+    border-radius: 20px;
+    font-size: 1rem;
+    background-color: var(--main-color);
+    color: white;
+}
+
 .btn:hover,
 .btn:focus {
 	opacity: 0.9;
@@ -77,6 +88,7 @@ COMMON
 .btn-icon:focus {
 	opacity: 0.7;
 }
+
 
 .container {
 	width: 90%;
@@ -154,10 +166,29 @@ NAVBAR
 .header-title {
 	font-size: 1.5em;
 	padding: 0.5em 0;
+	margin-right: 2em;
 }
 
-.nav-links {
+.nav-links, .nav-left {
 	display: flex;
+	align-items: center;
+}
+
+.active {
+	position: relative;
+}
+
+.active::after {
+	content: '';
+	position: absolute;
+    height: 2px;
+    width: 80%;
+    margin-top: 0.2em;
+    background-color: var(--main-color);
+}
+
+.logout {
+	cursor: pointer;
 }
 
 /* =====

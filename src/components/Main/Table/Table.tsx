@@ -32,7 +32,6 @@ function Table() {
 			colors: [],
 			successCounter: 0,
 			failCounter: 0,
-			previousArrays: [],
 			didChange: false,
 			history: [],
 			historyStep: 0

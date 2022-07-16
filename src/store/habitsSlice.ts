@@ -57,7 +57,6 @@ const habitsSlice = createSlice({
 			if (successFinishCount === 0) {
 				if (successStreakCount === 0) {
 					if (successCount >= DAYS_TO_VALIDATE_STEP) {
-						state[index].previousArrays.push(state[index].colors)
 						state[index].colors = [SUCCESS_STREAK_COLOR]
 					}
 				} else if (successStreakCount === 1) {
@@ -65,16 +64,13 @@ const habitsSlice = createSlice({
 						const redCount = colorCounter(state[index].colors, FAIL_COLOR)
 						if (redCount === 0) {
 							// if 0 fail upgrade to finish color directly
-							state[index].previousArrays.push(state[index].colors)
 							state[index].colors = [SUCCESS_FINISH_COLOR]
 						} else {
-							state[index].previousArrays.push(state[index].colors)
 							state[index].colors = [SUCCESS_STREAK_COLOR, SUCCESS_STREAK_COLOR]
 						}
 					}
 				} else if (successStreakCount === 2) {
 					if (successCount >= DAYS_TO_VALIDATE_STEP) {
-						state[index].previousArrays.push(state[index].colors)
 						state[index].colors = [SUCCESS_FINISH_COLOR]
 					}
 				} else {
@@ -84,7 +80,6 @@ const habitsSlice = createSlice({
 				//successfinishcount === 1 here
 				const failCount = colorCounter(state[index].colors, FAIL_COLOR)
 				if (successCount > failCount * 3) {
-					state[index].previousArrays.push(state[index].colors)
 					state[index].colors = [SUCCESS_FINISH_COLOR]
 				}
 			}
@@ -112,10 +107,8 @@ const habitsSlice = createSlice({
 			if (hasTooManyRedsConsecutive(state[index].colors) || hasTooManyReds(state[index].colors)) {
 				const successFinishCount = colorCounter(state[index].colors, SUCCESS_FINISH_COLOR)
 				if (successFinishCount === 1) {
-					state[index].previousArrays.push(state[index].colors)
 					state[index].colors = [SUCCESS_STREAK_COLOR]
 				} else {
-					state[index].previousArrays.push(state[index].colors)
 					state[index].colors = [FAIL_STREAK_COLOR]
 				}
 			}
@@ -140,7 +133,6 @@ const habitsSlice = createSlice({
 			state[index].colors = []
 			state[index].successCounter = 0
 			state[index].failCounter = 0
-			state[index].previousArrays = []
 		},
 		undoColors(state, action: PayloadAction<{ index: number }>) {
 			const { index } = action.payload

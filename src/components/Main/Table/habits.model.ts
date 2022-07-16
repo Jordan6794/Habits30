@@ -4,7 +4,6 @@ export interface Habit {
 	colors: Array<string>
 	successCounter: number
 	failCounter: number
-	previousArrays: Array<Array<string>>
 	didChange: boolean
     history: Array<HistoryObject>
     historyStep: number
