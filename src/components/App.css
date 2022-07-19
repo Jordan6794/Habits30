@@ -213,10 +213,24 @@ Forms
 /* =====
 Table 
 ==== */
+.relative {
+	position: relative;
+}
+
+.background-div {
+	position: absolute;
+	right: 0;
+	z-index: -1;
+}
+
+.background-svg {
+	width: 400px;
+}
 
 .habit-table {
 	border-radius: 5px 5px 0 0;
 	overflow: hidden;
+	background-color: white;
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 	margin-bottom: 6em;
 }

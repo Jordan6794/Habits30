@@ -22,16 +22,18 @@ Improvements :
 - Put link/pages on footer stuff
 - recheck refacto
 - Faire profile page ?
-- Make un truc pour move up/down habits in the list
-- fix le bug où je met le counter a 25 après undo sur finish streak ? (need to keep in state history of greencount when finishStreak) : will be good with undo/history into step array
+- Make un truc pour move up/down habits in the list ?
 - Get a domain name and spend a few 10s$ for marketing : SO WORTH for portfolio to have a real app with (few) active users
-- Improve token check + refresh :
-: client-check each request; + une option : token refresh qui remplace pas le token mais qui va echanger contre un nouveau token la premiere fois que le token fail (si le token refresh est toujours valid) (need other than jwt then (ou check leur options))
+
+Later/Osef :
 - Make a score/gamifying ?
 - Avoir un listener sur la db plutot que state
+- Improve token check + refresh :
+: client-check each request; + une option : token refresh qui remplace pas le token mais qui va echanger contre un nouveau token la premiere fois que le token fail (si le token refresh est toujours valid) (need other than jwt then (ou check leur options))
 
 
 Debatable ?
+- Design sideNav (and put responsive uperbar for mobile) ?
 -  Switch preview to carousel/video ?
 - Repasser client state update first before database requests ? (seems faster pas d'effet laggy)
 - mettre le 0 counter en grey plutot que green ?

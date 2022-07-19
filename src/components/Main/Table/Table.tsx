@@ -2,8 +2,7 @@
 import React from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
-import { makeDaysArray } from '../../../services/effects.service'
-
+import Book from './SVG/background.svg'
 import HabitRow from './HabitRow'
 import NewHabitForm from './NewHabitForm'
 
@@ -13,6 +12,7 @@ import { SUCCESS_FINISH_COLOR } from '../../../consts/consts'
 import { TableSkeleton } from '../../../shared/skeletons'
 import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { habitsActions } from '../../../store/habitsSlice'
+import { makeDaysArray } from '../../../services/effects.service'
 
 function Table() {
 	const habits = useAppSelector(state => state.habits)
@@ -61,7 +61,10 @@ function Table() {
 	}
 
 	return (
-		<div className="container">
+		<div className="container relative">
+			<div className="background-div">
+				<Book className='background-svg'/>
+			</div>
 			{/* <div className="habit-table-container"> */}
 				<table className="habit-table">
 					<thead>

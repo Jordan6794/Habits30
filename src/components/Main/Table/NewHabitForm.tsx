@@ -2,15 +2,18 @@ import React, { FunctionComponent, useState } from 'react'
 
 const NewHabitForm: FunctionComponent<{handleSubmitHabit: (habitName: string) => Promise<void>}> = ({ handleSubmitHabit }) => {
 	const [habitInput, setHabitInput] = useState('')
+	const [isAdding, setIsAdding] = useState(false)
 
 	function onChangeInput(event: React.ChangeEvent<HTMLInputElement>) {
 		const inputValue: string = event.target.value
 		setHabitInput(inputValue)
 	}
 
-	function onSubmitHabit(event: React.FormEvent) {
-		handleSubmitHabit(habitInput)
+	async function onSubmitHabit(event: React.FormEvent) {
 		event.preventDefault()
+		setIsAdding(true)
+		await handleSubmitHabit(habitInput)
+		setIsAdding(false)
 		setHabitInput('')
 	}
 
@@ -25,8 +28,8 @@ const NewHabitForm: FunctionComponent<{handleSubmitHabit: (habitName: string) =>
 						onChange={onChangeInput}
 						value={habitInput}
 					/>
-					<button className="btn btn-add-habit" onClick={onSubmitHabit}>
-						Add
+					<button disabled={isAdding} className="btn btn-add-habit" onClick={onSubmitHabit}>
+						{isAdding ? 'Adding...' : 'Add'}
 					</button>
 				</form>
 			</th>
