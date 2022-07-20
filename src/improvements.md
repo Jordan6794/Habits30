@@ -21,6 +21,7 @@ Improvements :
 - Faire un readme pour git (check zach stone and others) : https://www.makeareadme.com/
 - Put link/pages on footer stuff
 - recheck refacto
+- Improve ma landing page (habitify ou habstrak inspiration : background-image / switch backgrounds notament)
 - Faire profile page ?
 - Make un truc pour move up/down habits in the list ?
 - Get a domain name and spend a few 10s$ for marketing : SO WORTH for portfolio to have a real app with (few) active users
@@ -40,18 +41,4 @@ Debatable ?
 - make algorythm rules parametrables ? (in profile page)
 
 
-Names :
-Habstreak
-Habitify
-Habitica
-Stikk
-42 goals
-Habitbull
-
-Habitistreak
-StreakHabit
-StreakHab
-Streakica
-Habiter (already exists)
-Streakify (already exists)
-Habstreak (already exists)
+Names : Habits30 // Habitistreak StreakHabit StreakHab 

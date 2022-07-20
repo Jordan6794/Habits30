@@ -69,6 +69,7 @@ COMMON
 }
 
 .btn-how {
+	margin-left: 1.5em;
 	background-color: var(--main-color);
 }
 
@@ -228,6 +229,7 @@ Table
 }
 
 .habit-table {
+	margin-top: 5em;
 	border-radius: 5px 5px 0 0;
 	overflow: hidden;
 	background-color: white;

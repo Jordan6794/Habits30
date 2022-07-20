@@ -7,7 +7,7 @@ const Main: FunctionComponent = () => {
 	return (
 		<>
 			<NavBar />
-			<MainHero />
+			{/* <MainHero /> */}
 			<Table />
 		</>
 	)

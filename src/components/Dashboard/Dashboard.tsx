@@ -43,7 +43,7 @@ const Dasboard: FunctionComponent = () => {
 		{ name: 'Solidified', value: solidifiedHabits },
 	]
 	// const pieColors = ['gray', 'green', 'red', '#20C98B']
-	const pieColors = ['#16B1FF', '#56CA00', '#FF4C51', '#20C98B'] // first gray : 9B9EA3
+	const pieColors = ['#9B9EA3', '#2CABE3', '#FFC36D', '#20C98B'] // first gray : 9B9EA3
 	
 	const barData = [
 		{ name: 'Smallest', Successes: smallestSuccessHabit },
@@ -102,19 +102,19 @@ const Dasboard: FunctionComponent = () => {
 					<div className={styles.barChartDiv}>
 						<h3>Streak durations</h3>
 						<div className={styles.chartDiv}>
-							<BarChartComponent data={barData} />
+							<BarChartComponent data={barData} colors={pieColors}/>
 						</div>
 						<div className={styles.pieTextStats}>
-							<div className={styles.statBoxDiv}>
+							<div className={`${styles.statBoxDiv} ${styles.neutralColor}`}>
 								<p>Smallest : {smallestSuccessHabit}</p>
 							</div>
-							<div className={styles.statBoxDiv}>
+							<div className={`${styles.statBoxDiv} ${styles.greenColor}`}>
 								<p>Median : {medianSuccesses}</p>
 							</div>
-							<div className={styles.statBoxDiv}>
+							<div className={`${styles.statBoxDiv} ${styles.redColor}`}>
 								<p>Average : {averageSuccesses}</p>
 							</div>
-							<div className={styles.statBoxDiv}>
+							<div className={`${styles.statBoxDiv}`}>
 								<p>Biggest : {mostSuccessHabit}</p>
 							</div>
 						</div>

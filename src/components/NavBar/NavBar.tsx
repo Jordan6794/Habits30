@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import decode, { JwtPayload } from 'jwt-decode'
 
 import { useAppSelector } from '../../hooks'
 import { Link, NavLink } from 'react-router-dom'
+import InfosModal from '../Main/Hero/InfosModal'
 
 export default function NavBar() {
+	const [showInfos, setShowInfos] = useState(false)
 	const user = useAppSelector((state) => state.auth.user)
 	const isDemo = user?.result.username === 'Demo Account'
 
@@ -25,19 +27,20 @@ export default function NavBar() {
 		window.location.reload()
 	}
 
-
 	return (
 		<>
+			{showInfos && <InfosModal onExitModal={() => setShowInfos(false)} />}
 			<header className="App-navbar">
 				<div className="container nav-container">
 					<div className="nav-left">
-						<h4 className="header-title">Habits streak manager</h4>
+						<h4 className="header-title">Habits 30</h4>
 						<NavLink to="/dashboard" className={({ isActive }) => (isActive ? 'active' : undefined)}>
 							<li>Dasboard</li>
 						</NavLink>
 						<NavLink to="/" className={({ isActive }) => (isActive ? 'active' : undefined)}>
 							<li>Habits</li>
 						</NavLink>
+						<button className='btn btn-primary btn-how' onClick={() => setShowInfos(true)}>How it works</button>
 					</div>
 					<ul className="nav-links">
 						<Link to="/landing">
