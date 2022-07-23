@@ -274,11 +274,20 @@
 }
 
 .laptopDiv {
-    background-image: url(../../../public/macbook.png);
-    background-size: 1280px 813px;
-    /* position: relative; */
+    /* background-image: url(../../../public/macbook.png);
+    background-size: 1280px 813px; */
+    position: relative;
     width: 1280px;
     height: 813px;
+}
+
+.laptop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1280px;
+    height: 813px;
+    z-index: 5;
 }
 
 .laptopDivMargin {
@@ -314,24 +323,62 @@
 
 @keyframes fadeO {
     0% {
+        transform: translateX(0);
         opacity: 1;
     }
-    40% {
+    27% {
+        transform: translateX(0);
         opacity: 1;
     }
-    60% {
+    33% {
+        transform: translateX(-17px);
+        opacity: 0;
+    }
+    93% {
+        transform: translateX(0);
         opacity: 0;
     }
     100% {
-        opacity: 0;
+        transform: translateX(0);
+        opacity: 1;
     }
 }
-
-.img2 {
-    animation: fadeO 5s ease-in-out;
+.img1 {
+    animation: fadeO 7.5s ease-in-out;
     animation-iteration-count: infinite;
-    animation-direction: alternate;
+    animation-delay: 5s;
 }
+.img2 {
+    animation: fadeO 7.5s ease-in-out;
+    animation-iteration-count: infinite;
+    animation-delay: 2.5s;
+}
+
+.img3 {
+    animation: fadeO 7.5s ease-in-out;
+    animation-iteration-count: infinite;
+    animation-delay: 0s;
+}
+
+/* .img4 {
+    animation: fadeO 8s ease-in-out;
+    animation-iteration-count: infinite;
+    animation-delay: 0s;
+} */
+
+/* http://css3.bradshawenterprises.com/cfimg/
+For "n" images You must define:
+a=presentation time for one image : 2
+b=duration for cross fading : 0.5
+Total animation-duration is of course t=(a+b)*n
+animation-delay = t/n or = a+b
+
+Percentage for keyframes:
+0%
+a/t*100%
+(a+b)/t*100% = 1/n*100%
+100%-(b/t*100%)
+100% */
 
 /* === Last CTA Area
 ============ */
