@@ -2,13 +2,17 @@ import React, { useEffect, useState } from 'react'
 import decode, { JwtPayload } from 'jwt-decode'
 
 import { useAppSelector } from '../../hooks'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import InfosModal from '../Main/Hero/InfosModal'
 
 export default function NavBar() {
 	const [showInfos, setShowInfos] = useState(false)
 	const user = useAppSelector((state) => state.auth.user)
 	const isDemo = user?.result.username === 'Demo Account'
+
+	let location = useLocation()
+	
+	const tablePathname = '/'
 
 	useEffect(() => {
 		const token = user?.token
@@ -40,7 +44,7 @@ export default function NavBar() {
 						<NavLink to="/" className={({ isActive }) => (isActive ? 'active' : undefined)}>
 							<li>Habits</li>
 						</NavLink>
-						<button className='btn btn-primary btn-how' onClick={() => setShowInfos(true)}>How it works</button>
+						{location.pathname === tablePathname && <button className='btn btn-primary btn-how' onClick={() => setShowInfos(true)}>How it works</button>}
 					</div>
 					<ul className="nav-links">
 						<Link to="/landing">

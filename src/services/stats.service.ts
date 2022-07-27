@@ -73,7 +73,6 @@ export function calculateMedianSuccesses(habits: Habit[]){
 	if(habits.length === 0) { return 0 }
 	const sortedArray = habits.map(habit => habit.successCounter)
 	sortedArray.sort((a, b) => {return (a - b)})
-	console.log(sortedArray)
 	if(sortedArray.length % 2 !== 0){
 		const index = Math.floor(sortedArray.length / 2)
 		return sortedArray[index]

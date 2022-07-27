@@ -2,7 +2,7 @@
 import React from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
-import Book from './SVG/background.svg'
+import Book from './SVG/background2.svg'
 import HabitRow from './HabitRow'
 import NewHabitForm from './NewHabitForm'
 

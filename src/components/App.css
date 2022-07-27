@@ -224,8 +224,26 @@ Table
 	z-index: -1;
 }
 
+@media (min-width: 1800px){
+	.background-div{
+		right: 100px;
+	}
+}
+
+
 .background-svg {
-	width: 400px;
+	width: 250px;
+}
+@media (max-width: 1520px){
+	.background-svg {
+		width: 130px;
+	}
+}
+
+@media (max-width: 1380px){
+	.background-svg {
+		display: none;
+	}
 }
 
 .habit-table {

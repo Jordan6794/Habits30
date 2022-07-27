@@ -318,7 +318,7 @@
     position: absolute;
     top: 105px;
     left: 807px;
-    z-index: 5;
+    z-index: 6;
 }
 
 @keyframes fadeO {
