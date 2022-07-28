@@ -66,7 +66,7 @@ export function calculateAverageSuccesses(habits: Habit[]){
     const successes = habits.map(habit => habit.successCounter)
     const sum = successes.reduce((accumulator, element) => (accumulator + element), 0)
     const average = sum / habits.length
-    return average.toFixed(2)
+    return average.toFixed(1)
 }
 
 export function calculateMedianSuccesses(habits: Habit[]){
@@ -80,6 +80,6 @@ export function calculateMedianSuccesses(habits: Habit[]){
 		const belowMedianIndex = (sortedArray.length / 2 ) - 1
 		const belowMedian = sortedArray[belowMedianIndex]
 		const aboveMedian = sortedArray[belowMedianIndex + 1]
-		return ((belowMedian + aboveMedian) / 2).toFixed(2)
+		return ((belowMedian + aboveMedian) / 2).toFixed(1)
 	}
 }

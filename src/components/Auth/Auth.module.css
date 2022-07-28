@@ -119,6 +119,14 @@
 	text-decoration: underline;
 }
 
+.errorDiv {
+	margin-bottom: 0.5em;
+}
+
+.errorMessage {
+	color: red;
+}
+
 /* ====Demo==== */
 .demoText {
 	width: 80%;

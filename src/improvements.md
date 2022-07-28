@@ -1,8 +1,6 @@
-- feedback SVG
+- feedback SVG / feedback preview transition
 - Put Goath
 - Rewrite all text properly + spellcheck
-- Get un header pour le phone w time battery etc
-- LandingPage: put slide animation on every part (nearly)
 - Redirect/guard from landing if logged in (can remove navigate after auth and only let refresh too after that)
 - Remove public acc
 - Make it responsive in mobil (smaller fonts + reduce padding + habit details in column with 2 raws)

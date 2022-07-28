@@ -5,6 +5,7 @@ import { FormData } from './formData.model'
 
 import styles from './Auth.module.css'
 import { useNavigate } from 'react-router-dom'
+import { matchErrorToMessage } from '../../services/errorManagement.service'
 
 export default function AuthForm({
 	isSignup, isDemo
@@ -19,6 +20,7 @@ export default function AuthForm({
 	})
 	const [demoMessage, setDemoMessage] = useState('')
 	const [demoSuccess, setDemoSuccess] = useState('')
+	const [error, setError] = useState('')
 
 	const isFormValid =
 		formData.email !== '' &&
@@ -93,20 +95,34 @@ export default function AuthForm({
 	}
 
 	async function handleSignup(inputs: FormData) {
-		const response = await signup(inputs)
-		if (response) {
-			localStorage.setItem('User', JSON.stringify(response))
-			navigate('/', {replace: true})
-			window.location.reload()
+		setError('')
+		try {
+			const response = await signup(inputs)
+			if (response) {
+				localStorage.setItem('User', JSON.stringify(response))
+				navigate('/', {replace: true})
+				window.location.reload()
+			}
+		} catch (error: any) {
+			const errorMessage = error?.response?.data?.message
+			const errorDisplay = matchErrorToMessage(errorMessage)
+			setError(errorDisplay)
 		}
 	}
 
 	async function handleSignin(formInfos: FormData) {
-		const data = await signin(formInfos)
-		if (data) {
-			localStorage.setItem('User', JSON.stringify(data))
-			navigate('/', {replace: true})
-			window.location.reload()
+		setError('')
+		try {
+			const data = await signin(formInfos)
+			if (data) {
+				localStorage.setItem('User', JSON.stringify(data))
+				navigate('/', {replace: true})
+				window.location.reload()
+		}
+		} catch (error: any) {
+			const errorMessage = error?.response?.data?.message
+			const errorDisplay = matchErrorToMessage(errorMessage)
+			setError(errorDisplay)
 		}
 	}
 
@@ -126,9 +142,9 @@ export default function AuthForm({
 
 	function handleSwitchAuth() {
 		if(isSignup){
-			navigate('/login', {replace: true})
+			navigate('/login')
 		} else {
-			navigate('/signup', {replace: true})
+			navigate('/signup')
 		}
 	}
 
@@ -191,6 +207,9 @@ export default function AuthForm({
 					>
 						{isSignup ? 'Signup' : 'Login'}
 					</button>
+					<div className={styles.errorDiv}>
+						{error && <p className={styles.errorMessage}>{error}</p>}
+					</div>
 					<div className={styles.switchLogin_signup}>
 						{isSignup
 							? 'Already have an account ?'

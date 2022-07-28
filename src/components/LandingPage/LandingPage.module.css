@@ -152,7 +152,7 @@
     opacity: 0;
 }
 
-.intersected {
+.breakOneIntersected {
     opacity: 1;
     animation: slideUp 0.4s ease-in-out;
 
@@ -185,9 +185,6 @@
 ============ */
 .ctaOneDiv {
     margin-bottom: 9em;
-    animation: slideLeft 0.55s ease-in-out;
-    animation-fill-mode: backwards;
-    animation-delay: 0.1s;
 }
 
 .bodyTitle {
@@ -218,6 +215,12 @@
 ============ */
 .howToDiv {
     margin-bottom: 9em;
+    opacity: 0;
+}
+
+.howToIntersected {
+    opacity: 1;
+    animation: slideUp 0.4s ease-in-out;
 }
 
 .howToTitleDiv{
@@ -312,11 +315,19 @@
     z-index: 10;
 }
 
+.phoneStatusBarMockup {
+    position: absolute;
+    top: 102px;
+    right: 35px;
+    height: 24px;
+    z-index: 9;
+}
+
 .imgScreenshotPhone {
     width: 267px;
-    height: 582px;
+    height: 562px;
     position: absolute;
-    top: 105px;
+    top: 125px;
     left: 807px;
     z-index: 6;
 }
@@ -326,7 +337,7 @@
         transform: translateX(0);
         opacity: 1;
     }
-    27% {
+    30% {
         transform: translateX(0);
         opacity: 1;
     }
@@ -334,7 +345,7 @@
         transform: translateX(-17px);
         opacity: 0;
     }
-    93% {
+    97% {
         transform: translateX(0);
         opacity: 0;
     }
@@ -344,18 +355,18 @@
     }
 }
 .img1 {
-    animation: fadeO 7.5s ease-in-out;
+    animation: fadeO 9.9s ease-in-out;
     animation-iteration-count: infinite;
-    animation-delay: 5s;
+    animation-delay: 6.6s;
 }
 .img2 {
-    animation: fadeO 7.5s ease-in-out;
+    animation: fadeO 9.9s ease-in-out;
     animation-iteration-count: infinite;
-    animation-delay: 2.5s;
+    animation-delay: 3.3s;
 }
 
 .img3 {
-    animation: fadeO 7.5s ease-in-out;
+    animation: fadeO 9.9s ease-in-out;
     animation-iteration-count: infinite;
     animation-delay: 0s;
 }
@@ -368,8 +379,8 @@
 
 /* http://css3.bradshawenterprises.com/cfimg/
 For "n" images You must define:
-a=presentation time for one image : 2
-b=duration for cross fading : 0.5
+a=presentation time for one image : 3
+b=duration for cross fading : 0.3
 Total animation-duration is of course t=(a+b)*n
 animation-delay = t/n or = a+b
 

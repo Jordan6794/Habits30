@@ -15,6 +15,7 @@ const InActionArea: FunctionComponent = () => {
                     <img className={`${styles.imgScreenshot} ${styles.img3}`}src='habitsChrome.png' alt='habits in action' />
                     {/* <img className={`${styles.imgScreenshot} ${styles.img4}`}src='localhost_3000_signup_phone.png' alt='habits in action' /> */}
                     <img className={`${styles.phoneMockup}`} src='phone.png' alt='phone mockup' />
+                    <img className={`${styles.phoneStatusBarMockup}`} src='phone-status-bar.jpg' alt='phone mockup' />
                     <img className={`${styles.imgScreenshotPhone} ${styles.img1}`}src='dashboard.png' alt='habits in action' />
                     <img className={`${styles.imgScreenshotPhone} ${styles.img2}`} src='localhost_3000_signup_phone.png' alt='habits in action' />
                     <img className={`${styles.imgScreenshotPhone} ${styles.img3}`}src='habitsChrome.png' alt='habits in action' />

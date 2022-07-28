@@ -12,7 +12,6 @@ import CTAAreaLast from "../components/LandingPage/CTAAreaLast";
 import Footer from "../components/Footer/Footer";
 
 const LandingPage: FunctionComponent = () => {
-
     return (
     <div>
         <div className={styles.container}>

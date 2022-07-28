@@ -23,7 +23,7 @@ export default function NavBar() {
 			if (decodedToken.exp && decodedToken.exp * 1000 < new Date().getTime()) {
 				handleLogout()
 			}
-		}
+		} 
 	}, [user])
 
 	function handleLogout() {
@@ -50,7 +50,7 @@ export default function NavBar() {
 						<Link to="/landing">
 							<li>To Landing</li>
 						</Link>
-						{user ? <li>{user?.result?.username}</li> : <li>Public Account</li>}
+						{user && <li>{user?.result?.username}</li>}
 						{!user && (
 							<Link to="/login">
 								<li>Login</li>

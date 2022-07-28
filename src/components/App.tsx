@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 
 import { useAppDispatch } from '../hooks'
 import { authActions } from '../store/authSlice'
@@ -18,11 +18,25 @@ import { loadingActions } from '../store/loadingSlice'
 
 function App() {
 	const dispatch = useAppDispatch()
+	const navigate = useNavigate()
+	const location = useLocation()
 
+	const landingPathname = '/landing'
+	
 	useEffect(() => {
 		const userStorage = localStorage.getItem('User')
 		dispatch(authActions.setUser(userStorage ? JSON.parse(userStorage) : null))
-	}, [dispatch])
+
+		//redirecting if needed
+		// if(userStorage){
+		// 	if(location.pathname === landingPathname)
+		// 	navigate('/', {replace: true})
+		// } else {
+		// 	const protectedPathnames = ['/', '/dashboard']
+		// 	if(protectedPathnames.includes(location.pathname))
+		// 	navigate(landingPathname, {replace: true})
+		// }
+	}, [dispatch, navigate, location.pathname])
 
 	useEffect(() => {
 		const fetchHabits = async () => {

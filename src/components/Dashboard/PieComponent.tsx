@@ -1,5 +1,5 @@
 import { FunctionComponent, useCallback, useState } from 'react'
-import { PieChart, Pie, Sector, ResponsiveContainer, Cell } from 'recharts'
+import { PieChart, Pie, Sector, Cell } from 'recharts'
 
 const PieComponent: FunctionComponent<{ data: Array<{ name: string; value: number }>, colors: string[] }> = ({ data, colors }) => {
 	const [activeIndex, setActiveIndex] = useState(0)
@@ -74,7 +74,7 @@ const renderActiveShape = (props: any) => {
 			<circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
 			<text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`${value}`}</text>
 			<text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
-				{`(${(percent * 100).toFixed(2)}%)`}
+				{`(${(percent * 100).toFixed(1)}%)`}
 			</text>
 		</g>
 	)
