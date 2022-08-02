@@ -37,9 +37,9 @@ export default function NavBar() {
 			<header className="App-navbar">
 				<div className="container nav-container">
 					<div className="nav-left">
-						<h4 className="header-title">Habits 30</h4>
+						<h4 className="header-title">Habits30</h4>
 						<NavLink to="/dashboard" className={({ isActive }) => (isActive ? 'active' : undefined)}>
-							<li>Dasboard</li>
+							<li>Dashboard</li>
 						</NavLink>
 						<NavLink to="/" className={({ isActive }) => (isActive ? 'active' : undefined)}>
 							<li>Habits</li>

@@ -14,7 +14,7 @@ const InfosModal: FunctionComponent<{ onExitModal: () => void }> = ({ onExitModa
 				<span className={styles.close} onClick={onExitModal}></span>
 				<h3>How it Works</h3>
 
-				<ModalPart title={'Objective'} icon={<i className={`fa-solid fa-bullseye ${styles.infoIcon}`}></i>} content={contentP1}/>
+				<ModalPart title={'Goal'} icon={<i className={`fa-solid fa-bullseye ${styles.infoIcon}`}></i>} content={contentP1}/>
                 <ModalPart title={'Actions'} icon={<i className={`fa-solid fa-down-left-and-up-right-to-center ${styles.infoIcon}`}></i>} content={contentP2}/>
                 <ModalPart title={'Streaks'} icon={<i className={`fa-solid fa-chart-line ${styles.infoIcon}`}></i>} content={contentP3}/>
 			</div>

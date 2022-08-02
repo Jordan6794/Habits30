@@ -1,7 +1,6 @@
 - Feedback colors in dashboard ?
 - Put Goath
-- Rewrite all text properly + spellcheck
-- Uncoment redirect in App.tsx
+- Uncoment redirect in App.tsx (change pathnames for landing and table ?)
 - Make it responsive in mobil (smaller fonts + reduce padding + habit details in column with 2 raws)
 
 Improvements :

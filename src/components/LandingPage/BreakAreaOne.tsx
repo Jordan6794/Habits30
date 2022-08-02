@@ -36,9 +36,9 @@ const BreakAreaOne: FunctionComponent = () => {
 
     return(
         <div ref={divRef} className={`${styles.areaOneDiv} ${didIntersect && styles.breakOneIntersected}`}>
-            <AreaOneCard icon={<SmileySVG />} title='Easy to use' text="Manage your habits everyday with a few clicks, enjoy the multiples features and fonctionalities" />
-            <AreaOneCard icon={<CheckCircleSVG />} title='Very effective' text="Designed following reasearch backed up informations about habit building and habit maintening" />
-            <AreaOneCard icon={<HeartSVG />} title='Entirely free' text="The whole app is entirely for free. You have access to all the features for free forever" />
+            <AreaOneCard icon={<SmileySVG />} title='Easy to use' text="Manage all your habits everyday with a few clicks, enjoy the multiples features and functionalities." />
+            <AreaOneCard icon={<CheckCircleSVG />} title='Very effective' text="Designed following research backed up studies about habit building and habit maintaining." />
+            <AreaOneCard icon={<HeartSVG />} title='Entirely free' text="The whole app is entirely free. You have access to all the features for free without any limitation." />
         </div>
     )
 }

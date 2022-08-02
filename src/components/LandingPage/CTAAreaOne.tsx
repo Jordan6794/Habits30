@@ -11,7 +11,7 @@ const CTAAreaOne: FunctionComponent = () => {
                 The ultimate tool to implement new habits into your life
             </h1>
             <p className={styles.bodySubTitle}>
-                Finally manage to get the habits that gets you your dream life<br />Try it once and you'll never go back, demo available without making any account
+                Finally manage to get the habits that get you your dream life.<br />Try it once and you'll never leave it, demo available without making any account.
             </p>
             <Link to='/register-demo'><button className={`${styles.btn} ${styles.btnHero} ${styles.btnCTA}`}>Try our demo</button></Link>
             <TaskListSVG />
