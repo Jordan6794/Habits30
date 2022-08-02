@@ -2,7 +2,7 @@
 import React from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
-import Book from './SVG/background2.svg'
+import Background from './SVG/background2.svg'
 import HabitRow from './HabitRow'
 import NewHabitForm from './NewHabitForm'
 
@@ -63,7 +63,7 @@ function Table() {
 	return (
 		<div className="container relative">
 			<div className="background-div">
-				<Book className='background-svg'/>
+				<Background className='background-svg'/>
 			</div>
 			{/* <div className="habit-table-container"> */}
 				<table className="habit-table">

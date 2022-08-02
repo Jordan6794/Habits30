@@ -384,14 +384,15 @@ Table
 	stroke: red;
 }
 
-.lastCellChanged{
+/* visual cues for in session updated habits : */
+/* .lastCellChanged{
 	filter: brightness(70%);
 }
 
 .changedCounter {
-	/* font-weight: 700; */
+	font-weight: 700;
 	filter: brightness(75%);
-}
+} */
 
 /* =====
 Other common 

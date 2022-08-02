@@ -27,20 +27,34 @@
     display: flex;
 }
 .statBoxDiv {
-    background-color: var(--main-color);
+    /* background-color: var(--main-color);
+    color: white; */
+    background-color: rgba(32, 201, 139,0.82);
+    color: rgb(32, 201, 139);
     color: white;
+    /* font-weight: bold; */
+    font-size: 0.9rem;
     padding: 1em 2em;
     border-radius: 10px;
 }
 
 .neutralColor {
-    background-color: #9B9EA3;
+    /* background-color: #9B9EA3; */
+    background-color: rgba(155, 158, 163,0.82);
+    color: rgb(155, 158, 163);
+    color: white;
 }
 .greenColor {
-    background-color: #2CABE3;
+    /* background-color: #2CABE3; */
+    background-color: rgba(86, 202, 0, 0.74);
+    color: rgb(86,202,0);
+    color: white;
 }
 .redColor {
-    background-color: #FFC36D;
+    /* background-color: #FFC36D; */
+    background-color: rgba(255, 76, 81, 0.75);
+    color: rgb(255, 76, 81);
+    color: white;
 }
 
 .marginRight {
