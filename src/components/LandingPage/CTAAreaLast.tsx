@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react"
 import { Link } from "react-router-dom"
 
-import ActivityTracker from './SVG/activity_tracker.svg'
+import ActivityTrackerSVG from './SVG/ActivityTrackerSVG'
 import styles from "./LandingPage.module.css"
 
 const CTAAreaLast: FunctionComponent = () => {
@@ -18,7 +18,7 @@ const CTAAreaLast: FunctionComponent = () => {
                 <Link to='/signup'><button className={`${styles.btn} ${styles.btnInvisible}`}>Sign Up</button></Link>
             </div>
             <div>
-                <ActivityTracker className={styles.activitySVG} />
+                <ActivityTrackerSVG />
             </div>
         </div>
     )

@@ -1,9 +1,10 @@
 import { FAIL_COLOR, SUCCESS_COLOR, SUCCESS_FINISH_COLOR, SUCCESS_STREAK_COLOR, FAIL_STREAK_COLOR } from '../../../consts/consts'
-import Check from './SVG/check.svg'
-import CheckCircle from './SVG/check-circle.svg'
-import CheckShield from './SVG/check-shield.svg'
-import X from './SVG/x.svg'
-import XCircle from './SVG/x-circle.svg'
+
+import CheckSVG from './SVG/CheckSVG'
+import CheckCircleSVG from './SVG/CheckCircleSVG'
+import CheckShieldSVG from './SVG/CheckShieldSVG'
+import XSVG from './SVG/XSVG'
+import XCircleSVG from './SVG/XCircleSVG'
 
 export default function HabitCell({
 	color,
@@ -19,19 +20,19 @@ export default function HabitCell({
 	let content
 	switch (color) {
 		case SUCCESS_COLOR:
-			content = <Check className="habitCellIcon successColor" />
+			content = <CheckSVG />
 			break
 		case SUCCESS_STREAK_COLOR:
-			content = <CheckCircle className="habitCellIcon successColor" />
+			content = <CheckCircleSVG />
 			break
 		case SUCCESS_FINISH_COLOR:
-			content = <CheckShield className="habitCellIcon successColor" />
+			content = <CheckShieldSVG />
 			break
 		case FAIL_COLOR:
-			content = <X className="habitCellIcon failColor" />
+			content = <XSVG />
 			break
 		case FAIL_STREAK_COLOR:
-			content = <XCircle className="habitCellIcon failColor" />
+			content = <XCircleSVG />
 			break
 	}
 	const lastClass = didChange && index === lastIndex ? 'lastCellChanged' : ''

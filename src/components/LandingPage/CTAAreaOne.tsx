@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react"
 import { Link } from "react-router-dom"
 
-import TaskList from './SVG/task_list.svg'
+import TaskListSVG from './SVG/TaskListSVG'
 import styles from "./LandingPage.module.css"
 
 const CTAAreaOne: FunctionComponent = () => {
@@ -14,7 +14,7 @@ const CTAAreaOne: FunctionComponent = () => {
                 Finally manage to get the habits that gets you your dream life<br />Try it once and you'll never go back, demo available without making any account
             </p>
             <Link to='/register-demo'><button className={`${styles.btn} ${styles.btnHero} ${styles.btnCTA}`}>Try our demo</button></Link>
-            <TaskList className={styles.taskListSVG} />
+            <TaskListSVG />
         </div>
     )
 }

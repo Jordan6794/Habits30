@@ -1,9 +1,9 @@
 import { FunctionComponent, useEffect, useRef, useState } from "react"
 import AreaOneCard from "./AreaOneCard"
 
-import CheckCircle from './SVG/check_circle.svg'
-import Heart from './SVG/heart.svg'
-import Smiley from './SVG/smiley.svg'
+import CheckCircleSVG from './SVG/CheckCircleSVG'
+import HeartSVG from './SVG/HeartSVG'
+import SmileySVG from './SVG/SmileySVG'
 
 import styles from './LandingPage.module.css'
 
@@ -36,9 +36,9 @@ const BreakAreaOne: FunctionComponent = () => {
 
     return(
         <div ref={divRef} className={`${styles.areaOneDiv} ${didIntersect && styles.breakOneIntersected}`}>
-            <AreaOneCard icon={<Smiley className={styles.googleIcon} />} title='Easy to use' text="Manage your habits everyday with a few clicks, enjoy the multiples features and fonctionalities" />
-            <AreaOneCard icon={<CheckCircle className={styles.googleIcon} />} title='Very effective' text="Designed following reasearch backed up informations about habit building and habit maintening" />
-            <AreaOneCard icon={<Heart className={styles.googleIcon} />} title='Entirely free' text="The whole app is entirely for free. You have access to all the features for free forever" />
+            <AreaOneCard icon={<SmileySVG />} title='Easy to use' text="Manage your habits everyday with a few clicks, enjoy the multiples features and fonctionalities" />
+            <AreaOneCard icon={<CheckCircleSVG />} title='Very effective' text="Designed following reasearch backed up informations about habit building and habit maintening" />
+            <AreaOneCard icon={<HeartSVG />} title='Entirely free' text="The whole app is entirely for free. You have access to all the features for free forever" />
         </div>
     )
 }

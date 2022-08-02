@@ -1,8 +1,9 @@
 import { FunctionComponent } from 'react'
-
-import Gym from './SVG/gym.svg'
-import styles from './LandingPage.module.css'
 import { Link } from 'react-router-dom'
+
+import GymSVG from './SVG/GymSVG'
+
+import styles from './LandingPage.module.css'
 
 const Hero: FunctionComponent = () => {
 	return (
@@ -18,7 +19,7 @@ const Hero: FunctionComponent = () => {
                 <Link to='/signup'><button className={`${styles.btn} ${styles.btnInvisible}`}>Sign Up</button></Link>
 			</div>
 			<div className={styles.heroRightDiv}>
-				<Gym className={styles.heroSVG} />
+				<GymSVG />
 			</div>
 		</div>
 	)

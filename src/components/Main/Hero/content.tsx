@@ -1,8 +1,8 @@
-import Check from '../Table/SVG/check.svg'
-import CheckCircle from '../Table/SVG/check-circle.svg'
-import CheckShield from '../Table/SVG/check-shield.svg'
-import XCircle from '../Table/SVG/x-circle.svg'
-import X from '../Table/SVG/x.svg'
+import CheckSVG from '../Table/SVG/CheckSVG'
+import CheckCircleSVG from '../Table/SVG/CheckCircleSVG'
+import CheckShieldSVG from '../Table/SVG/CheckShieldSVG'
+import XSVG from '../Table/SVG/XSVG'
+import XCircleSVG from '../Table/SVG/XCircleSVG'
 
 import styles from './MainHero.module.css'
 
@@ -78,50 +78,50 @@ export const contentP3 = (
 		<p className={styles.infoParagraph}>
 			After you accumulate <span className="green-counter no-padding">10</span> validated days (
 			<span className={styles.verticalAlign}>
-				<Check className="habitCellIcon successColor" />
+				<CheckSVG />
 			</span>
 			), you will get into the first streak{' '}
 			(<span className={styles.verticalAlign}>
-				<CheckCircle className="habitCellIcon successColor" />
+				<CheckCircleSVG />
 			</span>)
 		</p>
 		<p className={styles.infoParagraph}>
 			one{' '}
 			<span className={styles.verticalAlign}>
-				<CheckCircle className="habitCellIcon successColor" />
+				<CheckCircleSVG />
 			</span>{' '}
 			is equal to 10{' '}
             <span className={styles.verticalAlign}>
-				<Check className="habitCellIcon successColor" />
+				<CheckSVG />
 			</span>
 		</p>
         <p className={styles.infoParagraph}>
 			However, if you fail too much, you will lose all your streaks and your habit will turn into a failing streak{' '}
 			<span className={styles.verticalAlign}>
-                <XCircle className="habitCellIcon failColor" />
+                <XCircleSVG />
 			</span>
 		</p>
         <p className={styles.infoParagraph}>
 			It will take 3 fails (
 			<span className={styles.verticalAlign}>
-                <X className="habitCellIcon failColor" />
+                <XSVG />
 			</span>
             ), or 2 fails in a row to make you lose your streaks
 		</p>
         <p className={styles.infoParagraph}>
 			After you accumulate <span className="green-counter no-padding">30 days</span> of success, which corresponds to three 10 days streaks (
 			<span className={styles.verticalAlign}>
-                <CheckCircle className="habitCellIcon successColor" />
+                <CheckCircleSVG />
 			</span>
             ), your habit will turn into a solidified habbit : {' '}
             <span className={styles.verticalAlign}>
-                <CheckShield className="habitCellIcon successColor" />
+                <CheckShieldSVG />
 			</span>
 		</p>
         <p className={styles.infoParagraph}>
 			But if you have been on a rampage and got <span className="green-counter no-padding">20 days</span> of success without a single fail, your habit will directly turn into a solidified habit : {' '}
             <span className={styles.verticalAlign}>
-                <CheckShield className="habitCellIcon successColor" />
+                <CheckShieldSVG />
 			</span>
 		</p>
 	</>
