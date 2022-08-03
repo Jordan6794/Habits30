@@ -46,7 +46,7 @@ const Dasboard: FunctionComponent = () => {
 	// const chartsColors = ['#9B9EA3', '#2CABE3', '#FFC36D', '#20C98B'] // first gray : 9B9EA3
 	const chartsColors = ['rgb(155, 158, 163)', 'rgb(86,202,0)', 'rgb(255, 76, 81)', 'rgb(32, 201, 139)']
 	// const chartsColors = ['rgba(155, 158, 163, 0.82)', 'rgba(86,202,0, 0.82)', 'rgba(255, 76, 81, 0.82)', 'rgba(32, 201, 139, 0.82)']
-	
+
 	const barData = [
 		{ name: 'Smallest', Successes: smallestSuccessHabit },
 		{ name: 'Median', Successes: medianSuccesses },
@@ -82,7 +82,7 @@ const Dasboard: FunctionComponent = () => {
 				<div className={styles.bottomStatsContainer}>
 					<div className={styles.pieDiv}>
 						<h3>Habits repartition</h3>
-						<div className={styles.charttDiv}>
+						<div className={styles.chartDiv}>
 							<PieComponent data={pieData} colors={chartsColors} />
 						</div>
 						<div className={styles.pieTextStats}>
@@ -103,8 +103,8 @@ const Dasboard: FunctionComponent = () => {
 
 					<div className={styles.barChartDiv}>
 						<h3>Streak durations</h3>
-						<div className={styles.chartDiv}>
-							<BarChartComponent data={barData} colors={chartsColors}/>
+						<div className={`${styles.chartDiv} ${styles.barChart}`}>
+							<BarChartComponent data={barData} colors={chartsColors} />
 						</div>
 						<div className={styles.pieTextStats}>
 							<div className={`${styles.statBoxDiv} ${styles.neutralColor}`}>

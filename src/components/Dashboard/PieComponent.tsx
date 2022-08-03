@@ -1,6 +1,8 @@
 import { FunctionComponent, useCallback, useState } from 'react'
 import { PieChart, Pie, Sector, Cell } from 'recharts'
 
+import useWindowWidth from '../../hooks/useWindowWidth';
+
 const PieComponent: FunctionComponent<{ data: Array<{ name: string; value: number }>, colors: string[] }> = ({ data, colors }) => {
 	const [activeIndex, setActiveIndex] = useState(0)
 	const onPieEnter = useCallback(
@@ -10,15 +12,18 @@ const PieComponent: FunctionComponent<{ data: Array<{ name: string; value: numbe
 		[setActiveIndex]
 	)
 
+	const width = useWindowWidth()
+	const isSmallSize = width < 600
+
 	return (
 		// <ResponsiveContainer>
-		<PieChart width={400} height={350}>
+		<PieChart width={isSmallSize ? 200 : 400} height={isSmallSize ? 250 : 350}>
 			<Pie
 				activeIndex={activeIndex}
-				activeShape={renderActiveShape}
+				activeShape={(props) => renderActiveShape(props, isSmallSize)}
 				data={data}
-				cx={200}
-				cy={200}
+				cx={isSmallSize ? 100 : 200}
+				cy={isSmallSize ? 120 : 200}
 				innerRadius={60}
 				outerRadius={80}
 				fill="#8884d8"
@@ -34,7 +39,7 @@ const PieComponent: FunctionComponent<{ data: Array<{ name: string; value: numbe
 	)
 }
 
-const renderActiveShape = (props: any) => {
+const renderActiveShape = (props: any, isSmallSize: boolean) => {
 	const RADIAN = Math.PI / 180
 	const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value } = props
 	const sin = Math.sin(-RADIAN * midAngle)
@@ -52,6 +57,10 @@ const renderActiveShape = (props: any) => {
 			<text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
 				{payload.name}
 			</text>
+
+			{isSmallSize && <text x={cx} y={cy+15} dy={8} textAnchor="middle" fill={fill}>
+            	{value} {`(${(percent * 100).toFixed(1)}%)`}
+			</text>}
 			<Sector
 				cx={cx}
 				cy={cy}
@@ -70,12 +79,16 @@ const renderActiveShape = (props: any) => {
 				outerRadius={outerRadius + 10}
 				fill={fill}
 			/>
-			<path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
-			<circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-			<text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`${value}`}</text>
-			<text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
-				{`(${(percent * 100).toFixed(1)}%)`}
-			</text>
+			{!isSmallSize && 
+			<>
+				<path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
+				<circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
+				<text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`${value}`}</text>
+				<text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
+					{`(${(percent * 100).toFixed(1)}%)`}
+				</text>
+			</>}
+			
 		</g>
 	)
 }

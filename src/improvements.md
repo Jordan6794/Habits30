@@ -1,11 +1,11 @@
 - Feedback colors in dashboard ?
 - Put Goath
 - Uncoment redirect in App.tsx (change pathnames for landing and table ?)
-- Make it responsive in mobil (smaller fonts + reduce padding + habit details in column with 2 raws)
+- Make it responsive in mobil : Finish nav (make sliding modals for hamburger and ...)
 
 Improvements :
-- Lacher 5e pour get un logo
 - Mettre token a 10days ? Useful for demo accounts (and recheck si tokenexpire logout corectly)
+- Lacher 5e pour get un logo
 - add lifetime success/fail for stats ?
 - Put loading text/skeleton on dashboard too
 - Add lazy loading for router
@@ -23,6 +23,7 @@ Improvements :
 - Get a domain name and spend a few 10s$ for marketing : SO WORTH for portfolio to have a real app with (few) active users
 
 Later/Osef :
+- Responsiveness for ipad size
 - Make a score/gamifying ?
 - Avoir un listener sur la db plutot que state
 - Improve token check + refresh :

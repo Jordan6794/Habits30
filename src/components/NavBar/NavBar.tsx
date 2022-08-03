@@ -4,6 +4,9 @@ import decode, { JwtPayload } from 'jwt-decode'
 import { useAppSelector } from '../../hooks'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import InfosModal from '../Main/Hero/InfosModal'
+import LogoutSVG from './LogoutSVG'
+import HamburgerSVG from './HamburgerSVG'
+import DotsSVG from './DotsSVG'
 
 export default function NavBar() {
 	const [showInfos, setShowInfos] = useState(false)
@@ -37,14 +40,16 @@ export default function NavBar() {
 			<header className="App-navbar">
 				<div className="container nav-container">
 					<div className="nav-left">
+						<HamburgerSVG />
 						<h4 className="header-title">Habits30</h4>
-						<NavLink to="/dashboard" className={({ isActive }) => (isActive ? 'active' : undefined)}>
+						<DotsSVG />
+						<NavLink to="/dashboard" className={({ isActive }) => (isActive ? 'navlink active' : 'navlink')}>
 							<li>Dashboard</li>
 						</NavLink>
-						<NavLink to="/" className={({ isActive }) => (isActive ? 'active' : undefined)}>
+						<NavLink to="/" className={({ isActive }) => (isActive ? 'navlink active' : 'navlink')}>
 							<li>Habits</li>
 						</NavLink>
-						{location.pathname === tablePathname && <button className='btn btn-primary btn-how' onClick={() => setShowInfos(true)}>How it works</button>}
+						{location.pathname === tablePathname && <button className='navlink btn btn-primary btn-how' onClick={() => setShowInfos(true)}>How it works</button>}
 					</div>
 					<ul className="nav-links">
 						<Link to="/landing">
@@ -56,7 +61,7 @@ export default function NavBar() {
 								<li>Login</li>
 							</Link>
 						)}
-						{user && <li className='logout' onClick={handleLogout}>Logout</li>}
+						{user && <li className='logout' onClick={handleLogout}>Logout <LogoutSVG /></li>}
 						{(!user || isDemo) && (
 							<Link to="/signup">
 								<li className='btn btn-sign'>Signup</li>

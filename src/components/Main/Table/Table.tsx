@@ -63,11 +63,8 @@ function Table() {
 	return (
 		<div className="container relative">
 			<div className="background-div">
-				{/* <img src={Background} className='background-svg' alt='background' /> */}
-				{/* <Background className='background-svg'/> */}
 				<BackgroundSVG />
 			</div>
-			{/* <div className="habit-table-container"> */}
 				<table className="habit-table">
 					<thead>
 						<tr className="table-first-row">
@@ -84,7 +81,6 @@ function Table() {
 						<NewHabitForm handleSubmitHabit={handleSubmitHabit} />
 					</tbody>
 				</table>
-			{/* </div> */}
 
 			{finishedHabits.length > 0 && <table className="habit-table">
 					<thead>

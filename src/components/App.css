@@ -164,6 +164,16 @@ NAVBAR
 	justify-content: space-between;
 }
 
+.hamburger-icon {
+	cursor: pointer;
+	display: none;
+}
+
+.dots-icon {
+	cursor: pointer;
+	display: none;
+}
+
 .header-title {
 	font-size: 1.5em;
 	padding: 0.5em 0;
@@ -190,6 +200,11 @@ NAVBAR
 
 .logout {
 	cursor: pointer;
+	display: flex;
+	align-items: center;
+}
+.logout-icon {
+	margin-left: 0.25em;
 }
 
 /* =====
@@ -247,11 +262,11 @@ Table
 }
 
 .habit-table {
-	margin-top: 5em;
 	border-radius: 5px 5px 0 0;
 	overflow: hidden;
 	background-color: white;
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+	margin-top: 5em;
 	margin-bottom: 6em;
 }
 
@@ -401,41 +416,72 @@ Other common
 	padding: 0;
 }
 
-/* To make table scrollable : (and wrap with div 'habit-table-container')
-======================== */
-/* .habit-table-container {
-	max-height: 500px;
-	overflow: auto;
-	margin-bottom: 6em;
-	width: 80%;
-}
 
-.habit-table-container thead th,
-.habit-table-container thead tr {
-	position: sticky;
-	top: 0;
-}
 
-.habit-table-container::-webkit-scrollbar {
-	width: 10px;
-}
+@media (max-width: 550px) {
 
-.habit-table-container::-webkit-scrollbar-track {
-	box-shadow: inset 0 0 5px grey;
-	border-radius: 10px;
-}
+	/* Nav */
+	.hamburger-icon {
+		display: initial;
+	}
+	.dots-icon {
+		display: initial;
+	}
 
-.habit-table-container::-webkit-scrollbar-thumb {
-	background: #dddddd;
-	border-radius: 10px;
-}
+	.navlink {
+		display: none;
+	}
 
-.habit-table-container::-webkit-scrollbar-thumb:hover {
-	background: #282c34;
-}
+	.nav-links {
+		display: none;
+	}
 
-.habit-table {
-	overflow: unset;
-	width: 100%;
-	margin-bottom: 0;
-} */
+	.nav-left {
+		width: 100%;
+		justify-content: space-between;
+	}
+
+	.header-title {
+		margin: 0;
+	}
+
+
+	/* Table */
+	.habit-table {
+		margin: 0 auto;
+		margin-top: 5em;
+		margin-bottom: 6em;
+	}
+	
+	.table-day-cell {
+		display: none;
+	}
+
+	.table-habit-title-cell {
+		width: 300px;
+	}
+
+	.habit-row {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.table-habit-title {
+		padding: 0.5em 0;
+	}
+
+	.green-counter,
+	.red-counter {
+		padding: 0.5em 0.2em;
+	}
+
+	.btn-icon {
+		padding: 0.5em 0.3em;
+	}
+
+	.habit-form {
+		min-width: 200px;
+	}
+
+	
+}
