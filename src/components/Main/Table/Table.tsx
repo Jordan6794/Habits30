@@ -15,12 +15,12 @@ import { habitsActions } from '../../../store/habitsSlice'
 import { makeDaysArray } from '../../../services/effects.service'
 
 function Table() {
-	const habits = useAppSelector(state => state.habits)
-	const isLoadingHabits = useAppSelector(state => state.loading)
+	const habits = useAppSelector((state) => state.habits)
+	const isLoadingHabits = useAppSelector((state) => state.loading)
 	const dispatch = useAppDispatch()
 
-	const ongoingHabits = habits.filter(habit => habit.colors[0] !== SUCCESS_FINISH_COLOR)
-	const finishedHabits = habits.filter(habit => habit.colors[0] === SUCCESS_FINISH_COLOR)
+	const ongoingHabits = habits.filter((habit) => habit.colors[0] !== SUCCESS_FINISH_COLOR)
+	const finishedHabits = habits.filter((habit) => habit.colors[0] === SUCCESS_FINISH_COLOR)
 
 	let daysArray: number[] = []
 	makeDaysArray(daysArray)
@@ -34,16 +34,16 @@ function Table() {
 			failCounter: 0,
 			didChange: false,
 			history: [],
-			historyStep: 0
+			historyStep: 0,
 		}
 		await postHabit(newHabit)
-		dispatch(habitsActions.add({habit: newHabit}))
+		dispatch(habitsActions.add({ habit: newHabit }))
 	}
 
 	function onDeleteHabit(deleteIndex: number) {
 		const _id = habits[deleteIndex]._id
 		deleteHabit(_id)
-		dispatch(habitsActions.delete({index: deleteIndex}))
+		dispatch(habitsActions.delete({ index: deleteIndex }))
 	}
 
 	function createHabitRow(habit: Habit, index: number, isFinished: boolean) {
@@ -65,24 +65,26 @@ function Table() {
 			<div className="background-div">
 				<BackgroundSVG />
 			</div>
+
+			<table className="habit-table">
+				<thead>
+					<tr className="table-first-row">
+						<th className="table-habit-title-cell">
+							<h4 className="table-habit-title">Habits</h4>
+						</th>
+						{daysArray.map(makeDaysHtml)}
+					</tr>
+				</thead>
+
+				<tbody>
+					{isLoadingHabits && <TableSkeleton />}
+					{ongoingHabits.map((habit, index) => createHabitRow(habit, index, false))}
+					<NewHabitForm handleSubmitHabit={handleSubmitHabit} />
+				</tbody>
+			</table>
+
+			{finishedHabits.length > 0 && (
 				<table className="habit-table">
-					<thead>
-						<tr className="table-first-row">
-							<th className="table-habit-title-cell">
-								<h4 className="table-habit-title">Habits</h4>
-							</th>
-							{daysArray.map(makeDaysHtml)}
-						</tr>
-					</thead>
-
-					<tbody>
-						{isLoadingHabits && <TableSkeleton />}
-						{ongoingHabits.map((habit, index) => createHabitRow(habit, index, false))}
-						<NewHabitForm handleSubmitHabit={handleSubmitHabit} />
-					</tbody>
-				</table>
-
-			{finishedHabits.length > 0 && <table className="habit-table">
 					<thead>
 						<tr className="table-first-row">
 							<th className="table-habit-title-cell">
@@ -92,10 +94,9 @@ function Table() {
 						</tr>
 					</thead>
 
-					<tbody>
-						{finishedHabits.map((habit, index) => createHabitRow(habit, index, true))}
-					</tbody>
-				</table>}
+					<tbody>{finishedHabits.map((habit, index) => createHabitRow(habit, index, true))}</tbody>
+				</table>
+			)}
 		</div>
 	)
 }

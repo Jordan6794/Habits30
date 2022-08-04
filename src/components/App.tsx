@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
+import decode, { JwtPayload } from 'jwt-decode'
 
-import { useAppDispatch } from '../hooks'
+import { useAppDispatch, useAppSelector } from '../hooks'
 import { authActions } from '../store/authSlice'
 
 import LandingPage from '../pages/LandingPage'
@@ -15,14 +16,30 @@ import './App.css'
 import { habitsActions } from '../store/habitsSlice'
 import { getHabits } from '../actions/habits'
 import { loadingActions } from '../store/loadingSlice'
+import { logout } from '../lib/logout.service'
 
 function App() {
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 	const location = useLocation()
+	const user = useAppSelector((state) => state.auth.user)
 
-	const landingPathname = '/landing'
+	//checking user token
+	useEffect(() => {
+		const token = user?.token
+		
+		if (token) {
+			const decodedToken = decode<JwtPayload>(token)
+			
+			if (decodedToken.exp && decodedToken.exp * 1000 < new Date().getTime()) {
+				logout()
+			}
+		}
+	}, [user])
 	
+	const landingPathname = '/landing'
+
+	// redirecting public/private routes
 	useEffect(() => {
 		const userStorage = localStorage.getItem('User')
 		dispatch(authActions.setUser(userStorage ? JSON.parse(userStorage) : null))
@@ -38,6 +55,7 @@ function App() {
 		// }
 	}, [dispatch, navigate, location.pathname])
 
+	// fetching habits from database
 	useEffect(() => {
 		const fetchHabits = async () => {
 

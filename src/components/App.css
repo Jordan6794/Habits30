@@ -73,6 +73,11 @@ COMMON
 	background-color: var(--main-color);
 }
 
+.btn-how-modal {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
 .btn-sign {
     border-radius: 20px;
     font-size: 1rem;
@@ -122,7 +127,6 @@ COMMON
 	animation-duration: 0.3s;
 }
 
-
 .editModal {
 	position: absolute;
 	width: 100%;
@@ -146,65 +150,6 @@ COMMON
 .main-color {
 	color: var(--main-color);
 	font-weight: bold;
-}
-
-/* =====
-NAVBAR 
-==== */
-.App-navbar {
-	background-color: #282c34;
-	display: flex;
-	text-align: left;
-	color: white;
-	box-shadow: 3px 3px 5px rgba(0,0,0,0.05);
-}
-
-.nav-container {
-	display: flex;
-	justify-content: space-between;
-}
-
-.hamburger-icon {
-	cursor: pointer;
-	display: none;
-}
-
-.dots-icon {
-	cursor: pointer;
-	display: none;
-}
-
-.header-title {
-	font-size: 1.5em;
-	padding: 0.5em 0;
-	margin-right: 2em;
-}
-
-.nav-links, .nav-left {
-	display: flex;
-	align-items: center;
-}
-
-.active {
-	position: relative;
-}
-
-.active::after {
-	content: '';
-	position: absolute;
-    height: 2px;
-    width: 80%;
-    margin-top: 0.2em;
-    background-color: var(--main-color);
-}
-
-.logout {
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-}
-.logout-icon {
-	margin-left: 0.25em;
 }
 
 /* =====
@@ -419,32 +364,6 @@ Other common
 
 
 @media (max-width: 550px) {
-
-	/* Nav */
-	.hamburger-icon {
-		display: initial;
-	}
-	.dots-icon {
-		display: initial;
-	}
-
-	.navlink {
-		display: none;
-	}
-
-	.nav-links {
-		display: none;
-	}
-
-	.nav-left {
-		width: 100%;
-		justify-content: space-between;
-	}
-
-	.header-title {
-		margin: 0;
-	}
-
 
 	/* Table */
 	.habit-table {

@@ -1,72 +1,39 @@
-import React, { useEffect, useState } from 'react'
-import decode, { JwtPayload } from 'jwt-decode'
+import React, { useState } from 'react'
 
-import { useAppSelector } from '../../hooks'
-import { Link, NavLink, useLocation } from 'react-router-dom'
 import InfosModal from '../Main/Hero/InfosModal'
-import LogoutSVG from './LogoutSVG'
 import HamburgerSVG from './HamburgerSVG'
-import DotsSVG from './DotsSVG'
+import NavLeft from './NavLeft'
+import NavRight from './NavRight'
+
+import styles from './Nav.module.css'
 
 export default function NavBar() {
 	const [showInfos, setShowInfos] = useState(false)
-	const user = useAppSelector((state) => state.auth.user)
-	const isDemo = user?.result.username === 'Demo Account'
-
-	let location = useLocation()
-	
-	const tablePathname = '/'
-
-	useEffect(() => {
-		const token = user?.token
-
-		if (token) {
-			const decodedToken = decode<JwtPayload>(token)
-
-			if (decodedToken.exp && decodedToken.exp * 1000 < new Date().getTime()) {
-				handleLogout()
-			}
-		} 
-	}, [user])
-
-	function handleLogout() {
-		localStorage.removeItem('User')
-		window.location.reload()
-	}
+	const [showHamburgerModal, setShowHamburgerModal] = useState(false)
 
 	return (
 		<>
 			{showInfos && <InfosModal onExitModal={() => setShowInfos(false)} />}
-			<header className="App-navbar">
-				<div className="container nav-container">
-					<div className="nav-left">
-						<HamburgerSVG />
-						<h4 className="header-title">Habits30</h4>
-						<DotsSVG />
-						<NavLink to="/dashboard" className={({ isActive }) => (isActive ? 'navlink active' : 'navlink')}>
-							<li>Dashboard</li>
-						</NavLink>
-						<NavLink to="/" className={({ isActive }) => (isActive ? 'navlink active' : 'navlink')}>
-							<li>Habits</li>
-						</NavLink>
-						{location.pathname === tablePathname && <button className='navlink btn btn-primary btn-how' onClick={() => setShowInfos(true)}>How it works</button>}
+			{showHamburgerModal && <div className={styles.hamburgerCloseBackdrop} onClick={() => setShowHamburgerModal(false)}></div>}
+			<div className={`${styles.hamburgerModal} ${styles.modalNav} ${showHamburgerModal ? styles.hamburgerVisible : ''}`}>
+				<span className={styles.closeIcon} onClick={() => setShowHamburgerModal(false)}></span>
+				<div className={styles.modalFlex}>
+					<div>
+						<NavLeft setShowInfos={setShowInfos} setShowHamburgerModal={setShowHamburgerModal} isModal={true}/>
 					</div>
-					<ul className="nav-links">
-						<Link to="/landing">
-							<li>To Landing</li>
-						</Link>
-						{user && <li>{user?.result?.username}</li>}
-						{!user && (
-							<Link to="/login">
-								<li>Login</li>
-							</Link>
-						)}
-						{user && <li className='logout' onClick={handleLogout}>Logout <LogoutSVG /></li>}
-						{(!user || isDemo) && (
-							<Link to="/signup">
-								<li className='btn btn-sign'>Signup</li>
-							</Link>
-						)}
+					<div className={styles.modalRightNav}>
+						<NavRight isModal={true}/>
+					</div>
+				</div>
+			</div>
+			<header className={styles.appNavbar}>
+				<div className={`container ${styles.navContainer}`}>
+					<div className={styles.navLeft}>
+						<HamburgerSVG onClick={() =>setShowHamburgerModal(true)}/>
+						<NavLeft setShowInfos={setShowInfos} setShowHamburgerModal={setShowHamburgerModal} isModal={false}/>
+					</div>
+					<ul className={styles.navRight}>
+						<NavRight isModal={false}/>
 					</ul>
 				</div>
 			</header>
