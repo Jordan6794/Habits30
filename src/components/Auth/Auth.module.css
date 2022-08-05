@@ -25,17 +25,20 @@
 	padding: 0 2.5em;
 }
 
+.upperDiv {
+	margin-bottom: 1em;
+	padding-bottom: 2em;
+	border-bottom: 1px solid silver;
+}
+
 .logo {
-	font-size: 1.7rem;
+	font-size: 2rem;
 	color: var(--main-color);
 	margin-bottom: 0.5em;
 }
 
 .title {
-	font-size: 2rem;
-	margin-bottom: 0.5em;
-	padding-bottom: 1em;
-	border-bottom: 1px solid silver;
+	font-size: 1.7rem;
 }
 
 .textField {
@@ -87,24 +90,6 @@
 	width: 100%;
 }
 
-.btn {
-	width: 100%;
-	font-size: 1.3rem;
-	font-weight: bold;
-	margin-bottom: 0.5em;
-	border-radius: 25px;
-}
-
-.btn:disabled {
-	opacity: 0.5;
-	cursor:initial;
-}
-
-.btn:disabled:hover {
-	opacity: 0.5;
-	cursor:initial;
-}
-
 .link {
 	background: none;
 	border: none;
@@ -149,4 +134,17 @@
 	font-weight: bold;
     margin-bottom: 1em;
     font-size: 1.4rem;
+}
+
+
+@media (max-width: 1000px) {
+	.formDiv {
+		width: 60%;
+	}
+}
+
+@media (max-width: 630px) {
+	.formDiv {
+		width: 90%;
+	}
 }

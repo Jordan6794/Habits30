@@ -1,9 +1,8 @@
-- Feedback colors in dashboard ?
 - Put Goath
 - Uncoment redirect in App.tsx (change pathnames for landing and table ?)
-- Make it responsive in mobil : Auth + landing
 
 Improvements :
+- Improve colors in dashboard ?
 - Faire un readme pour git (check zach stone and others) : https://www.makeareadme.com/
 - Mettre token a 10days ? Useful for demo accounts (and recheck si tokenexpire logout corectly)
 - Lacher 5e pour get un logo

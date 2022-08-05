@@ -10,3 +10,21 @@
     margin-right: 1em;
     cursor: pointer;
 }
+
+@media (max-width: 700px) {
+    .footer {
+        flex-direction: column;
+    }
+
+    .footerLeft {
+        margin-bottom: 1.5em;
+    }
+
+    .footerRight {
+        justify-content: center;
+    }
+
+    .footerItem {
+        margin-right: 0.5em;
+    }
+}

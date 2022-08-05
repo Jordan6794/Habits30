@@ -150,8 +150,10 @@ export default function AuthForm({
 
 	return (
 		<div className={styles.formDiv}>
-			<h3 className={styles.logo}>Habit Streak Manager</h3>
-			<h3 className={styles.title}>{isSignup ? 'Signup' : 'Login'}</h3>
+			<div className={styles.upperDiv}>
+				<h3 className={styles.logo}>Habits 30</h3>
+				<h3 className={styles.title}>{isSignup ? 'Signup' : 'Login'}</h3>
+			</div>
 			{demoMessage && <p className={styles.demoText}>{demoMessage}</p>}
 			{demoSuccess && <p className={styles.demoSuccess}>{demoSuccess}</p>}
 			<form className={styles.authForm}>
@@ -202,7 +204,7 @@ export default function AuthForm({
 				<div>
 					<button
 						disabled={!isFormValid || isDemo}
-						className={`btn ${styles.btn}`}
+						className={`btn btn-auth`}
 						onClick={onSubmit}
 					>
 						{isSignup ? 'Signup' : 'Login'}

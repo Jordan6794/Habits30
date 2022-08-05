@@ -80,12 +80,12 @@
 
 /* === Nav
 ============ */
-.Nav {
+.nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1.2em 0;
-    margin-bottom: 7.5em;
+    margin-bottom: 8.5em;
 }
 
 .title {
@@ -112,7 +112,7 @@
 }
 
 .heroTitle {
-    font-size: 3.2rem;
+    font-size: 3.5rem;
     font-weight: 800;
     margin-bottom: 0.3em;
 }
@@ -129,18 +129,8 @@
     color: white;
 }
 
-/* .heroRightDiv {
-    width: 50%;
-} */
 .heroSVG {
     width: 540px;
-}
-
-@media (max-width: 900px) {
-    .heroSVG {
-        height: 200px;
-        width: 300px;
-    }
 }
 
 /* === Break Area 1
@@ -277,8 +267,6 @@
 }
 
 .laptopDiv {
-    /* background-image: url(../../../public/macbook.png);
-    background-size: 1280px 813px; */
     position: relative;
     width: 1280px;
     height: 813px;
@@ -300,11 +288,11 @@
 }
 
 .imgScreenshot {
-    width: 948px;
+    width: 950px;
     height: 590px;
     position: absolute;
     top: 0;
-    left: 0;
+    left: -1px;
 }
 
 .phoneMockup {
@@ -324,14 +312,16 @@
 }
 
 .imgScreenshotPhone {
-    width: 267px;
-    height: 562px;
+    width: 269px;
+    height: 563px;
     position: absolute;
     top: 125px;
     left: 807px;
     z-index: 6;
 }
 
+/* =================================
+======= Preview Sliding animation */
 @keyframes fadeO {
     0% {
         transform: translateX(0);
@@ -412,4 +402,197 @@ a/t*100%
 
 .activitySVG {
     width: 450px;
+}
+
+
+@media (min-width: 1750px){
+    .cardOneDiv {
+        padding: 0 5em;
+    }
+}
+
+@media (max-width: 1400px){
+    /* Hero */
+    .heroTitle {
+        font-size: 3rem;
+    }
+    .heroSubtitle {
+        font-size: 1.25rem;
+    }
+
+    /* In action preview*/
+    .laptopDiv {
+        position: relative;
+        width: 1024px;
+        height: 650px;
+    }
+    
+    .laptop {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1024px;
+        height: 650px;
+        z-index: 5;
+    }
+    
+    .laptopDivMargin {
+        position: relative;
+        margin-left: 133px;
+        margin-top: 88px;
+    }
+    
+    .imgScreenshot {
+        width: 758px;
+        height: 473px;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    
+    .phoneMockup {
+        position: absolute;
+        top: 70px;
+        right: -40px;
+        height: 520px;
+        z-index: 10;
+    }
+    
+    .phoneStatusBarMockup {
+        position: absolute;
+        top: 98px;
+        right: 22px;
+        height: 19px;
+        z-index: 9;
+    }
+    
+    .imgScreenshotPhone {
+        width: 215px;
+        height: 450px;
+        position: absolute;
+        top: 116px;
+        left: 653px;
+        z-index: 6;
+    }
+}
+
+@media (max-width: 1000px){
+    .nav {
+        margin-bottom: 3em;
+    }
+    .heroDiv {
+        flex-direction: column;
+    }
+    .heroLeftDiv, .heroRightDiv {
+        width: 100%;
+    }
+    .heroLeftDiv {
+        text-align: center;
+        margin-bottom: 4em;
+    }
+    .heroRightDiv {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+
+/* Mobile */
+@media (max-width: 700px) {
+    /* Hero */
+    .heroTitle {
+        font-size: 2.25rem;
+    }
+    .heroSubtitle {
+        font-size: 1rem;
+    }
+    .heroSVG {
+        height: 200px;
+        width: 300px;
+    }
+
+    /* Area one */
+    .areaOneDiv {
+        flex-direction: column;
+        align-items: center;
+    }
+    .cardOneDiv {
+        padding: 0;
+        width: 80%;
+        margin-bottom: 2em;
+    }
+
+    /* CTA one*/
+    .bodyTitle {
+        font-size: 1.8rem;
+        width: 80%;
+    }
+    .taskListSVG {
+        width: 300px;
+    }
+
+    /* How to area */
+    .howToCardsDiv {
+        grid-template-columns: 1fr;
+        gap: 3em;
+    }
+
+    /* In action area */
+    .laptopDiv {
+        width: 361px;
+        height: 550px;
+        position: relative;
+    }
+    
+    .laptop {
+        display: none;
+    }
+    
+    .laptopDivMargin {
+        margin: 0;
+        margin-top: 2.5em;
+    }
+    
+    .imgScreenshot {
+        display: none;
+    }
+    
+    .phoneMockup {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 550px;
+        z-index: 10;
+    }
+    
+    .phoneStatusBarMockup {
+        position: absolute;
+        top: 29px;
+        left: 63px;
+        height: 20px;
+        z-index: 9;
+    }
+    
+    .imgScreenshotPhone {
+        width: 228px;
+        height: 478px;
+        position: absolute;
+        top: 45px;
+        left: 66px;
+        z-index: 6;
+    }
+
+    /* CTA last */
+    .ctaLastDiv {
+        flex-direction: column;
+    }
+    .ctaLastLeftDiv {
+        width: 100%;
+        text-align: center;
+        margin-right: 0;
+        margin-bottom: 2em;
+    }
+    .activitySVG {
+        width: 300px;
+    }
 }

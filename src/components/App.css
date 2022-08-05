@@ -85,6 +85,24 @@ COMMON
     color: white;
 }
 
+.btn-auth {
+	width: 100%;
+	font-size: 1.3rem;
+	font-weight: bold;
+	margin-bottom: 0.5em;
+	border-radius: 25px;
+}
+
+.btn-auth:disabled {
+	opacity: 0.5;
+	cursor:initial;
+}
+
+.btn-auth:disabled:hover {
+	opacity: 0.5;
+	cursor:initial;
+}
+
 .btn:hover,
 .btn:focus {
 	opacity: 0.9;

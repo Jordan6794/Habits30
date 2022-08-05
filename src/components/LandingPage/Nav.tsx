@@ -6,7 +6,7 @@ import styles from "./LandingPage.module.css"
 const Nav: FunctionComponent = () => {
 
     return(
-    <div className={styles.Nav}>
+    <div className={styles.nav}>
         <Link to='/'><h3 className={styles.title}>Habits30</h3></Link>
         <div className="">
         <Link to='/login'><button className={`${styles.btn} ${styles.btnInvisible}`}>Log In</button></Link>
