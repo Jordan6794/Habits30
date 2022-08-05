@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { GoogleLogin, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login'
 
 import { signup, signin } from '../../actions/auth'
 import { FormData } from './formData.model'
+import { matchErrorToMessage } from '../../services/errorManagement.service'
 
 import styles from './Auth.module.css'
-import { useNavigate } from 'react-router-dom'
-import { matchErrorToMessage } from '../../services/errorManagement.service'
 
 export default function AuthForm({
 	isSignup, isDemo
@@ -147,6 +148,15 @@ export default function AuthForm({
 			navigate('/signup')
 		}
 	}
+	
+
+	const googleSuccess = async (res: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+		console.log(res)
+	}
+
+	const googleFailure = (res: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+		console.log(res)
+	}
 
 	return (
 		<div className={styles.formDiv}>
@@ -223,6 +233,20 @@ export default function AuthForm({
 						>
 							{isSignup ? 'Login' : 'Signup'}
 						</button>
+						{/* <GoogleLogin 
+							clientId={process.env.REACT_APP_GAUTH_CLIENT_ID ?? ''}
+							buttonText="Login"
+							onSuccess={googleSuccess}
+							onFailure={googleFailure}
+							cookiePolicy='single_host_origin'
+						/> */}
+						<GoogleLogin
+    clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+    buttonText="Login"
+    onSuccess={googleSuccess}
+    onFailure={googleFailure}
+    cookiePolicy={'single_host_origin'}
+  />
 					</div>
 				</div>
 			</form>

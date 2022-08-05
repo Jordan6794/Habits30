@@ -2,9 +2,7 @@ import axios from 'axios'
 import { Habit } from '../components/Main/Table/habits.model'
 import { FormData } from '../components/Auth/formData.model'
 
-const API = axios.create({baseURL: 'https://habits-project-backend.herokuapp.com'})
-// baseUrl: 'https://habits-project-backend.herokuapp.com'
-// baseUrl: 'http://localhost:5000'
+const API = axios.create({baseURL: process.env.REACT_APP_BACKEND_BASE_URL})
 
 API.interceptors.request.use((req) => {
     if(req.headers){

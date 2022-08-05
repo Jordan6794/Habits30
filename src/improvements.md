@@ -1,5 +1,5 @@
 - Put Goath
-- Uncoment redirect in App.tsx (change pathnames for landing and table ?)
+- Uncoment redirect in App.tsx (change pathnames for landing and table ?) (and remove link in landing nav logo!)
 
 Improvements :
 - Improve colors in dashboard ?
@@ -20,7 +20,7 @@ Improvements :
 - Initialise didChange at false ? or just not put in DB ?
 - Make a sidebranch in github and push to main branch only validated new versions
 - Improve ma landing page (habitify ou habstrak inspiration : background-image / switch backgrounds notament)
-- Faire profile page ?
+- Faire profile page ? (then put small round icon with profile pic on nav (can update and get it from google if OAuth))
 - Make un truc pour move up/down habits in the list ?
 
 Later/Osef :
@@ -29,6 +29,9 @@ Later/Osef :
 - Avoir un listener sur la db plutot que state
 - Improve token check + refresh :
 : client-check each request; + une option : token refresh qui remplace pas le token mais qui va echanger contre un nouveau token la premiere fois que le token fail (si le token refresh est toujours valid) (need other than jwt then (ou check leur options))
+
+Small fixes :
+- Landing animation in mobile screen howto trigger too late (triggered at bottom of div)
 
 
 Debatable ?
