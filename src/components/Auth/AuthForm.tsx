@@ -240,13 +240,13 @@ export default function AuthForm({
 							onFailure={googleFailure}
 							cookiePolicy='single_host_origin'
 						/> */}
-						<GoogleLogin
+						{/* <GoogleLogin
     clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
     buttonText="Login"
     onSuccess={googleSuccess}
     onFailure={googleFailure}
     cookiePolicy={'single_host_origin'}
-  />
+  /> */}
 					</div>
 				</div>
 			</form>
