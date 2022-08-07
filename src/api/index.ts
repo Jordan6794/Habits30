@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Habit } from '../components/Main/Table/habits.model'
 import { FormData, GoogleAuthData } from '../components/Auth/formData.model'
 
-const API = axios.create({baseURL: process.env.REACT_APP_LOCAL_BACKEND_BASE_URL})
+const API = axios.create({baseURL: process.env.REACT_APP_BACKEND_BASE_URL})
 
 API.interceptors.request.use((req) => {
     if(req.headers){
