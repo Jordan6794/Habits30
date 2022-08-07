@@ -20,7 +20,7 @@ const NavLeft: FunctionComponent<{setShowInfos: React.Dispatch<React.SetStateAct
 			<NavLink to="/dashboard" className={({ isActive }) => (isModal ? '' : isActive ? `${styles.navlink} ${styles.active}` : styles.navlink)}>
 				<li className={isModal ? styles.modalItem : ''}>Dashboard</li>
 			</NavLink>
-			<NavLink to="/" className={({ isActive }) => ((isModal) ? '' : isActive ? `${styles.navlink} ${styles.active}` : styles.navlink)}>
+			<NavLink to="/habits" className={({ isActive }) => ((isModal) ? '' : isActive ? `${styles.navlink} ${styles.active}` : styles.navlink)}>
 				<li className={isModal ? styles.modalItem : ''}>Habits</li>
 			</NavLink>
 			{location.pathname === tablePathname && (

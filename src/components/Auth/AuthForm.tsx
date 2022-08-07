@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { GoogleLogin, useGoogleLogin } from '@react-oauth/google'
 
 import { signup, signin, googleAuth } from '../../actions/auth'
 import { FormData, GoogleAuthData } from './formData.model'
 import { matchErrorToMessage } from '../../services/errorManagement.service'
+import { DEMO_ACCOUNT_USERNAME } from '../../consts/consts'
 
-import { GoogleLogin, useGoogleLogin } from '@react-oauth/google'
-import axios from 'axios'
 import decode, { JwtPayload } from 'jwt-decode'
 
 import styles from './Auth.module.css'
@@ -44,7 +45,7 @@ export default function AuthForm({
 			const randomNumber = Math.round(Math.random()*10000)
 			const credentials = {
 				email: `Demo${randomNumber}@demo.com`,
-				username: `Demo Account`,
+				username: DEMO_ACCOUNT_USERNAME,
 				password: 'password',
 				repeatPassword: 'password'
 			}

@@ -1,5 +1,5 @@
-- Put Goath : manage Goath response infos : make another route gauth (signup or signin if user exists, no password, put pass optional in model), reste same
-- Uncoment redirect in App.tsx (change pathnames for landing and table ?) (and remove link in landing nav logo!)
+- Put Goath : design button
+- Update screenshots in preview
 
 Improvements :
 - Improve colors in dashboard ?

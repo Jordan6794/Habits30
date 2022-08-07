@@ -39,22 +39,21 @@ function App() {
 		}
 	}, [user])
 	
-	const landingPathname = '/landing'
-
 	// redirecting public/private routes
 	useEffect(() => {
 		const userStorage = localStorage.getItem('User')
 		dispatch(authActions.setUser(userStorage ? JSON.parse(userStorage) : null))
-
-		//redirecting if needed
-		// if(userStorage){
-		// 	if(location.pathname === landingPathname)
-		// 	navigate('/', {replace: true})
-		// } else {
-		// 	const protectedPathnames = ['/', '/dashboard']
-		// 	if(protectedPathnames.includes(location.pathname))
-		// 	navigate(landingPathname, {replace: true})
-		// }
+		
+		const landingPathname = '/'
+		// redirecting if needed
+		if(userStorage){
+			if(location.pathname === landingPathname)
+			navigate('/habits', {replace: true})
+		} else {
+			const protectedPathnames = ['/habits', '/dashboard']
+			if(protectedPathnames.includes(location.pathname))
+			navigate(landingPathname, {replace: true})
+		}
 	}, [dispatch, navigate, location.pathname])
 
 	// fetching habits from database
@@ -79,9 +78,9 @@ function App() {
 	return (
 		<div className="App">
 			<Routes>
-				<Route path='/' element={<Main />} />
+				<Route path='/' element={<LandingPage />} />
 				<Route path='dashboard' element={<Dashboard />} />
-				<Route path='landing' element={<LandingPage />} />
+				<Route path='habits' element={<Main />} />
 				<Route path='login' element={<Login />} />
 				<Route path='signup' element={<Signup />} />
 				<Route path='register-demo' element={<RegisterDemo />} />
