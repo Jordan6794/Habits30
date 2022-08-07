@@ -1,4 +1,5 @@
 import { FunctionComponent } from "react";
+import { Link } from "react-router-dom";
 
 import styles from './Footer.module.css'
 const Footer: FunctionComponent = () => {
@@ -9,8 +10,8 @@ const Footer: FunctionComponent = () => {
                 {/* //? Put text content like that in some consts somewhere ? */}
                 <p className={styles.footerLeft}>Habits30, 2022</p>
                 <div className={`flex ${styles.footerRight}`}>
-                    <p className={styles.footerItem}>Privacy</p>
-                    <p className={styles.footerItem}>Terms of service</p>
+                    <Link to='/privacy'><p className={styles.footerItem}>Privacy</p></Link>
+                    <Link to='/tos'><p className={styles.footerItem}>Terms of service</p></Link>         
                     <p className={styles.footerItem}>Contact us</p>
                 </div>
             </footer>

@@ -1,10 +1,11 @@
-- Put Goath
+- Put Goath : manage Goath response infos : make another route gauth (signup or signin if user exists, no password, put pass optional in model), reste same
 - Uncoment redirect in App.tsx (change pathnames for landing and table ?) (and remove link in landing nav logo!)
 
 Improvements :
 - Improve colors in dashboard ?
 - Faire un readme pour git (check zach stone and others) : https://www.makeareadme.com/
 - Mettre token a 10days ? Useful for demo accounts (and recheck si tokenexpire logout corectly)
+- get une favicon
 - Lacher 5e pour get un logo
 - Get a domain name and spend a few 10s$ for marketing
 - add lifetime success/fail for stats ?
@@ -13,9 +14,10 @@ Improvements :
 - Pour les await database UI faire un loading & success modal (see Zach Stone MAC)
 - Update le state client AFTER les http request et manage les errors dans l'UX si error (certains put en await + UI, d'autres update client first mais ensuite make error modal si error)
 - implement le show password feature
-- get une favicon
 - Put link/pages on footer stuff
+- 
 - recheck refacto
+- Put each habits stats/infos on edit habit name modal (need lifetime win/fails first too)
 - Put active visual cue in hamberger modal left nav
 - Initialise didChange at false ? or just not put in DB ?
 - Make a sidebranch in github and push to main branch only validated new versions

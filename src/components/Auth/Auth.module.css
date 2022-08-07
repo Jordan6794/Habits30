@@ -112,6 +112,13 @@
 	color: red;
 }
 
+/* ====Google Auth==== */
+.googleContainerDiv {
+	display: flex;
+	justify-content: center;
+}
+
+
 /* ====Demo==== */
 .demoText {
 	width: 80%;

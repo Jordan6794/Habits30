@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { GoogleLogin, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login'
 
-import { signup, signin } from '../../actions/auth'
-import { FormData } from './formData.model'
+import { signup, signin, googleAuth } from '../../actions/auth'
+import { FormData, GoogleAuthData } from './formData.model'
 import { matchErrorToMessage } from '../../services/errorManagement.service'
+
+import { GoogleLogin, useGoogleLogin } from '@react-oauth/google'
+import axios from 'axios'
+import decode, { JwtPayload } from 'jwt-decode'
 
 import styles from './Auth.module.css'
 
@@ -37,7 +40,6 @@ export default function AuthForm({
 		}
 
 		async function handleDemo(){
-			console.log('creating')
 			setDemoMessage('Creating your demo account...')
 			const randomNumber = Math.round(Math.random()*10000)
 			const credentials = {
@@ -119,7 +121,7 @@ export default function AuthForm({
 				localStorage.setItem('User', JSON.stringify(data))
 				navigate('/', {replace: true})
 				window.location.reload()
-		}
+			}
 		} catch (error: any) {
 			const errorMessage = error?.response?.data?.message
 			const errorDisplay = matchErrorToMessage(errorMessage)
@@ -148,15 +150,43 @@ export default function AuthForm({
 			navigate('/signup')
 		}
 	}
-	
 
-	const googleSuccess = async (res: GoogleLoginResponse | GoogleLoginResponseOffline) => {
-		console.log(res)
-	}
+	const googleLogin = useGoogleLogin({
+		onSuccess: async (tokenResponse) => {
+		setError('')
+		try {
+			const userInfo = await axios.get(
+				'https://www.googleapis.com/oauth2/v3/userinfo',
+				{ headers: { Authorization: `Bearer ${tokenResponse.access_token}` } },
+			);
+			
+			//we received correct user infos
+			if(userInfo?.data?.sub){
+				const { given_name, email, sub} = userInfo.data
+				const googleLoginData: GoogleAuthData = { given_name, email, sub }
+				console.log(googleLoginData)
 
-	const googleFailure = (res: GoogleLoginResponse | GoogleLoginResponseOffline) => {
-		console.log(res)
-	}
+				const data = await googleAuth(googleLoginData)
+				if (data) {
+					localStorage.setItem('User', JSON.stringify(data))
+					navigate('/', {replace: true})
+					window.location.reload()
+				}
+			}
+			else {
+				console.log('User infos were not received properly, response : ', userInfo)
+				setError('Something went wrong with google authentification. Please try again')
+			}
+		} catch (error) {
+			console.log(error)
+			setError('Something went wrong with google authentification. Please try again')
+		}
+		},
+		onError: errorResponse => {
+			console.log(errorResponse)
+			setError('Something went wrong with google authentification. Please try again')
+		},
+	});
 
 	return (
 		<div className={styles.formDiv}>
@@ -219,6 +249,31 @@ export default function AuthForm({
 					>
 						{isSignup ? 'Signup' : 'Login'}
 					</button>
+
+					
+					{/* WORKING WELL TOO */}
+					<button type='button' onClick={() => googleLogin()}>
+					Sign in with Google 🚀{' '}
+					</button>
+
+					{/* WORKING WELL */}
+					{/* <div className={styles.googleContainerDiv}>
+						<GoogleLogin
+							onSuccess={credentialResponse => {
+								console.log(credentialResponse)
+								if(credentialResponse.credential){
+									const decodedToken = decode<JwtPayload>(credentialResponse.credential)
+									console.log(decodedToken)
+								}
+								
+							}}
+							onError={() => {
+								console.log('Login Failed')
+							}}
+						/>
+					</div> */}
+
+
 					<div className={styles.errorDiv}>
 						{error && <p className={styles.errorMessage}>{error}</p>}
 					</div>
@@ -233,20 +288,6 @@ export default function AuthForm({
 						>
 							{isSignup ? 'Login' : 'Signup'}
 						</button>
-						{/* <GoogleLogin 
-							clientId={process.env.REACT_APP_GAUTH_CLIENT_ID ?? ''}
-							buttonText="Login"
-							onSuccess={googleSuccess}
-							onFailure={googleFailure}
-							cookiePolicy='single_host_origin'
-						/> */}
-						{/* <GoogleLogin
-    clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
-    buttonText="Login"
-    onSuccess={googleSuccess}
-    onFailure={googleFailure}
-    cookiePolicy={'single_host_origin'}
-  /> */}
 					</div>
 				</div>
 			</form>

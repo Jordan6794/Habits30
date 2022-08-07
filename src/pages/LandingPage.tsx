@@ -5,6 +5,7 @@ import Hero from "../components/LandingPage/Hero";
 import BreakAreaOne from "../components/LandingPage/BreakAreaOne";
 
 import styles from "../components/LandingPage/LandingPage.module.css"
+
 import HowToArea from "../components/LandingPage/HowToArea";
 import CTAAreaOne from "../components/LandingPage/CTAAreaOne";
 import InActionArea from "../components/LandingPage/InActionArea";

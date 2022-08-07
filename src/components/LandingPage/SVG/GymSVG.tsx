@@ -319,7 +319,7 @@ const GymSVG: FunctionComponent = () => {
 					transform="translate(-90 -115.91)"
 					fill="none"
 					stroke="#6c63ff"
-					stroke-miterlimit="10"
+					strokeMiterlimit="10"
 				/>
 			</g>
 			<path
@@ -352,7 +352,7 @@ const GymSVG: FunctionComponent = () => {
 				transform="translate(-90 -115.91)"
 				fill="none"
 				stroke="#6c63ff"
-				stroke-miterlimit="10"
+				strokeMiterlimit="10"
 			/>
 			<path
 				d="M153,669.17s1.39-1.55-1.22-2.17v-2.55h1.57a13.46,13.46,0,0,0-10.66-13.16v-3.09h.41v-4H133v4h.29v3.13a13.46,13.46,0,0,0-10.48,13.12h1.4v2.45s-3.32,1.57,0,4.37,2.8,4.89,2.8,4.89-1.4,5.24-4.19,5.94v48.75a10.83,10.83,0,0,0,10.83,10.83h8.56A10.83,10.83,0,0,0,153,730.86V682.1s-4.89-3.67-4-5.94A55,55,0,0,1,153,669.17Z"

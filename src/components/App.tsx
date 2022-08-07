@@ -4,6 +4,10 @@ import decode, { JwtPayload } from 'jwt-decode'
 
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { authActions } from '../store/authSlice'
+import { habitsActions } from '../store/habitsSlice'
+import { getHabits } from '../actions/habits'
+import { loadingActions } from '../store/loadingSlice'
+import { logout } from '../lib/logout.service'
 
 import LandingPage from '../pages/LandingPage'
 import Main from '../pages/Main'
@@ -11,12 +15,10 @@ import Login from '../pages/Login'
 import Signup from '../pages/Signup'
 import RegisterDemo from '../pages/RegisterDemo'
 import Dashboard from '../pages/Dashboard'
+import TermsOfServicePage from '../pages/TermsOfServicePage'
+import PrivacyPolicyPage from '../pages/PrivacyPolicyPage'
 
 import './App.css'
-import { habitsActions } from '../store/habitsSlice'
-import { getHabits } from '../actions/habits'
-import { loadingActions } from '../store/loadingSlice'
-import { logout } from '../lib/logout.service'
 
 function App() {
 	const dispatch = useAppDispatch()
@@ -83,6 +85,8 @@ function App() {
 				<Route path='login' element={<Login />} />
 				<Route path='signup' element={<Signup />} />
 				<Route path='register-demo' element={<RegisterDemo />} />
+				<Route path='tos' element={<TermsOfServicePage />} />
+				<Route path='privacy' element={<PrivacyPolicyPage />} />
 			</Routes>
 					
 		</div>

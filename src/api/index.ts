@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { Habit } from '../components/Main/Table/habits.model'
-import { FormData } from '../components/Auth/formData.model'
+import { FormData, GoogleAuthData } from '../components/Auth/formData.model'
 
-const API = axios.create({baseURL: process.env.REACT_APP_BACKEND_BASE_URL})
+const API = axios.create({baseURL: process.env.REACT_APP_LOCAL_BACKEND_BASE_URL})
 
 API.interceptors.request.use((req) => {
     if(req.headers){
@@ -22,3 +22,4 @@ export const deleteHabit = (id: string) => API.delete(`${'/posts'}/${id}`)
 
 export const signIn = (formData: FormData) => API.post('/user/signin', formData)
 export const signUp = (formData: FormData) => API.post('/user/signup', formData)
+export const googleAuth = (authData: GoogleAuthData) => API.post('/user/googleauth', authData)
