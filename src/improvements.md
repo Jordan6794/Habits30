@@ -1,13 +1,13 @@
-- Put Goath : design button
 - Update screenshots in preview
 
 Improvements :
 - Improve colors in dashboard ?
+- Get a domain name and reput goauth in
+- Put Goath : design button
 - Faire un readme pour git (check zach stone and others) : https://www.makeareadme.com/
 - Mettre token a 10days ? Useful for demo accounts (and recheck si tokenexpire logout corectly)
 - get une favicon
 - Lacher 5e pour get un logo
-- Get a domain name and spend a few 10s$ for marketing
 - add lifetime success/fail for stats ?
 - Put loading text/skeleton on dashboard too
 - Add lazy loading for router

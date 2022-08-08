@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { GoogleLogin, useGoogleLogin } from '@react-oauth/google'
+
+// import axios from 'axios'
+// import { useGoogleLogin } from '@react-oauth/google'
 
 import { signup, signin, googleAuth } from '../../actions/auth'
 import { FormData, GoogleAuthData } from './formData.model'
 import { matchErrorToMessage } from '../../services/errorManagement.service'
 import { DEMO_ACCOUNT_USERNAME } from '../../consts/consts'
-
-import decode, { JwtPayload } from 'jwt-decode'
 
 import styles from './Auth.module.css'
 
@@ -152,42 +151,43 @@ export default function AuthForm({
 		}
 	}
 
-	const googleLogin = useGoogleLogin({
-		onSuccess: async (tokenResponse) => {
-		setError('')
-		try {
-			const userInfo = await axios.get(
-				'https://www.googleapis.com/oauth2/v3/userinfo',
-				{ headers: { Authorization: `Bearer ${tokenResponse.access_token}` } },
-			);
+	// const googleLogin = useGoogleLogin({
+	// 	onSuccess: async (tokenResponse) => {
+	// 	setError('')
+	// 	try {
+	// 		const userInfo = await axios.get(
+	// 			'https://www.googleapis.com/oauth2/v3/userinfo',
+	// 			{ headers: { Authorization: `Bearer ${tokenResponse.access_token}` } },
+	// 		);
 			
-			//we received correct user infos
-			if(userInfo?.data?.sub){
-				const { given_name, email, sub} = userInfo.data
-				const googleLoginData: GoogleAuthData = { given_name, email, sub }
-				console.log(googleLoginData)
+	// 		//we received correct user infos
+	// 		if(userInfo?.data?.sub){
+	// 			const { given_name, email, sub} = userInfo.data
+	// 			const googleLoginData: GoogleAuthData = { given_name, email, sub }
+	// 			console.log(googleLoginData)
 
-				const data = await googleAuth(googleLoginData)
-				if (data) {
-					localStorage.setItem('User', JSON.stringify(data))
-					navigate('/', {replace: true})
-					window.location.reload()
-				}
-			}
-			else {
-				console.log('User infos were not received properly, response : ', userInfo)
-				setError('Something went wrong with google authentification. Please try again')
-			}
-		} catch (error) {
-			console.log(error)
-			setError('Something went wrong with google authentification. Please try again')
-		}
-		},
-		onError: errorResponse => {
-			console.log(errorResponse)
-			setError('Something went wrong with google authentification. Please try again')
-		},
-	});
+	// 			const data = await googleAuth(googleLoginData)
+	// 			if (data) {
+	// 				localStorage.setItem('User', JSON.stringify(data))
+	// 				navigate('/', {replace: true})
+	// 				window.location.reload()
+	// 			}
+	// 		}
+	// 		else {
+	// 			console.log('User infos were not received properly, response : ', userInfo)
+	// 			setError('Something went wrong with google authentification. Please try again')
+	// 		}
+	// 	} catch (error) {
+	// 		console.log(error)
+	// 		setError('Something went wrong with google authentification. Please try again')
+	// 	}
+	// 	},
+	// 	onError: errorResponse => {
+	// 		console.log(errorResponse)
+	// 		setError('Something went wrong with google authentification. Please try again')
+	// 	},
+	// });
+
 
 	return (
 		<div className={styles.formDiv}>
@@ -251,29 +251,10 @@ export default function AuthForm({
 						{isSignup ? 'Signup' : 'Login'}
 					</button>
 
-					
-					{/* WORKING WELL TOO */}
-					<button type='button' onClick={() => googleLogin()}>
+					{/* Google login */}
+					{/* <button type='button' onClick={() => googleLogin()}>
 					Sign in with Google 🚀{' '}
-					</button>
-
-					{/* WORKING WELL */}
-					{/* <div className={styles.googleContainerDiv}>
-						<GoogleLogin
-							onSuccess={credentialResponse => {
-								console.log(credentialResponse)
-								if(credentialResponse.credential){
-									const decodedToken = decode<JwtPayload>(credentialResponse.credential)
-									console.log(decodedToken)
-								}
-								
-							}}
-							onError={() => {
-								console.log('Login Failed')
-							}}
-						/>
-					</div> */}
-
+					</button> */}
 
 					<div className={styles.errorDiv}>
 						{error && <p className={styles.errorMessage}>{error}</p>}
