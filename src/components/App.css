@@ -345,6 +345,19 @@ Table
 	padding: 0;
 }
 
+.btn-google {
+	width: 100%;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: white;
+	color: rgb(92, 108, 117);
+	box-shadow: rgba(0, 0, 0, 0.15) 1px 1px 4px;
+	border-radius: 25px;
+	margin-bottom: 0.5em;
+}
+
 .habitCell{
 	border-bottom: 1px solid #dddddd;
 }

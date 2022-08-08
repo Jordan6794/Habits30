@@ -27,7 +27,7 @@
 
 .upperDiv {
 	margin-bottom: 1em;
-	padding-bottom: 2em;
+	padding-bottom: 1em;
 	border-bottom: 1px solid silver;
 }
 
@@ -112,12 +112,47 @@
 	color: red;
 }
 
-/* ====Google Auth==== */
-.googleContainerDiv {
+/* ====Or Div==== */
+.orDiv {
 	display: flex;
-	justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 100%;
+    margin: 1em 0;
 }
 
+.orDiv::before,
+.orDiv::after {
+	content: "";
+    flex: 0 1 100%;
+    border-bottom: 1px solid rgb(193, 199, 198);
+    margin: 0px 10px;
+    transform: translateY(-50%);
+}
+
+.orSpan {
+	font-size: 13px;
+    line-height: 16px;
+    font-weight: normal;
+    color: rgb(92, 108, 117);
+    text-align: center;
+}
+
+/* ====Google Auth==== */
+.googleLogo {
+	height: 30px;
+	margin-right: 10px;
+}
+
+.googleBtnText {
+	font-size: 1rem;
+	font-weight: 500;
+}
+
+/* ====Switch==== */
+.switchLogin_signup {
+	margin-top: 1.5em;
+}
 
 /* ====Demo==== */
 .demoText {
