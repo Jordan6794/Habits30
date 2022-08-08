@@ -5,7 +5,8 @@ import styles from './Nav.module.css'
 
 const NavLeft: FunctionComponent<{setShowInfos: React.Dispatch<React.SetStateAction<boolean>>, setShowHamburgerModal: React.Dispatch<React.SetStateAction<boolean>>, isModal: boolean}> = ({setShowInfos, setShowHamburgerModal ,isModal}) => {
 	let location = useLocation()
-	const tablePathname = '/'
+	
+	const tablePathname = '/habits'
 
 	function handleHowToClick(){
 		if(isModal){

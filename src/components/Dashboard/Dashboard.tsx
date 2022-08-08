@@ -42,10 +42,7 @@ const Dasboard: FunctionComponent = () => {
 		{ name: 'Fail streak', value: failStreakHabits },
 		{ name: 'Solidified', value: solidifiedHabits },
 	]
-	// const pieColors = ['gray', 'green', 'red', '#20C98B']
-	// const chartsColors = ['#9B9EA3', '#2CABE3', '#FFC36D', '#20C98B'] // first gray : 9B9EA3
-	const chartsColors = ['rgb(155, 158, 163)', 'rgb(86,202,0)', 'rgb(255, 76, 81)', 'rgb(32, 201, 139)']
-	// const chartsColors = ['rgba(155, 158, 163, 0.82)', 'rgba(86,202,0, 0.82)', 'rgba(255, 76, 81, 0.82)', 'rgba(32, 201, 139, 0.82)']
+	const chartsColors = ['#9B9EA3', '#2CABE3', '#FFC36D', '#20C98B']
 
 	const barData = [
 		{ name: 'Smallest', Successes: smallestSuccessHabit },
