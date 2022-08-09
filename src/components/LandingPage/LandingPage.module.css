@@ -289,9 +289,9 @@
 
 .imgScreenshot {
     width: 950px;
-    height: 590px;
+    height: 592px;
     position: absolute;
-    top: 0;
+    top: -1px;
     left: -1px;
 }
 
@@ -360,13 +360,6 @@
     animation-iteration-count: infinite;
     animation-delay: 0s;
 }
-
-/* .img4 {
-    animation: fadeO 8s ease-in-out;
-    animation-iteration-count: infinite;
-    animation-delay: 0s;
-} */
-
 /* http://css3.bradshawenterprises.com/cfimg/
 For "n" images You must define:
 a=presentation time for one image : 3
@@ -380,6 +373,7 @@ a/t*100%
 (a+b)/t*100% = 1/n*100%
 100%-(b/t*100%)
 100% */
+
 
 /* === Last CTA Area
 ============ */
