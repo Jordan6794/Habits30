@@ -184,9 +184,18 @@ Forms
 	width: 290px;
 	margin-right: 1em;
 }
+.habit-input:focus {
+	outline: none;
+}
+.habit-input::placeholder {
+	font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+}
 
 .btn-add-habit {
 	padding: 0.3em 0.75em;
+}
+.btn-add-habit:disabled {
+	opacity: 0.7;
 }
 
 /* =====
@@ -431,6 +440,14 @@ Other common
 
 	.habit-form {
 		min-width: 200px;
+	}
+
+	.habit-input {
+		margin-top: 0.3em;
+		margin-bottom: 0.3em;
+	}
+	.habit-input::placeholder {
+		text-align: center;
 	}
 
 	
