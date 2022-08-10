@@ -5,7 +5,7 @@ import styles from './LandingPage.module.css'
 const InActionArea: FunctionComponent = () => {
 	return (
         <div className={styles.inActionDiv}>
-            <h1>Habits30 In Action</h1> 
+            <h1 className={styles.underline}>Habits30 In Action</h1> 
 
             <div className={styles.laptopDiv}>
                 <img className={`${styles.laptop}`}src='macbook.png' alt='habits in action' />

@@ -37,6 +37,7 @@
 .mainColor {
     color: var(--main-color);
 }
+
 /* === BTNs */
 .btn {
     border: none;
@@ -76,6 +77,17 @@
     height: 21px;
     fill: var(--main-color);
     margin-bottom: 1em;
+}
+
+/* === styling */
+.underline::after {
+    content: '';
+    display: block;
+    height: 3px;
+    width: 35%;
+    margin: 0 auto;
+    margin-top: 0.1em;
+    background-color: var(--main-color);
 }
 
 /* === Nav
@@ -222,15 +234,6 @@
 .howToTitle {
     display: inline-block;
     margin-bottom: 1.5em;
-}
-.howToTitle::after {
-    content: '';
-    display: block;
-    height: 3px;
-    width: 35%;
-    margin: 0 auto;
-    margin-top: 0.1em;
-    background-color: var(--main-color);
 }
 
 .howToCardsDiv {
@@ -494,6 +497,10 @@ a/t*100%
 /* Mobile */
 @media (max-width: 700px) {
     /* Hero */
+    .heroDiv {
+        margin-bottom: 4em;
+    }
+
     .heroTitle {
         font-size: 2.25rem;
     }
@@ -509,6 +516,7 @@ a/t*100%
     .areaOneDiv {
         flex-direction: column;
         align-items: center;
+        margin-bottom: 6em;
     }
     .cardOneDiv {
         padding: 0;

@@ -27,8 +27,9 @@ const NewHabitForm: FunctionComponent<{handleSubmitHabit: (habitName: string) =>
 						className="habit-input"
 						onChange={onChangeInput}
 						value={habitInput}
+						placeholder="Write your new habit here"
 					/>
-					<button disabled={isAdding} className="btn btn-add-habit" onClick={onSubmitHabit}>
+					<button disabled={isAdding || !habitInput} className="btn btn-add-habit" onClick={onSubmitHabit}>
 						{isAdding ? 'Adding...' : 'Add'}
 					</button>
 				</form>

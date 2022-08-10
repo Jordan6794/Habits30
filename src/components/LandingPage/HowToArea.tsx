@@ -35,8 +35,8 @@ const HowToArea: FunctionComponent = () => {
         })
     }
 	return (
-        <div ref={divRef} className={`${styles.howToDiv} ${didIntersect && styles.howToIntersected}`}>
-            <h1 className={styles.howToTitle}>How To Use</h1> 
+        <div className={`${styles.howToDiv} ${didIntersect && styles.howToIntersected}`}>
+            <h1 ref={divRef} className={`${styles.howToTitle} ${styles.underline}`}>How To Use</h1> 
             <div className={styles.howToCardsDiv}>
                 <HowToCard icon={<AddSVG />} number="1." title="Add" text="Add new habits that you want to implement in your life." />
                 <HowToCard icon={<SummarizeSVG />} number="2." title="Report" text="Everyday report if you have been successful or not to implement your habits" />
