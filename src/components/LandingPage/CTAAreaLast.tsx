@@ -12,7 +12,7 @@ const CTAAreaLast: FunctionComponent = () => {
                     Get started today
                 </h1>
                 <p className={styles.heroSubtitle}>
-                    Take back control of your life and build the lifestyle you've always wanted.
+                    Regain control over your life and build the lifestyle that you always dreamed of.
                 </p>
                 <Link to='/register-demo'><button className={`${styles.btn} ${styles.btnPrimary} {styles.btnLastCTA}`}>Try our demo</button></Link>
                 <Link to='/signup'><button className={`${styles.btn} ${styles.btnInvisible}`}>Sign Up</button></Link>
