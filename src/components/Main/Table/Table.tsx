@@ -7,6 +7,7 @@ import HabitRow from './HabitRow'
 import NewHabitForm from './NewHabitForm'
 
 import { postHabit, deleteHabit } from '../../../actions/habits'
+import { script } from '../../../api/index'
 import { Habit } from './habits.model'
 import { SUCCESS_FINISH_COLOR } from '../../../consts/consts'
 import { TableSkeleton } from '../../../shared/skeletons'
@@ -32,6 +33,8 @@ function Table() {
 			colors: [],
 			successCounter: 0,
 			failCounter: 0,
+			lifetimeSuccessCounter: 0,
+			lifetimeFailCounter: 0,
 			didChange: false,
 			history: [],
 			historyStep: 0,
@@ -60,11 +63,17 @@ function Table() {
 		)
 	}
 
+	function handleScript(){
+		script()
+	}
+
 	return (
 		<div className="container relative">
 			<div className="background-div">
 				<BackgroundSVG />
 			</div>
+
+			<button onClick={handleScript}>Launch script</button>
 
 			<table className="habit-table">
 				<thead>

@@ -1,8 +1,12 @@
 
+.background {
+    background-color: #F9FAFC;
+    padding-top: 3em;
+}
+
 .topStatsDiv {
     display: flex;
     justify-content: center;
-    margin-top: 3em;
     margin-bottom: 3em;
 }
 
@@ -10,6 +14,9 @@
     width: 90%;
     max-width: 920px;
     box-shadow: 3px 3px 6px rgba(0,0,0,0.15), -2px -2px 4px rgba(0,0,0,0.03);
+    box-shadow: 1px 0 20px rgba(0,0,0,.05);
+    box-shadow: rgba(145, 158, 171, 0.2) 0px 0px 2px 0px, rgba(145, 158, 171, 0.12) 0px 12px 24px -4px;
+    background-color: white;
     padding: 1.5em;
     border-radius: 10px;
 }
@@ -37,14 +44,19 @@
 
 .neutralColor {
     background-color: #9B9EA3;
+    background-color: #2b9ab3;
     color: white;
 }
 .greenColor {
     background-color: #2CABE3;
+    background-color: #5ac461;
+    background-color: #41b169;
     color: white;
 }
 .redColor {
     background-color: #FFC36D;
+    background-color: #aa4731;
+    background-color: #bc4d34;
     color: white;
 }
 
@@ -69,7 +81,9 @@
 .barChartDiv {
     padding: 1em;
     box-shadow: 3px 3px 6px rgba(0,0,0,0.15), -2px -2px 4px rgba(0,0,0,0.03);
+    box-shadow: rgba(145, 158, 171, 0.2) 0px 0px 2px 0px, rgba(145, 158, 171, 0.12) 0px 12px 24px -4px;
     border-radius: 10px;
+    background-color: white;
 }
 
 .pieTextStats {
