@@ -42,7 +42,8 @@ const Dasboard: FunctionComponent = () => {
 		{ name: 'Fail streak', value: failStreakHabits },
 		{ name: 'Solidified', value: solidifiedHabits },
 	]
-	const chartsColors = ['#9B9EA3', '#2CABE3', '#FFC36D', '#20C98B']
+	// const chartsColors = ['#9B9EA3', '#2CABE3', '#FFC36D', '#20C98B'] //neutral green red brand
+	const chartsColors = ['#2b9ab3', '#41b169', '#bc4d34', '#20C98B']
 
 	const barData = [
 		{ name: 'Smallest', Successes: smallestSuccessHabit },
@@ -52,7 +53,7 @@ const Dasboard: FunctionComponent = () => {
 	]
 
 	return (
-		<>
+		<div className={styles.background}>
 			<div className={styles.topStatsDiv}>
 				<div className={styles.topStatsContainer}>
 					<div className={styles.topTitleDiv}>
@@ -104,13 +105,13 @@ const Dasboard: FunctionComponent = () => {
 							<BarChartComponent data={barData} colors={chartsColors} />
 						</div>
 						<div className={styles.pieTextStats}>
-							<div className={`${styles.statBoxDiv} ${styles.neutralColor}`}>
+							<div className={`${styles.statBoxDiv} ${styles.redColor}`}>
 								<p>Smallest : {smallestSuccessHabit}</p>
 							</div>
-							<div className={`${styles.statBoxDiv} ${styles.greenColor}`}>
+							<div className={`${styles.statBoxDiv} ${styles.neutralColor}`}>
 								<p>Median : {medianSuccesses}</p>
 							</div>
-							<div className={`${styles.statBoxDiv} ${styles.redColor}`}>
+							<div className={`${styles.statBoxDiv} ${styles.greenColor}`}>
 								<p>Average : {averageSuccesses}</p>
 							</div>
 							<div className={`${styles.statBoxDiv}`}>
@@ -120,7 +121,7 @@ const Dasboard: FunctionComponent = () => {
 					</div>
 				</div>
 			</div>
-		</>
+		</div>
 	)
 }
 

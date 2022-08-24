@@ -1,10 +1,14 @@
 .background {
-	background-color: #F0F4F8;
+	background-color: #F2F2F2;
+	background-image: url(../../../public/landing-bg.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
 }
 
 .formContainer {
-	min-height: 100vh;
 	width: 90%;
+	min-height: 100vh;
 	max-width: 1140px;
 	margin: 0 auto;
 	display: flex;
@@ -14,7 +18,7 @@
 
 .formDiv {
 	width: 40%;
-	box-shadow: 5px 5px 10px rgba(0,0,0,0.1);
+	box-shadow: 1px 0 20px rgba(0,0,0,.05);
 	background-color: white;
 	border-radius: 20px;
 	padding: 2em 0;

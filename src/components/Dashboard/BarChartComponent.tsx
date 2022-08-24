@@ -5,6 +5,8 @@ const BarChartComponent: FunctionComponent<{ data: Array<{ name: string; Success
 	data,
 	colors,
 }) => {
+	// reordering colors so that the fail colors is in first : it will corespond to smallest streak
+	const reorderedColors=[colors[2], colors[0], colors[1], colors[3]]
 	return (
 		// <ResponsiveContainer width="100%" height="100%">
 		<BarChart
@@ -26,7 +28,7 @@ const BarChartComponent: FunctionComponent<{ data: Array<{ name: string; Success
 
 			<Bar dataKey="Successes">
 				{data.map((entry, index) => (
-					<Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+					<Cell key={`cell-${index}`} fill={reorderedColors[index % colors.length]} />
 				))}
 			</Bar>
 		</BarChart>
