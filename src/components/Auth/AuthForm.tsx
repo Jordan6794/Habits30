@@ -164,7 +164,6 @@ export default function AuthForm({
 			if(userInfo?.data?.sub){
 				const { given_name, email, sub} = userInfo.data
 				const googleLoginData: GoogleAuthData = { given_name, email, sub }
-				console.log(googleLoginData)
 
 				const data = await googleAuth(googleLoginData)
 				if (data) {

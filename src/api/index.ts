@@ -20,6 +20,8 @@ export const postHabit = (habit: Habit) => API.post('/posts', {habit})
 export const updateHabit = (habit: Habit) => API.patch(`${'/posts'}/${habit._id}`, {habit})
 export const deleteHabit = (id: string) => API.delete(`${'/posts'}/${id}`)
 
+export const script = () => API.post('/posts/script')
+
 export const signIn = (formData: FormData) => API.post('/user/signin', formData)
 export const signUp = (formData: FormData) => API.post('/user/signup', formData)
 export const googleAuth = (authData: GoogleAuthData) => API.post('/user/googleauth', authData)

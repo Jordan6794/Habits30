@@ -1,5 +1,4 @@
-- Fix la shitty dropshadow in dashboard
-- Improve colors in dashboard
+- Improve colors in dashboard : feedback (update screenshot when validated)
 
 - Faire un gitrepo pour la backend ?
 - Faire un readme pour git (check zach stone and others) : https://www.makeareadme.com/

@@ -43,7 +43,8 @@ const habitsSlice = createSlice({
 				state[index].history = []
 				state[index].historyStep = 0
 			}
-			const historyObject: HistoryObject = { colors: habit.colors, successCounter: habit.successCounter, failCounter: habit.failCounter }
+			const { colors, successCounter, failCounter, lifetimeSuccessCounter, lifetimeFailCounter} = habit
+			const historyObject: HistoryObject = { colors, successCounter, failCounter, lifetimeSuccessCounter, lifetimeFailCounter }
 			state[index].history.push(historyObject)
 			state[index].historyStep++
 
@@ -87,6 +88,7 @@ const habitsSlice = createSlice({
 			//updating success and fail counters
 			state[index].failCounter = colorCounter(state[index].colors, FAIL_COLOR)
 			state[index].successCounter += 1
+			state[index].lifetimeSuccessCounter += 1
 		},
 		addFailColor(state, action: PayloadAction<{ index: number }>) {
 			const { index } = action.payload
@@ -97,7 +99,8 @@ const habitsSlice = createSlice({
 				state[index].history = []
 				state[index].historyStep = 0
 			}
-			const historyObject: HistoryObject = { colors: habit.colors, successCounter: habit.successCounter, failCounter: habit.failCounter }
+			const { colors, successCounter, failCounter, lifetimeSuccessCounter, lifetimeFailCounter} = habit
+			const historyObject: HistoryObject = { colors, successCounter, failCounter, lifetimeSuccessCounter, lifetimeFailCounter }
 			state[index].history.push(historyObject)
 			state[index].historyStep++
 			state[index].colors = addFailColor(state[index].colors)
@@ -116,6 +119,7 @@ const habitsSlice = createSlice({
 			// updating success and fail counters
 			state[index].successCounter = calculateSuccessCount(state[index].colors, state[index].successCounter)
 			state[index].failCounter += 1
+			state[index].lifetimeFailCounter += 1
 		},
 		clearColors(state, action: PayloadAction<{ index: number }>) {
 			const { index } = action.payload
@@ -126,7 +130,8 @@ const habitsSlice = createSlice({
 				state[index].history = []
 				state[index].historyStep = 0
 			}
-			const historyObject: HistoryObject = { colors: habit.colors, successCounter: habit.successCounter, failCounter: habit.failCounter }
+			const { colors, successCounter, failCounter, lifetimeSuccessCounter, lifetimeFailCounter} = habit
+			const historyObject: HistoryObject = { colors, successCounter, failCounter, lifetimeSuccessCounter, lifetimeFailCounter }
 			state[index].history.push(historyObject)
 			state[index].historyStep++
 
@@ -145,7 +150,8 @@ const habitsSlice = createSlice({
 			//If we're on the first undo we add the history into the array so we can redo to it
 			if (step === state[index].history.length){
 				const habit = state[index]
-				const historyObject: HistoryObject = { colors: habit.colors, successCounter: habit.successCounter, failCounter: habit.failCounter }
+				const { colors, successCounter, failCounter, lifetimeSuccessCounter, lifetimeFailCounter} = habit
+				const historyObject: HistoryObject = { colors, successCounter, failCounter, lifetimeSuccessCounter, lifetimeFailCounter }
 				state[index].history.push(historyObject)
 			}
 			state[index] = {...state[index], ...state[index].history[step - 1]}
