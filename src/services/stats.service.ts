@@ -3,13 +3,13 @@ import { SUCCESS_STREAK_COLOR, SUCCESS_FINISH_COLOR, FAIL_STREAK_COLOR } from '.
 
 export function calculateTotalSuccesses(habits: Habit[]) {
 	let count = 0
-	habits.forEach((habit) => (count += habit.successCounter))
+	habits.forEach((habit) => (count += habit.lifetimeSuccessCounter))
 	return count
 }
 
 export function calculateTotalFails(habits: Habit[]) {
 	let count = 0
-	habits.forEach((habit) => (count += habit.failCounter))
+	habits.forEach((habit) => (count += habit.lifetimeFailCounter))
 	return count
 }
 

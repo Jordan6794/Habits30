@@ -22,7 +22,6 @@ Improvements :
 : Make the HowTo modal two pages Basics/Advanced if I start having more features like that ?
 - Responsiveness for ipad size
 - Put active visual cue in hamberger modal left nav
-- Initialise didChange at false ? or just not put in DB ?
 - Faire profile page ? (then put small round icon with profile pic on nav (can update and get it from google if OAuth))
 - Make un truc pour move up/down habits in the list ?
 

@@ -7,7 +7,6 @@ import HabitRow from './HabitRow'
 import NewHabitForm from './NewHabitForm'
 
 import { postHabit, deleteHabit } from '../../../actions/habits'
-import { script } from '../../../api/index'
 import { Habit } from './habits.model'
 import { SUCCESS_FINISH_COLOR } from '../../../consts/consts'
 import { TableSkeleton } from '../../../shared/skeletons'
@@ -35,7 +34,6 @@ function Table() {
 			failCounter: 0,
 			lifetimeSuccessCounter: 0,
 			lifetimeFailCounter: 0,
-			didChange: false,
 			history: [],
 			historyStep: 0,
 		}
