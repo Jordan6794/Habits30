@@ -63,17 +63,11 @@ function Table() {
 		)
 	}
 
-	function handleScript(){
-		script()
-	}
-
 	return (
 		<div className="container relative">
 			<div className="background-div">
 				<BackgroundSVG />
 			</div>
-
-			<button onClick={handleScript}>Launch script</button>
 
 			<table className="habit-table">
 				<thead>
