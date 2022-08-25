@@ -146,6 +146,10 @@ COMMON
 	animation-duration: 0.3s;
 }
 
+.backdrop-light {
+	opacity: 0.2;
+}
+
 .editModal {
 	position: absolute;
 	width: 100%;

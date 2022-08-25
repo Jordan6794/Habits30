@@ -15,6 +15,7 @@ import { habitsActions } from '../../../store/habitsSlice'
 import { makeDaysArray } from '../../../services/effects.service'
 import { authActions } from '../../../store/authSlice'
 import { onboard } from '../../../actions/auth'
+import OnboardingModal from './Onboarding/OnboardingModal'
 
 function Table() {
 	const habits = useAppSelector((state) => state.habits)
@@ -67,19 +68,21 @@ function Table() {
 		)
 	}
 
-	async function handleOnboarding(){
+	async function onFinishOnboarding(){
 		try {
 			if(!user) {
 				return
 			}
+			dispatch(authActions.onboard())
 			const result = await onboard()
 			const updatedUser = {...user.user, result}
 			localStorage.setItem('User', JSON.stringify(updatedUser))
-			dispatch(authActions.onboard())
 		} catch (error) {
 			console.log(error)
 		}
 	}
+
+	console.log('hasOnboarded : ', hasOnboarded, 'equal false : ', hasOnboarded === false)
 
 	return (
 		<div className="container relative">
@@ -87,7 +90,7 @@ function Table() {
 				<BackgroundSVG />
 			</div>
 
-			{hasOnboarded === false && <button onClick={handleOnboarding}>Finish Onboarding</button>}
+			{hasOnboarded === false && <OnboardingModal onFinishOnboarding={onFinishOnboarding} />}
 			
 			<table className="habit-table">
 				<thead>

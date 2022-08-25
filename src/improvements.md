@@ -1,4 +1,7 @@
 - Better embording!!! (and precise that can always click How to BTN to read more)
+: display how many steps left
+: option to take a tour / step out right from the first slide ?
+: Make it a full page and redirect rather than modal ?
 
 - Faire un gitrepo pour la backend ?
 - Faire un readme pour git (check zach stone and others) : https://www.makeareadme.com/
@@ -21,7 +24,9 @@ Improvements :
 - Responsiveness for ipad size
 - Put active visual cue in hamberger modal left nav
 - Faire profile page ? (then put small round icon with profile pic on nav (can update and get it from google if OAuth))
+: Could put checlist tasks for onboarding as well if profile 
 - Make un truc pour move up/down habits in the list ?
+- next level onboarding : https://www.appcues.com/blog/user-onboarding-ui-ux-patterns
 
 Later/Osef :
 - Refactor to have components not aware of auth stuff (Authform + onboarding in table)
@@ -31,6 +36,7 @@ Later/Osef :
 : client-check each request; + une option : token refresh qui remplace pas le token mais qui va echanger contre un nouveau token la premiere fois que le token fail (si le token refresh est toujours valid) (need other than jwt then (ou check leur options))
 
 Debatable ?
+- Remove the demo animation ?
 - leftNav sideNav in desktop ? (and put responsive uperbar for mobile) ?
 -  Switch preview to carousel/video ?
 - mettre le 0 counter en grey plutot que green ?
