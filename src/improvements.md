@@ -1,21 +1,19 @@
-- Improve colors in dashboard : feedback (update screenshot when validated)
+- Better embording!!! (and precise that can always click How to BTN to read more)
 
 - Faire un gitrepo pour la backend ?
 - Faire un readme pour git (check zach stone and others) : https://www.makeareadme.com/
-- add lifetime success/fail for stats
 
 Improvements :
+- Improve colors in dashboard : round2 with less autumn-y colors ?
 - Lacher 5e pour get un logo ; logo instead of text or not ?
 - Improve design tos/privacy pages + make contact me page
 - Improve ma landing page (habitify ou habstrak inspiration : background-image / switch backgrounds notament)
 - Make a producthunt post ! (see https://blogtheorem.com/ https://www.producthunt.com/products/testimonialapi)
 - Put loading text/skeleton on dashboard too
 - recheck refacto
-- Better embording!!! (HowTo open by default on first use ? (wbutton don't show again ), DIFFERENT HowToModal split in multiple parts where each part can read more / exit ?) (and precise that can always click How to BTN to read more)
 - Add lazy loading for router
 - Pour les await database UI faire un loading & success modal/visual display? (see Zach Stone MAC)
 - Update le state client AFTER les http request et manage les errors dans l'UX si error (certains put en await + UI, d'autres update client first mais ensuite make error modal si error)
-- 
 - implement le show password feature
 - Put each habits stats/infos on edit habit name modal (need lifetime win/fails first too) (+ put date created, and some stats, winrate, time since created etc)
 - Fail preview display cue that alerts you if one more fail would make you lose your streak (codewise have to make another array fail preview that I update on each add, and check when failPreview[0] = FAIL_COLOR ? (not display if streak empty or already in fail streak)) (can add a tooltip explaining what it means which a 'don't show anymore' box with boolean in DB ?)
@@ -26,6 +24,7 @@ Improvements :
 - Make un truc pour move up/down habits in the list ?
 
 Later/Osef :
+- Refactor to have components not aware of auth stuff (Authform + onboarding in table)
 - Archive button (+ archive page) for solidifed habits once success reach x (50-75-100) ?
 - Avoir un listener sur la db plutot que state
 - Improve token check + refresh :

@@ -13,10 +13,16 @@ import { TableSkeleton } from '../../../shared/skeletons'
 import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { habitsActions } from '../../../store/habitsSlice'
 import { makeDaysArray } from '../../../services/effects.service'
+import { authActions } from '../../../store/authSlice'
+import { onboard } from '../../../actions/auth'
 
 function Table() {
 	const habits = useAppSelector((state) => state.habits)
 	const isLoadingHabits = useAppSelector((state) => state.loading)
+	const hasOnboarded = useAppSelector(state => state.auth.user?.result.hasOnboarded)
+
+	const user = useAppSelector(state => state.auth)
+
 	const dispatch = useAppDispatch()
 
 	const ongoingHabits = habits.filter((habit) => habit.colors[0] !== SUCCESS_FINISH_COLOR)
@@ -61,12 +67,28 @@ function Table() {
 		)
 	}
 
+	async function handleOnboarding(){
+		try {
+			if(!user) {
+				return
+			}
+			const result = await onboard()
+			const updatedUser = {...user.user, result}
+			localStorage.setItem('User', JSON.stringify(updatedUser))
+			dispatch(authActions.onboard())
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
 	return (
 		<div className="container relative">
 			<div className="background-div">
 				<BackgroundSVG />
 			</div>
 
+			{hasOnboarded === false && <button onClick={handleOnboarding}>Finish Onboarding</button>}
+			
 			<table className="habit-table">
 				<thead>
 					<tr className="table-first-row">

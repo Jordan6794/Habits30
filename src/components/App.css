@@ -1,5 +1,6 @@
 :root {
-	--main-color: #20C98B
+	--main-color: #20C98B;
+	--nav-height: 56px;
 }
 
 html, * {

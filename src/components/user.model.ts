@@ -10,4 +10,5 @@ export interface Result {
     username: string
     password: string
     habits: Array<Habit>
+    hasOnboarded: boolean
 }
