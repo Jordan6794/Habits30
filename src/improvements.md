@@ -1,8 +1,11 @@
-- Better embording!!! (and precise that can always click How to BTN to read more)
-: display how many steps left
-: option to take a tour / step out right from the first slide ?
-: Make it a full page and redirect rather than modal ?
+- Feedback
+: Onboarding
+: Put different examples habtis ?
 
+- Better embording!!! (and precise that can always click How to BTN to read more)ft
+: make a highlight add first habit after the onboarding finish ?
+
+- Put different streaks and solidified habits as well in the example habits ?
 - Faire un gitrepo pour la backend ?
 - Faire un readme pour git (check zach stone and others) : https://www.makeareadme.com/
 

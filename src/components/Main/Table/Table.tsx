@@ -82,8 +82,6 @@ function Table() {
 		}
 	}
 
-	console.log('hasOnboarded : ', hasOnboarded, 'equal false : ', hasOnboarded === false)
-
 	return (
 		<div className="container relative">
 			<div className="background-div">
