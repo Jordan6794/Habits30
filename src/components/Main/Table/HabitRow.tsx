@@ -16,7 +16,7 @@ const HabitRow: FunctionComponent<{
 	const dispatch = useAppDispatch()
 
 	const habit = useAppSelector((state) => state.habits.find((habit) => habit._id === props.habitObject._id))!
-	const { colors, successCounter, failCounter, didChange } = habit
+	const { colors, successCounter, failCounter } = habit
 	const index = useAppSelector((state) => state.habits.findIndex((habit) => habit._id === props.habitObject._id))
 
 
@@ -45,15 +45,14 @@ const HabitRow: FunctionComponent<{
 	
 
 	const colorsCells = colors.map((color: string, index: number) => (
-		<HabitCell lastIndex={colors.length - 1} key={index} color={color} index={index} didChange={didChange} />
+		<HabitCell lastIndex={colors.length - 1} key={index} color={color} index={index} />
 	))
 
-	const didChangeClass = didChange ? 'changedCounter' : ''
 	const streakCounterDisplay =
 		successCounter >= failCounter ? (
-			<p className={`${didChangeClass} green-counter`}>({successCounter})</p>
+			<p className={`green-counter`}>({successCounter})</p>
 		) : (
-			<p className={`${didChangeClass} red-counter`}>({failCounter})</p>
+			<p className={`red-counter`}>({failCounter})</p>
 		)
 
 	return (
@@ -81,7 +80,10 @@ const HabitRow: FunctionComponent<{
 					</button>
 				</div>
 			</th>
+
 			{colorsCells}
+
+			{/* Undo */}
 			{habit.historyStep > 0 && 
 			<th className="th-undo-btn">
 				<div className='center-container'>
@@ -91,6 +93,8 @@ const HabitRow: FunctionComponent<{
 					</button>
 				</div>
 			</th>}
+
+			{/* Redo */}
 			{(habit.history.length > 0 && habit.historyStep < habit.history.length - 1) &&
 			<th className="th-undo-btn">
 				<div className='center-container'>

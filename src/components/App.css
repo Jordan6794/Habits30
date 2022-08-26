@@ -1,5 +1,6 @@
 :root {
-	--main-color: #20C98B
+	--main-color: #20C98B;
+	--nav-height: 56px;
 }
 
 html, * {
@@ -60,12 +61,28 @@ COMMON
 	padding: 0.5em 1.25em;
 	border-radius: 5px;
 }
+.btn:hover,
+.btn:focus {
+	opacity: 0.9;
+}
+
+.btn-ghost {
+	border-radius: 20px;
+	background-color: white;
+	border: 2px solid var(--main-color);
+	color: var(--main-color);
+	transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out
+}
 
 .btn-icon {
 	border: none;
 	cursor: pointer;
 	background-color: transparent;
 	padding: 0.5em;
+}
+.btn-icon:hover,
+.btn-icon:focus {
+	opacity: 0.7;
 }
 
 .btn-how {
@@ -92,27 +109,29 @@ COMMON
 	margin-bottom: 0.5em;
 	border-radius: 25px;
 }
-
 .btn-auth:disabled {
 	opacity: 0.5;
 	cursor:initial;
 }
-
 .btn-auth:disabled:hover {
 	opacity: 0.5;
 	cursor:initial;
 }
 
-.btn:hover,
-.btn:focus {
-	opacity: 0.9;
+.btn-small {
+	font-size: 0.75rem;
 }
 
-.btn-icon:hover,
-.btn-icon:focus {
-	opacity: 0.7;
+.btn-big {
+	font-size: 1.25rem;
 }
 
+.btn-no-click {
+	cursor: initial;
+}
+.btn-no-click:hover {
+	opacity: 1;
+}
 
 .container {
 	width: 90%;
@@ -122,6 +141,10 @@ COMMON
 
 .flex {
 	display: flex;
+}
+
+.no-margin {
+	margin: 0;
 }
 
 /* ==== Modals ==== */
@@ -140,9 +163,13 @@ COMMON
 	z-index: 50;
 	background-color: rgb(0, 0, 0);
 	opacity: 0.8;
-
 	animation-name: backdrop-opacity;
 	animation-duration: 0.3s;
+}
+
+.backdrop-light {
+	opacity: 0.65;
+	animation: none;
 }
 
 .editModal {
@@ -383,16 +410,6 @@ Table
 .failColor {
 	stroke: red;
 }
-
-/* visual cues for in session updated habits : */
-/* .lastCellChanged{
-	filter: brightness(70%);
-}
-
-.changedCounter {
-	font-weight: 700;
-	filter: brightness(75%);
-} */
 
 /* =====
 Other common 

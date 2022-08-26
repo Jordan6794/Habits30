@@ -39,13 +39,13 @@ function App() {
 		}
 	}, [user])
 	
-	// redirecting public/private routes
+	// dispatching User (and redirecting)
 	useEffect(() => {
 		const userStorage = localStorage.getItem('User')
 		dispatch(authActions.setUser(userStorage ? JSON.parse(userStorage) : null))
 		
+		// redirecting public/private routes
 		const landingPathname = '/'
-		// redirecting if needed
 		if(userStorage){
 			if(location.pathname === landingPathname)
 			navigate('/habits', {replace: true})

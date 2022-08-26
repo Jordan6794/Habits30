@@ -13,6 +13,11 @@ const authSlice = createSlice({
     reducers: {
         setUser(state, action: PayloadAction<User | null>){
             state.user = action.payload
+        },
+        onboard(state) {
+            if(state.user){
+                state.user.result.hasOnboarded = true
+            }
         }
     }
 })

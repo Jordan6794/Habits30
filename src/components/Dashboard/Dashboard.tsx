@@ -42,8 +42,7 @@ const Dasboard: FunctionComponent = () => {
 		{ name: 'Fail streak', value: failStreakHabits },
 		{ name: 'Solidified', value: solidifiedHabits },
 	]
-	// const chartsColors = ['#9B9EA3', '#2CABE3', '#FFC36D', '#20C98B'] //neutral green red brand
-	const chartsColors = ['#2b9ab3', '#41b169', '#bc4d34', '#20C98B']
+	const chartsColors = ['#9B9EA3', '#2CABE3', '#FFC36D', '#20C98B'] //neutral green red brand
 
 	const barData = [
 		{ name: 'Smallest', Successes: smallestSuccessHabit },

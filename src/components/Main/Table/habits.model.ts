@@ -6,7 +6,6 @@ export interface Habit {
 	failCounter: number
 	lifetimeSuccessCounter: number
 	lifetimeFailCounter: number
-	didChange: boolean
     history: Array<HistoryObject>
     historyStep: number
 }

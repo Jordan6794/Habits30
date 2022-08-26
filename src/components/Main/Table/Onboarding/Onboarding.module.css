@@ -1,0 +1,92 @@
+
+/* ===Modal=== */
+.modal {
+    position: fixed;
+	text-align: center;
+	width: 54%;
+	left: 23%;
+	top: 7vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 1em 0;
+	z-index: 100;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+	border-radius: 10px;
+	background-color: white;
+}
+.close {
+	cursor: pointer;
+}
+.close:after,
+.close:before {
+	content: '';
+	height: 30px;
+	width: 30px;
+	border-top: 3px solid #000;
+	position: absolute;
+	top: 23px;
+	right: 10px;
+	transform: rotate(-45deg);
+}
+
+.close:before {
+	right: 31px;
+	transform: rotate(45deg);
+}
+
+.close:hover {
+	opacity: 0.7;
+}
+
+
+
+/* ===Pages=== */
+.pageDiv {
+	margin-bottom: 1.5em;
+}
+
+
+/* ===First Page=== */
+.illustration {
+	height: 300px;
+	margin-bottom: 1rem;
+}
+
+.title {
+	font-size: 1.5rem;
+	margin-bottom: 0.5em;
+}
+
+.subtext {
+	font-size: 1.15rem;
+	margin-bottom: 1em;
+}
+
+.btnMargin {
+	margin-bottom: 0.5em;
+}
+.btnAreaMargin {
+	margin-bottom: 1.6em;
+}
+
+.progressDiv {
+	display: flex;
+}
+
+.progressIcon {
+	height: 16px;
+	margin-right: 4px;
+	fill: var(--main-color);
+}
+
+
+/* ===Sec6nd Page=== */
+.paragraphsDiv {
+	max-width: 540px;
+	margin-bottom: 1em;
+}
+
+.paragraph {
+	margin-bottom: 0.5em;
+}

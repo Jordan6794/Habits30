@@ -10,12 +10,10 @@ export default function HabitCell({
 	color,
 	index,
 	lastIndex,
-	didChange,
 }: {
 	color: string
 	index: number
 	lastIndex: number
-	didChange: boolean | undefined
 }) {
 	let content
 	switch (color) {
@@ -35,10 +33,9 @@ export default function HabitCell({
 			content = <XCircleSVG />
 			break
 	}
-	const lastClass = didChange && index === lastIndex ? 'lastCellChanged' : ''
 
 	return (
-		<th className={`habitCell ${lastClass}`}>
+		<th className={`habitCell`}>
 			<div className="center-container">{content}</div>
 		</th>
 	)

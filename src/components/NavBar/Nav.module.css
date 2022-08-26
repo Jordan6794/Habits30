@@ -1,6 +1,7 @@
 
 .appNavbar {
 	background-color: #282c34;
+	height: var(--nav-height);
 	display: flex;
 	text-align: left;
 	color: white;

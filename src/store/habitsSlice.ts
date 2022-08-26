@@ -49,7 +49,6 @@ const habitsSlice = createSlice({
 			state[index].historyStep++
 
 			state[index].colors = addSuccessColor(state[index].colors)
-			state[index].didChange = true
 
 			// checking for new streaks
 			const successStreakCount = colorCounter(state[index].colors, SUCCESS_STREAK_COLOR)
@@ -104,7 +103,6 @@ const habitsSlice = createSlice({
 			state[index].history.push(historyObject)
 			state[index].historyStep++
 			state[index].colors = addFailColor(state[index].colors)
-			state[index].didChange = true
 
 			//checking for new streaks
 			if (hasTooManyRedsConsecutive(state[index].colors) || hasTooManyReds(state[index].colors)) {
@@ -141,7 +139,6 @@ const habitsSlice = createSlice({
 		},
 		undoColors(state, action: PayloadAction<{ index: number }>) {
 			const { index } = action.payload
-			state[index].didChange = false
 
 			if(state[index].history.length === 0){
 				return
@@ -159,7 +156,6 @@ const habitsSlice = createSlice({
 		},
 		redoColors(state, action: PayloadAction<{ index: number }>) {
 			const { index } = action.payload
-			state[index].didChange = false
 
 			const step = state[index].historyStep
 			state[index] = {...state[index], ...state[index].history[step + 1]}
@@ -213,7 +209,7 @@ async function updateHabitFromThunk(getState: () => RootState, index: number) {
 	const state = getState()
 	const habit = state.habits[index]
 	// we always put didChange false and history empty in the database
-	const response = await updateHabit({ ...habit, didChange: false, history: [], historyStep: 0 })
+	const response = await updateHabit({ ...habit, history: [], historyStep: 0 })
 	console.log('update : ', response)
 }
 
