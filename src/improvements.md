@@ -1,9 +1,7 @@
-- Feedback
-: Onboarding
-: Put different examples habtis ?
+- Fix SVG bug
 
-- Better embording!!! (and precise that can always click How to BTN to read more)ft
-: make a highlight add first habit after the onboarding finish ?
+- Feedback
+: Put different examples habtis ?
 
 - Put different streaks and solidified habits as well in the example habits ?
 - Faire un gitrepo pour la backend ?
@@ -12,12 +10,15 @@
 Improvements :
 - Improve colors in dashboard : round2 with less autumn-y colors ?
 - Lacher 5e pour get un logo ; logo instead of text or not ?
+-Improve icons ? ++ changed to checkmark cross ? And clear icon updated check google icons etc
 - Improve design tos/privacy pages + make contact me page
 - Improve ma landing page (habitify ou habstrak inspiration : background-image / switch backgrounds notament)
 - Make a producthunt post ! (see https://blogtheorem.com/ https://www.producthunt.com/products/testimonialapi)
 - Put loading text/skeleton on dashboard too
 - recheck refacto
 - Add lazy loading for router
+- Better embording : highlights ?
+: make a highlight add first habit after the onboarding finish ?
 - Pour les await database UI faire un loading & success modal/visual display? (see Zach Stone MAC)
 - Update le state client AFTER les http request et manage les errors dans l'UX si error (certains put en await + UI, d'autres update client first mais ensuite make error modal si error)
 - implement le show password feature
@@ -28,7 +29,7 @@ Improvements :
 - Put active visual cue in hamberger modal left nav
 - Faire profile page ? (then put small round icon with profile pic on nav (can update and get it from google if OAuth))
 : Could put checlist tasks for onboarding as well if profile 
-- Make un truc pour move up/down habits in the list ?
+- Make un truc pour move up/down habits in the list ? DRAG AND DROP WOULD BE GREAT, see how to do that
 - next level onboarding : https://www.appcues.com/blog/user-onboarding-ui-ux-patterns
 
 Later/Osef :

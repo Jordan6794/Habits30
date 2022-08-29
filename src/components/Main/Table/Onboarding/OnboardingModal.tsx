@@ -1,7 +1,7 @@
 import { FunctionComponent, useState } from 'react'
 
-import CircleSVG from './SVGs/circle.svg'
-import CircleFullSVG from './SVGs/circle_full.svg'
+import CircleSVG from './SVGs/CircleSVG'
+import CircleFullSVG from './SVGs/CircleFullSVG'
 
 import PageOne from './PageOne'
 import PageTwo from './PageTwo'
