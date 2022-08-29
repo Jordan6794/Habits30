@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 
 // import FinishIllustration from './Illustrations/undraw_maker_launch.svg'
-import FinishIllustration from './Illustrations/undraw_explore.svg'
+import FinishIllustrationSVG from './Illustrations/UndrawExploreSVG'
 
 import styles from './Onboarding.module.css'
 
@@ -34,7 +34,7 @@ const PageFour: FunctionComponent<{ onFinishOnboarding: () => void }> = ({ onFin
 				</p>
 			</div>
 
-			<FinishIllustration className={styles.illustration} />
+			<FinishIllustrationSVG className={styles.illustration} />
 			<div className={styles.btnAreaMargin}>
 				<button className="btn btn-sign" onClick={onFinishOnboarding}>
 					Let's start

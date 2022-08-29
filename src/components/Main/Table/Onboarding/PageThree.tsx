@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 
-import HabitsIllustration from './Illustrations/undraw_fitness_stats.svg'
+import HabitsIllustration from './Illustrations/UndrawFitnessStatsSVG'
 
 import styles from './Onboarding.module.css'
 
