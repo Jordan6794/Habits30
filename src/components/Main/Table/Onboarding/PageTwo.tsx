@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 
-import GoalIllustration from './Illustrations/undraw_target.svg'
+import GoalIllustration from './Illustrations/UndrawTargetSVG'
 
 import styles from './Onboarding.module.css'
 
