@@ -1,4 +1,4 @@
-- Fix SVG bug
+- Spellcheck onboarding
 
 - Feedback
 : Put different examples habtis ?

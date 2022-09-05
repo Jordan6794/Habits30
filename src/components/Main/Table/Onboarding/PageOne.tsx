@@ -20,7 +20,7 @@ const PageOne: FunctionComponent<{ onFinishOnboarding: () => void, onNextPage: (
 			</div>
 			<p className={styles.reminderText}>
 				(You can always click the <button className="btn btn-how btn-small btn-no-click no-margin">How it works</button> button for more
-				informations)
+				information)
 			</p>
 		</div>
 	)
