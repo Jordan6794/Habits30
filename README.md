@@ -6,11 +6,11 @@ A full stack web application, build with the MERN stack, this repository include
 
 ## Live
 
-Visit the web application live at [https://www.habits30/net](https://www.habits30/net)
+Visit the web application live at [https://www.habits30.net](https://www.habits30.net)
 
 ## Features
 
-The app is made to help the user build and maintain new habits in his life.
+The app is made to help the user build and maintain new habits in his life. <br>
 Features available includes :
 - Attractive landing page
 - Onboarding
