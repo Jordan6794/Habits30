@@ -26,11 +26,11 @@ const PageFour: FunctionComponent<{ onFinishOnboarding: () => void }> = ({ onFin
 					buttons.
 				</p>
 				<p className={styles.paragraph}>
-					You can see all your stats in the{' '}
+					You can see all your stats on the{' '}
 					<span className="main-color">Dasboard</span> page.
 				</p>
 				<p className={styles.paragraph}>
-					Start by writing now <span className="main-color">that one habit</span> that you want to develop, or be more consistant with.
+					Start by writing now <span className="main-color">that one habit</span> that you want to develop, or be more consistent with.
 				</p>
 			</div>
 
