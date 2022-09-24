@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react'
-import { render } from 'test-utils'
+import { render } from '../../../shared/test-utils'
 
 import Table from './Table'
 

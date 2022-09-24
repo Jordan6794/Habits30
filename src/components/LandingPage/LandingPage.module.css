@@ -496,6 +496,14 @@ a/t*100%
 
 /* Mobile */
 @media (max-width: 700px) {
+    .container {
+        width: 85%;
+    }
+
+    .nav {
+        margin-bottom: 3.5em;
+    }
+
     /* Hero */
     .heroDiv {
         margin-bottom: 4em;
@@ -506,10 +514,16 @@ a/t*100%
     }
     .heroSubtitle {
         font-size: 1rem;
+        margin-bottom: 2em;
     }
+
+    .heroLeftDiv {
+        margin-bottom: 7em;
+    }
+
     .heroSVG {
-        height: 200px;
-        width: 300px;
+        height: 220px;
+        width: 330px;
     }
 
     /* Area one */
