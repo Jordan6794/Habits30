@@ -1,7 +1,8 @@
 - Feedback
 : Put different streaks and solidified habits as well in the example habits ?
 
-- Faire un gitrepo pour la backend ? And switch from Heroku to Vercel
+- Switch from Heroku to Vercel ; even better check AWS hosting
+- Faire un gitrepo pour la backend 
 
 Improvements :
 - Improve icons ? ++ changed to checkmark cross ? And clear icon updated check google icons etc
@@ -9,6 +10,7 @@ Improvements :
 - Lacher 5e pour get un logo ; logo instead of text or not ?
 - Improve colors in dashboard : round2 with less autumn-y colors ?
 - Improve design tos/privacy pages + make contact me page
+- Improve scrolling animations on landing ? https://www.youtube.com/watch?v=T33NN_pPeNI
 - Fail preview display cue that alerts you if one more fail would make you lose your streak (codewise have to make another array fail preview that I update on each add, and check when failPreview[0] = FAIL_COLOR ? (not display if streak empty or already in fail streak)) (can add a tooltip explaining what it means which a 'don't show anymore' box with boolean in DB ?)
 : Make the HowTo modal two pages Basics/Advanced if I start having more features like that ?
 - Daily win/fails counter ?? yes/no ? On top habits page ? dashboard ? (add % too, can conditional color)
