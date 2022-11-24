@@ -1,11 +1,11 @@
-import React from "react"
+import React, { PropsWithChildren, ReactElement } from "react"
 import { render } from "@testing-library/react"
 import { Provider } from 'react-redux'
 import store from "../store"
 import { BrowserRouter } from 'react-router-dom'
 
 
-const AllTheProviders = ({children}: any) => {
+const AllTheProviders = ({children}: PropsWithChildren<{}>) => {
     return (
         <Provider store={store}>
         <BrowserRouter>
@@ -15,7 +15,7 @@ const AllTheProviders = ({children}: any) => {
     )
   }
   
-  const customRender = (ui: any, options?: any) =>
+  const customRender = (ui: ReactElement, options?: any) =>
     render(ui, {wrapper: AllTheProviders, ...options})
   
   // re-export everything
