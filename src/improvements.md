@@ -1,12 +1,10 @@
 - Feedback
 : Put different streaks and solidified habits as well in the example habits ?
 
-- Switch from Heroku to Vercel ; even better check AWS hosting
-- Faire un gitrepo pour la backend 
-
 Improvements :
 - Improve icons ? ++ changed to checkmark cross ? And clear icon updated check google icons etc
 - Unit Testing with Jest
+- Add lazy loading for router + fix le small lag d'auth de voir la page d'avant
 - Lacher 5e pour get un logo ; logo instead of text or not ?
 - Improve colors in dashboard : round2 with less autumn-y colors ?
 - Improve design tos/privacy pages + make contact me page
@@ -14,9 +12,9 @@ Improvements :
 - Fail preview display cue that alerts you if one more fail would make you lose your streak (codewise have to make another array fail preview that I update on each add, and check when failPreview[0] = FAIL_COLOR ? (not display if streak empty or already in fail streak)) (can add a tooltip explaining what it means which a 'don't show anymore' box with boolean in DB ?)
 : Make the HowTo modal two pages Basics/Advanced if I start having more features like that ?
 - Daily win/fails counter ?? yes/no ? On top habits page ? dashboard ? (add % too, can conditional color)
-- Add lazy loading for router
 - Improve ma landing page (habitify ou habstrak inspiration : background-image / switch backgrounds notament)
 - recheck refacto
+- Put small animations for winning streaks ?
 - Put each habits stats/infos on edit habit name modal (win/lose ration add camembert) (+ put date created, and some stats, winrate, time since created etc)
 : + add prioritize habit feature : visual cue that this habit is more important (+ maybe put it on top of its table?)
 - Make a producthunt post ! (see https://blogtheorem.com/ https://www.producthunt.com/products/testimonialapi)
@@ -24,6 +22,7 @@ Improvements :
 : make a highlight add first habit after the onboarding finish ?
 : next level onboarding : https://www.appcues.com/blog/user-onboarding-ui-ux-patterns
 - Pour les await database UI faire un loading & success modal/visual display? (see Zach Stone MAC)
+- Check AWS hosting for backend (or client) instead of Vercel
 - Update le state client AFTER les http request et manage les errors dans l'UX si error (certains put en await + UI, d'autres update client first mais ensuite make error modal si error)
 - Responsiveness for ipad size
 - Faire profile page ? (then put small round icon with profile pic on nav (can update and get it from google if OAuth))
