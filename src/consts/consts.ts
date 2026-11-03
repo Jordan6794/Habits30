@@ -14,3 +14,10 @@ export const TOO_MANY_REDS_NUMBER: number = 3
 export const TOO_MANY_REDS_NUMBER_WHILE_GREEN_STREAK: number = 4
 
 export const DEMO_ACCOUNT_USERNAME = 'Demo Account'
+export const UNKNOWN_COLOR: string = 'u'
+// number of consecutive unknown days from which they get collapsed into one cell
+export const UNKNOWN_COLLAPSE_THRESHOLD: number = 3
+
+// a habit day ends at 3:30 AM local time (clicks before that count for the previous day)
+export const DAY_END_HOUR: number = 3
+export const DAY_END_MINUTE: number = 30

@@ -1,4 +1,4 @@
-import { FAIL_COLOR, SUCCESS_COLOR, SUCCESS_FINISH_COLOR, SUCCESS_STREAK_COLOR, FAIL_STREAK_COLOR } from '../../../consts/consts'
+import { FAIL_COLOR, SUCCESS_COLOR, SUCCESS_FINISH_COLOR, SUCCESS_STREAK_COLOR, FAIL_STREAK_COLOR, UNKNOWN_COLOR } from '../../../consts/consts'
 
 import CheckSVG from './SVG/CheckSVG'
 import CheckCircleSVG from './SVG/CheckCircleSVG'
@@ -8,10 +8,12 @@ import XCircleSVG from './SVG/XCircleSVG'
 
 export default function HabitCell({
 	color,
+	count = 1,
 	index,
 	lastIndex,
 }: {
 	color: string
+	count?: number
 	index: number
 	lastIndex: number
 }) {
@@ -31,6 +33,13 @@ export default function HabitCell({
 			break
 		case FAIL_STREAK_COLOR:
 			content = <XCircleSVG />
+			break
+		case UNKNOWN_COLOR:
+			content = (
+				<span className="unknownCell" title={count > 1 ? `${count} days without result` : 'No result this day'}>
+					{count > 1 ? `?×${count}` : '?'}
+				</span>
+			)
 			break
 	}
 

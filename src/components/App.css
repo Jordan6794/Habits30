@@ -173,22 +173,24 @@ COMMON
 }
 
 .editModal {
-	position: absolute;
-	width: 100%;
-	height: 125px;
+	position: fixed;
+	width: 90%;
+	max-width: 480px;
+	max-height: 90vh;
+	overflow-y: auto;
+	overflow-x: hidden;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	top: -115%;
+	padding: 2.5em 0 1.5em;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	z-index: 100;
 	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
 	border-radius: 10px;
 	background-color: white;
-}
-
-.habit-row:last-of-type th .editModal {
-	top:initial;
-	bottom: 0;
+	font-weight: normal;
 }
 
 /* ==== Other ==== */
@@ -267,6 +269,10 @@ Table
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 	margin-top: 5em;
 	margin-bottom: 6em;
+}
+
+.habit-table.habit-table-after-summary {
+	margin-top: 1.5em;
 }
 
 .table-first-row {
@@ -379,6 +385,28 @@ Table
 
 .btn-undo {
 	padding: 0;
+}
+
+.btn-day-target {
+	font-size: 0.75rem;
+	color: grey;
+	min-width: 5.5em;
+}
+
+.btn-day-target:disabled {
+	cursor: default;
+	opacity: 0.5;
+}
+
+.btn-day-active {
+	background-color: #f0f0f0;
+	border-radius: 50%;
+}
+
+.unknownCell {
+	color: #aaaaaa;
+	font-weight: 600;
+	white-space: nowrap;
 }
 
 .btn-google {

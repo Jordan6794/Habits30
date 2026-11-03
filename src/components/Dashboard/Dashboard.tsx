@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react'
 
 import { useAppSelector } from '../../hooks'
+import { selectActiveHabits } from '../../store/habitsSlice'
 import {
 	calculateAverageSuccesses,
 	calculateMostSuccessesHabit,
@@ -20,7 +21,7 @@ import BarChartComponent from './BarChartComponent'
 import styles from './Dashboard.module.css'
 
 const Dasboard: FunctionComponent = () => {
-	const habits = useAppSelector((state) => state.habits)
+	const habits = useAppSelector(selectActiveHabits)
 
 	const totalSuccesses = calculateTotalSuccesses(habits)
 	const totalFails = calculateTotalFails(habits)
