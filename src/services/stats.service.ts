@@ -1,5 +1,24 @@
-import { Habit } from '../components/Main/Table/habits.model'
+import { Habit, StoredHabit } from '../components/Main/Table/habits.model'
 import { SUCCESS_STREAK_COLOR, SUCCESS_FINISH_COLOR, FAIL_STREAK_COLOR } from '../consts/consts'
+import { getDayStatus } from './habitReplay.service'
+
+export interface DayCounts {
+	success: number
+	fail: number
+	unknown: number
+}
+
+// How many habits were won, failed or without result on that day
+export function calculateDayCounts(habits: StoredHabit[], date: string, todayKey: string): DayCounts {
+	const counts: DayCounts = { success: 0, fail: 0, unknown: 0 }
+	habits.forEach((habit) => {
+		const status = getDayStatus(habit, date, todayKey)
+		if (status === 'success' || status === 'fail' || status === 'unknown') {
+			counts[status]++
+		}
+	})
+	return counts
+}
 
 export function calculateTotalSuccesses(habits: Habit[]) {
 	let count = 0

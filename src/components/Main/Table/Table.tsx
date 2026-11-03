@@ -6,20 +6,22 @@ import BackgroundSVG from './SVG/BackgroundSVG'
 import HabitRow from './HabitRow'
 import NewHabitForm from './NewHabitForm'
 
-import { postHabit, deleteHabit } from '../../../actions/habits'
+import { postHabit } from '../../../actions/habits'
 import { Habit, StoredHabit } from './habits.model'
 import { SUCCESS_FINISH_COLOR } from '../../../consts/consts'
 import { TableSkeleton } from '../../../shared/skeletons'
 import { useAppDispatch, useAppSelector } from '../../../hooks'
-import { habitsActions } from '../../../store/habitsSlice'
+import { habitsActions, habitsActionsThunk, selectActiveHabits } from '../../../store/habitsSlice'
 import { makeDaysArray } from '../../../services/effects.service'
 import { getTodayKey } from '../../../services/dates.service'
 import { authActions } from '../../../store/authSlice'
 import { onboard } from '../../../actions/auth'
 import OnboardingModal from './Onboarding/OnboardingModal'
+import MonthSummary from './MonthSummary'
 
 function Table() {
 	const habits = useAppSelector((state) => state.habits)
+	const activeHabits = useAppSelector(selectActiveHabits)
 	const isLoadingHabits = useAppSelector((state) => state.loading)
 	const hasOnboarded = useAppSelector(state => state.auth.user?.result.hasOnboarded)
 
@@ -27,8 +29,10 @@ function Table() {
 
 	const dispatch = useAppDispatch()
 
-	const ongoingHabits = habits.filter((habit) => habit.colors[0] !== SUCCESS_FINISH_COLOR)
-	const finishedHabits = habits.filter((habit) => habit.colors[0] === SUCCESS_FINISH_COLOR)
+	const ongoingHabits = activeHabits.filter((habit) => habit.colors[0] !== SUCCESS_FINISH_COLOR)
+	const finishedHabits = activeHabits.filter((habit) => habit.colors[0] === SUCCESS_FINISH_COLOR)
+
+	const isSummaryShown = !isLoadingHabits && habits.length > 0
 
 	let daysArray: number[] = []
 	makeDaysArray(daysArray)
@@ -47,9 +51,7 @@ function Table() {
 	}
 
 	function onDeleteHabit(deleteIndex: number) {
-		const _id = habits[deleteIndex]._id
-		deleteHabit(_id)
-		dispatch(habitsActions.delete({ index: deleteIndex }))
+		dispatch(habitsActionsThunk.deleteHabitAction(deleteIndex))
 	}
 
 	function createHabitRow(habit: Habit, index: number, isFinished: boolean) {
@@ -87,8 +89,10 @@ function Table() {
 			</div>
 
 			{hasOnboarded === false && <OnboardingModal onFinishOnboarding={onFinishOnboarding} />}
+
+			{isSummaryShown && <MonthSummary />}
 			
-			<table className="habit-table">
+			<table className={`habit-table ${isSummaryShown ? 'habit-table-after-summary' : ''}`}>
 				<thead>
 					<tr className="table-first-row">
 						<th className="table-habit-title-cell">

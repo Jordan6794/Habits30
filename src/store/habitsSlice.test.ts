@@ -1,6 +1,6 @@
 import { mockHabit } from '../components/Main/Table/habits.model'
 import { FAIL_COLOR, SUCCESS_COLOR, UNKNOWN_COLOR } from '../consts/consts'
-import reducer, { habitsActions } from './habitsSlice'
+import reducer, { habitsActions, selectActiveHabits } from './habitsSlice'
 
 const today = '2026-11-03'
 
@@ -78,4 +78,15 @@ describe('Habits reducer', () => {
         expect(habitsArray[0].colors).toEqual([SUCCESS_COLOR, UNKNOWN_COLOR])
         expect(habitsArray[0].historyStep).toBe(0)
     })
+
+    test('delete keeps the habit and its log, and hides it from the active habits', () => {
+        const habit = {...mockHabit, log: {'2026-11-01': 'success' as const}}
+        const habitsArray = reducer([habit], habitsActions.delete({index: 0, todayKey: today}))
+
+        expect(habitsArray).toHaveLength(1)
+        expect(habitsArray[0].deletedOn).toBe(today)
+        expect(habitsArray[0].log).toEqual({'2026-11-01': 'success'})
+        expect(selectActiveHabits({habits: habitsArray} as any)).toEqual([])
+    })
 })
+

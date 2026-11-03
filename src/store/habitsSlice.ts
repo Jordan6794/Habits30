@@ -1,8 +1,8 @@
-import { AnyAction, createSlice, PayloadAction, ThunkAction } from '@reduxjs/toolkit'
+import { AnyAction, createSelector, createSlice, PayloadAction, ThunkAction } from '@reduxjs/toolkit'
 import { DayStatus, Habit, HistoryObject, StoredHabit } from '../components/Main/Table/habits.model'
 import { createHabitFromStored, deriveHabitState, toStoredHabit } from '../services/habitReplay.service'
 import { getTodayKey } from '../services/dates.service'
-import { setLogEntry, updateHabit } from '../actions/habits'
+import { deleteHabit, setLogEntry, updateHabit } from '../actions/habits'
 import { RootState } from '.'
 
 const initialHabits: Habit[] = []
@@ -35,9 +35,12 @@ const habitsSlice = createSlice({
 			const { habit, todayKey } = action.payload
 			state.push(createHabitFromStored(habit, todayKey))
 		},
-		delete(state, action: PayloadAction<{ index: number }>) {
-			const { index } = action.payload
-			state.splice(index, 1)
+		// soft delete : the habit is hidden but its logs are kept for the stats
+		delete(state, action: PayloadAction<{ index: number; todayKey: string }>) {
+			const { index, todayKey } = action.payload
+			state[index].deletedOn = todayKey
+			state[index].history = []
+			state[index].historyStep = 0
 		},
 		updateName(state, action: PayloadAction<{ index: number; newName: string }>) {
 			const { index, newName } = action.payload
@@ -121,6 +124,16 @@ export const updateNameAction = (index: number, newName: string): ThunkAction<vo
 	}
 }
 
+export const deleteHabitAction = (index: number): ThunkAction<void, RootState, unknown, AnyAction> => {
+	return async (dispatch, getState) => {
+		const todayKey = getTodayKey()
+		dispatch(habitsActions.delete({ index, todayKey }))
+		const habit = getState().habits[index]
+		const response = await deleteHabit(habit._id, todayKey)
+		console.log('delete : ', response)
+	}
+}
+
 export const setDayStatusAction = (
 	index: number,
 	date: string,
@@ -163,7 +176,13 @@ async function updateHabitFromThunk(getState: () => RootState, index: number) {
 	console.log('update : ', response)
 }
 
-export const habitsActionsThunk = { updateNameAction, setDayStatusAction, clearColorsAction, undoColorsAction, redoColorsAction }
+// Habits that are not deleted, the ones shown in the tables and dashboard
+export const selectActiveHabits = createSelector(
+	(state: RootState) => state.habits,
+	(habits) => habits.filter((habit) => !habit.deletedOn)
+)
+
+export const habitsActionsThunk = { deleteHabitAction, updateNameAction, setDayStatusAction, clearColorsAction, undoColorsAction, redoColorsAction }
 
 export default habitsSlice.reducer
 export const habitsActions = habitsSlice.actions

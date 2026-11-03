@@ -19,7 +19,7 @@ export const fetchHabits = () => API.get('/posts')
 export const postHabit = (habit: StoredHabit) => API.post('/posts', {habit})
 export const updateHabit = (habit: StoredHabit) => API.patch(`${'/posts'}/${habit._id}`, {habit})
 export const setLogEntry = (id: string, date: string, status: DayStatus | null) => API.patch(`${'/posts'}/${id}/log`, {date, status})
-export const deleteHabit = (id: string) => API.delete(`${'/posts'}/${id}`)
+export const deleteHabit = (id: string, date: string) => API.delete(`${'/posts'}/${id}`, {params: {date}})
 
 export const script = () => API.post('/posts/script')
 

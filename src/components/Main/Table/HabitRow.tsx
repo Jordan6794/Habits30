@@ -100,7 +100,7 @@ const HabitRow: FunctionComponent<{
 					</button>{' '}
 				</div>
 
-				{isEditModalOpen && <HabitEditModal saveName={handleUpdateName} name={habit.name} exitModal={() => setIsEditModalOpen(false)} />}
+				{isEditModalOpen && <HabitEditModal habit={habit} saveName={handleUpdateName} name={habit.name} exitModal={() => setIsEditModalOpen(false)} />}
 				<p className="th-habit-name" onClick={() => setIsEditModalOpen(prev => !prev)}>{props.habitObject.name}</p>
 
 				<div className="th-plus-minus-div">

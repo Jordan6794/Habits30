@@ -16,15 +16,21 @@ export type DayDisplayStatus = DayStatus | 'unknown' | 'pending' | 'none'
 
 type StreakState = Pick<DerivedHabitState, 'colors' | 'successCounter' | 'failCounter'>
 
-export function getDayStatus(habit: Pick<StoredHabit, 'createdOn' | 'log'>, date: string, todayKey: string): DayDisplayStatus {
+export function getDayStatus(habit: Pick<StoredHabit, 'createdOn' | 'log' | 'deletedOn'>, date: string, todayKey: string): DayDisplayStatus {
 	const status = habit.log[date]
 	if (status && date <= todayKey) {
 		return status
 	}
-	if (date < habit.createdOn || date > todayKey) {
+	// a deleted habit has no unknown days from its deletion day
+	if (date < habit.createdOn || date > todayKey || (habit.deletedOn && date >= habit.deletedOn)) {
 		return 'none'
 	}
 	return date === todayKey ? 'pending' : 'unknown'
+}
+
+// Oldest day of a habit : its creation or its oldest log entry
+export function getEarliestDate(habit: Pick<StoredHabit, 'createdOn' | 'log'>) {
+	return [habit.createdOn, ...Object.keys(habit.log)].sort()[0]
 }
 
 export function applySuccess(state: StreakState): StreakState {
@@ -125,12 +131,13 @@ export function createHabitFromStored(raw: Partial<StoredHabit> & Pick<StoredHab
 		createdOn,
 		startDate: raw.startDate ?? createdOn,
 		log: raw.log ?? {},
+		...(raw.deletedOn && { deletedOn: raw.deletedOn }),
 	}
 	return { ...stored, ...deriveHabitState(stored, todayKey), history: [], historyStep: 0 }
 }
 
 // Only these fields are saved in the database
 export function toStoredHabit(habit: StoredHabit): StoredHabit {
-	const { name, _id, createdOn, startDate, log } = habit
-	return { name, _id, createdOn, startDate, log }
+	const { name, _id, createdOn, startDate, log, deletedOn } = habit
+	return { name, _id, createdOn, startDate, log, ...(deletedOn && { deletedOn }) }
 }

@@ -58,9 +58,9 @@ export const setLogEntry = async (id: string, date: string, status: DayStatus | 
     }
 }
 
-export const deleteHabit = async (id: string) => {
+export const deleteHabit = async (id: string, date: string) => {
     try {
-        const response = await api.deleteHabit(id)
+        const response = await api.deleteHabit(id, date)
         return response
     } catch (error) {
         if(error instanceof Error){
