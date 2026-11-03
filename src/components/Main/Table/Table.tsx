@@ -7,12 +7,13 @@ import HabitRow from './HabitRow'
 import NewHabitForm from './NewHabitForm'
 
 import { postHabit, deleteHabit } from '../../../actions/habits'
-import { Habit } from './habits.model'
+import { Habit, StoredHabit } from './habits.model'
 import { SUCCESS_FINISH_COLOR } from '../../../consts/consts'
 import { TableSkeleton } from '../../../shared/skeletons'
 import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { habitsActions } from '../../../store/habitsSlice'
 import { makeDaysArray } from '../../../services/effects.service'
+import { getTodayKey } from '../../../services/dates.service'
 import { authActions } from '../../../store/authSlice'
 import { onboard } from '../../../actions/auth'
 import OnboardingModal from './Onboarding/OnboardingModal'
@@ -33,19 +34,16 @@ function Table() {
 	makeDaysArray(daysArray)
 
 	async function handleSubmitHabit(habitName: string) {
-		const newHabit: Habit = {
+		const todayKey = getTodayKey()
+		const newHabit: StoredHabit = {
 			name: habitName,
 			_id: uuidv4(),
-			colors: [],
-			successCounter: 0,
-			failCounter: 0,
-			lifetimeSuccessCounter: 0,
-			lifetimeFailCounter: 0,
-			history: [],
-			historyStep: 0,
+			createdOn: todayKey,
+			startDate: todayKey,
+			log: {},
 		}
 		await postHabit(newHabit)
-		dispatch(habitsActions.add({ habit: newHabit }))
+		dispatch(habitsActions.add({ habit: newHabit, todayKey }))
 	}
 
 	function onDeleteHabit(deleteIndex: number) {

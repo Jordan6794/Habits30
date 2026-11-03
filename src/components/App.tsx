@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import decode, { JwtPayload } from 'jwt-decode'
 
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { authActions } from '../store/authSlice'
 import { habitsActions } from '../store/habitsSlice'
-import { getHabits } from '../actions/habits'
+import { getHabits, updateHabit } from '../actions/habits'
 import { loadingActions } from '../store/loadingSlice'
 import { logout } from '../lib/logout.service'
+import { getTodayKey } from '../services/dates.service'
+import { createHabitFromStored, toStoredHabit } from '../services/habitReplay.service'
 
 import LandingPage from '../pages/LandingPage'
 import Main from '../pages/Main'
@@ -25,6 +27,7 @@ function App() {
 	const navigate = useNavigate()
 	const location = useLocation()
 	const user = useAppSelector((state) => state.auth.user)
+	const todayKeyRef = useRef(getTodayKey())
 
 	//checking user token
 	useEffect(() => {
@@ -64,7 +67,15 @@ function App() {
 			try {
 				const response = await getHabits()
 				if(response && response.length > 0){
-					dispatch(habitsActions.set({habits: response}))
+					// every habit gets its past days computed (unknown days included) on load
+					todayKeyRef.current = getTodayKey()
+					dispatch(habitsActions.set({habits: response, todayKey: todayKeyRef.current}))
+
+					// habits saved before the daily log start empty from today, saving their dates once
+					const todayKey = todayKeyRef.current
+					response
+						.filter((habit) => !habit.createdOn)
+						.forEach((habit) => updateHabit(toStoredHabit(createHabitFromStored(habit, todayKey))))
 				}
 
 			} catch (error) {
@@ -73,6 +84,23 @@ function App() {
 			dispatch(loadingActions.set(false))
 		}
 		fetchHabits()
+	}, [dispatch])
+
+	// recomputing the habits if the habit day changed while the app was open
+	useEffect(() => {
+		const refreshIfNewDay = () => {
+			const todayKey = getTodayKey()
+			if (document.visibilityState === 'visible' && todayKey !== todayKeyRef.current) {
+				todayKeyRef.current = todayKey
+				dispatch(habitsActions.refreshToday({ todayKey }))
+			}
+		}
+		document.addEventListener('visibilitychange', refreshIfNewDay)
+		window.addEventListener('focus', refreshIfNewDay)
+		return () => {
+			document.removeEventListener('visibilitychange', refreshIfNewDay)
+			window.removeEventListener('focus', refreshIfNewDay)
+		}
 	}, [dispatch])
 
 	return (

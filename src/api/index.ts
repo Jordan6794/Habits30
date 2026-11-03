@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Habit } from '../components/Main/Table/habits.model'
+import { DayStatus, StoredHabit } from '../components/Main/Table/habits.model'
 import { FormData, GoogleAuthData } from '../components/Auth/formData.model'
 
 const API = axios.create({baseURL: process.env.REACT_APP_BACKEND_BASE_URL})
@@ -16,8 +16,9 @@ API.interceptors.request.use((req) => {
 })
 
 export const fetchHabits = () => API.get('/posts')
-export const postHabit = (habit: Habit) => API.post('/posts', {habit})
-export const updateHabit = (habit: Habit) => API.patch(`${'/posts'}/${habit._id}`, {habit})
+export const postHabit = (habit: StoredHabit) => API.post('/posts', {habit})
+export const updateHabit = (habit: StoredHabit) => API.patch(`${'/posts'}/${habit._id}`, {habit})
+export const setLogEntry = (id: string, date: string, status: DayStatus | null) => API.patch(`${'/posts'}/${id}/log`, {date, status})
 export const deleteHabit = (id: string) => API.delete(`${'/posts'}/${id}`)
 
 export const script = () => API.post('/posts/script')

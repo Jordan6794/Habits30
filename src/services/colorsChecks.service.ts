@@ -8,10 +8,21 @@ import {
     SUCCESS_FINISH_COLOR,
     SUCCESS_STREAK_COLOR,
     TOO_MANY_REDS_NUMBER,
-    TOO_MANY_REDS_NUMBER_WHILE_GREEN_STREAK
+    TOO_MANY_REDS_NUMBER_WHILE_GREEN_STREAK,
+    UNKNOWN_COLOR
 } from '../consts/consts'
 
-export function hasTooManyRedsConsecutive(array: string[]) {
+// unknown days are neutral, they are ignored by the streak rules
+export function withoutUnknown(array: string[]) {
+	return array.filter((color) => color !== UNKNOWN_COLOR)
+}
+
+export function firstKnownColor(array: string[]) {
+	return array.find((color) => color !== UNKNOWN_COLOR)
+}
+
+export function hasTooManyRedsConsecutive(colors: string[]) {
+	const array = withoutUnknown(colors)
 	const finishCount = colorCounter(array, SUCCESS_FINISH_COLOR)
 	let maxConsecutiveNumber = MAX_CONSECUTIVE_RED_NUMBER
 	if (finishCount === 1) {

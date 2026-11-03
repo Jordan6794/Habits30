@@ -381,6 +381,28 @@ Table
 	padding: 0;
 }
 
+.btn-day-target {
+	font-size: 0.75rem;
+	color: grey;
+	min-width: 5.5em;
+}
+
+.btn-day-target:disabled {
+	cursor: default;
+	opacity: 0.5;
+}
+
+.btn-day-active {
+	background-color: #f0f0f0;
+	border-radius: 50%;
+}
+
+.unknownCell {
+	color: #aaaaaa;
+	font-weight: 600;
+	white-space: nowrap;
+}
+
 .btn-google {
 	width: 100%;
 	height: 50px;

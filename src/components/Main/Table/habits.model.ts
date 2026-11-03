@@ -1,32 +1,45 @@
-export interface Habit {
+export type DayStatus = 'success' | 'fail'
+
+// What is saved in the database, everything else is derived from the log
+export interface StoredHabit {
 	name: string
 	_id: string
+	createdOn: string // 'YYYY-MM-DD'
+	startDate: string // replay starts here, moved to today on clear
+	log: Record<string, DayStatus> // key 'YYYY-MM-DD'
+}
+
+export interface DerivedHabitState {
 	colors: Array<string>
 	successCounter: number
 	failCounter: number
 	lifetimeSuccessCounter: number
 	lifetimeFailCounter: number
-    history: Array<HistoryObject>
-    historyStep: number
+}
+
+export interface Habit extends StoredHabit, DerivedHabitState {
+	// session only undo/redo, never saved in the database
+	history: Array<HistoryObject>
+	historyStep: number
 }
 
 export interface HistoryObject {
-    colors: Array<string>
-    successCounter: number
-	failCounter: number
-	lifetimeSuccessCounter: number
-	lifetimeFailCounter: number
+	startDate: string
+	log: Record<string, DayStatus>
 }
 
 // mock habit for tests
-export const mockHabit = {
+export const mockHabit: Habit = {
 	name: 'Test Example',
 	_id: 'test_id',
+	createdOn: '2026-11-01',
+	startDate: '2026-11-01',
+	log: {},
 	colors: [],
 	successCounter: 0,
 	failCounter: 0,
 	lifetimeSuccessCounter: 0,
 	lifetimeFailCounter: 0,
 	history: [],
-	historyStep: 0
+	historyStep: 0,
 }
