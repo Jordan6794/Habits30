@@ -58,6 +58,20 @@ export const setLogEntry = async (id: string, date: string, status: DayStatus | 
     }
 }
 
+export const setFavorite = async (id: string, isFavorite: boolean) => {
+    try {
+        const response = await api.setFavorite(id, isFavorite)
+        return response
+    } catch (error) {
+        if(error instanceof Error){
+            console.log(error.message)
+            throw new Error(error.message)
+        } else {
+            throw new Error('Unknown error')
+        }
+    }
+}
+
 export const deleteHabit = async (id: string, date: string) => {
     try {
         const response = await api.deleteHabit(id, date)

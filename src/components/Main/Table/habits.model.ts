@@ -8,6 +8,7 @@ export interface StoredHabit {
 	startDate: string // replay starts here, moved to today on clear
 	log: Record<string, DayStatus> // key 'YYYY-MM-DD'
 	deletedOn?: string // 'YYYY-MM-DD', deleted habits are hidden but their logs still count in the stats
+	isFavorite?: boolean // only stored when true, missing (older habits) means not favorite
 }
 
 export interface DerivedHabitState {
