@@ -2,7 +2,7 @@ import { AnyAction, createSelector, createSlice, PayloadAction, ThunkAction } fr
 import { DayStatus, Habit, HistoryObject, StoredHabit } from '../components/Main/Table/habits.model'
 import { createHabitFromStored, deriveHabitState, toStoredHabit } from '../services/habitReplay.service'
 import { getTodayKey } from '../services/dates.service'
-import { deleteHabit, setLogEntry, updateHabit } from '../actions/habits'
+import { deleteHabit, setFavorite, setLogEntry, updateHabit } from '../actions/habits'
 import { RootState } from '.'
 
 const initialHabits: Habit[] = []
@@ -45,6 +45,14 @@ const habitsSlice = createSlice({
 		updateName(state, action: PayloadAction<{ index: number; newName: string }>) {
 			const { index, newName } = action.payload
 			state[index].name = newName
+		},
+		setFavorite(state, action: PayloadAction<{ index: number; isFavorite: boolean }>) {
+			const { index, isFavorite } = action.payload
+			if (isFavorite) {
+				state[index].isFavorite = true
+			} else {
+				delete state[index].isFavorite
+			}
 		},
 		// status null removes the day's entry
 		setDayStatus(state, action: PayloadAction<{ index: number; date: string; status: DayStatus | null; todayKey: string }>) {
@@ -124,6 +132,20 @@ export const updateNameAction = (index: number, newName: string): ThunkAction<vo
 	}
 }
 
+export const toggleFavoriteAction = (index: number): ThunkAction<void, RootState, unknown, AnyAction> => {
+	return async (dispatch, getState) => {
+		const habit = getState().habits[index]
+		const isFavorite = !habit.isFavorite
+		dispatch(habitsActions.setFavorite({ index, isFavorite }))
+		try {
+			await setFavorite(habit._id, isFavorite)
+		} catch (error) {
+			// the server didn't save it, put the star back so the UI matches the database
+			dispatch(habitsActions.setFavorite({ index, isFavorite: !isFavorite }))
+		}
+	}
+}
+
 export const deleteHabitAction = (index: number): ThunkAction<void, RootState, unknown, AnyAction> => {
 	return async (dispatch, getState) => {
 		const todayKey = getTodayKey()
@@ -182,7 +204,7 @@ export const selectActiveHabits = createSelector(
 	(habits) => habits.filter((habit) => !habit.deletedOn)
 )
 
-export const habitsActionsThunk = { deleteHabitAction, updateNameAction, setDayStatusAction, clearColorsAction, undoColorsAction, redoColorsAction }
+export const habitsActionsThunk = { deleteHabitAction, toggleFavoriteAction, updateNameAction, setDayStatusAction, clearColorsAction, undoColorsAction, redoColorsAction }
 
 export default habitsSlice.reducer
 export const habitsActions = habitsSlice.actions

@@ -29,8 +29,12 @@ function Table() {
 
 	const dispatch = useAppDispatch()
 
-	const ongoingHabits = activeHabits.filter((habit) => habit.colors[0] !== SUCCESS_FINISH_COLOR)
-	const finishedHabits = activeHabits.filter((habit) => habit.colors[0] === SUCCESS_FINISH_COLOR)
+	const isSolidified = (habit: Habit) => habit.colors[0] === SUCCESS_FINISH_COLOR
+	// favorites get their own table, whether they are solidified or not
+	const favoriteHabits = activeHabits.filter((habit) => habit.isFavorite)
+	const otherHabits = activeHabits.filter((habit) => !habit.isFavorite)
+	const ongoingHabits = otherHabits.filter((habit) => !isSolidified(habit))
+	const finishedHabits = otherHabits.filter(isSolidified)
 
 	const isSummaryShown = !isLoadingHabits && habits.length > 0
 
@@ -91,8 +95,23 @@ function Table() {
 			{hasOnboarded === false && <OnboardingModal onFinishOnboarding={onFinishOnboarding} />}
 
 			{isSummaryShown && <MonthSummary />}
-			
-			<table className={`habit-table ${isSummaryShown ? 'habit-table-after-summary' : ''}`}>
+
+			{favoriteHabits.length > 0 && (
+				<table className={`habit-table ${isSummaryShown ? 'habit-table-after-summary' : ''}`}>
+					<thead>
+						<tr className="table-first-row">
+							<th className="table-habit-title-cell">
+								<h4 className="table-habit-title">Favorite Habits</h4>
+							</th>
+							{daysArray.map(makeDaysHtml)}
+						</tr>
+					</thead>
+
+					<tbody>{favoriteHabits.map((habit, index) => createHabitRow(habit, index, isSolidified(habit)))}</tbody>
+				</table>
+			)}
+
+			<table className={`habit-table ${isSummaryShown && favoriteHabits.length === 0 ? 'habit-table-after-summary' : ''}`}>
 				<thead>
 					<tr className="table-first-row">
 						<th className="table-habit-title-cell">

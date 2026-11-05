@@ -10,6 +10,25 @@ describe('Habits reducer', () => {
         expect(reducer(undefined, { type: undefined })).toEqual([])
     })
     
+    test('setFavorite stars and unstars a habit without touching its log', () => {
+        const habit = {...mockHabit, log: {[today]: 'success' as const}}
+        let habitsArray = reducer([habit], habitsActions.setFavorite({index: 0, isFavorite: true}))
+        expect(habitsArray[0].isFavorite).toBe(true)
+        expect(habitsArray[0].log).toEqual({[today]: 'success'})
+
+        habitsArray = reducer(habitsArray, habitsActions.setFavorite({index: 0, isFavorite: false}))
+        expect(habitsArray[0]).not.toHaveProperty('isFavorite')
+    })
+
+    test('habits saved before favorites existed load as not favorite', () => {
+        const { isFavorite, ...oldHabit } = mockHabit
+        const habitsArray = reducer([], habitsActions.set({habits: [oldHabit], todayKey: today}))
+        expect(habitsArray[0].isFavorite).toBeUndefined()
+
+        const favArray = reducer([], habitsActions.set({habits: [{...oldHabit, isFavorite: true}], todayKey: today}))
+        expect(favArray[0].isFavorite).toBe(true)
+    })
+
     test('add a success on an empty record should return one success', () => {
         const habitsArray = reducer([mockHabit], habitsActions.setDayStatus({index: 0, date: today, status: 'success', todayKey: today}))
     

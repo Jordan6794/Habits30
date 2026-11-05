@@ -132,12 +132,13 @@ export function createHabitFromStored(raw: Partial<StoredHabit> & Pick<StoredHab
 		startDate: raw.startDate ?? createdOn,
 		log: raw.log ?? {},
 		...(raw.deletedOn && { deletedOn: raw.deletedOn }),
+		...(raw.isFavorite === true && { isFavorite: true }),
 	}
 	return { ...stored, ...deriveHabitState(stored, todayKey), history: [], historyStep: 0 }
 }
 
 // Only these fields are saved in the database
 export function toStoredHabit(habit: StoredHabit): StoredHabit {
-	const { name, _id, createdOn, startDate, log, deletedOn } = habit
-	return { name, _id, createdOn, startDate, log, ...(deletedOn && { deletedOn }) }
+	const { name, _id, createdOn, startDate, log, deletedOn, isFavorite } = habit
+	return { name, _id, createdOn, startDate, log, ...(deletedOn && { deletedOn }), ...(isFavorite === true && { isFavorite: true }) }
 }

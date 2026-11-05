@@ -334,7 +334,7 @@ Table
     transform: rotate(20deg);
     color: var(--main-color);
     opacity: 0.3;
-    font-size: 1.9rem;
+    font-size: 1.4rem;
 }
 
 .th-habit-name {
@@ -348,6 +348,10 @@ Table
 
 .th-undo-clear-div {
 	display: flex;
+}
+
+.btn-favorite-active {
+	color: #f5b301;
 }
 
 .th-undo-btn {

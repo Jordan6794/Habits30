@@ -62,6 +62,9 @@ const HabitRow: FunctionComponent<{
 	function handleDeleteButtonClick() {
 		props.delete(index)
 	}
+	function handleFavoriteButtonClick() {
+		dispatch(habitsActionsThunk.toggleFavoriteAction(index))
+	}
 	function handleClearButtonClick() {
 		dispatch(habitsActionsThunk.clearColorsAction(index))
 	}
@@ -97,6 +100,15 @@ const HabitRow: FunctionComponent<{
 					</button>
 					<button className="btn-icon" onClick={handleClearButtonClick}>
 						<i className="fa-solid fa-broom"></i>
+					</button>
+					<button
+						className={`btn-icon btn-favorite ${habit.isFavorite ? 'btn-favorite-active' : ''}`}
+						onClick={handleFavoriteButtonClick}
+						title={habit.isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+						aria-label={habit.isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+						aria-pressed={!!habit.isFavorite}
+					>
+						<i className={`${habit.isFavorite ? 'fa-solid' : 'fa-regular'} fa-star`}></i>
 					</button>{' '}
 				</div>
 
