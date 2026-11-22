@@ -101,7 +101,7 @@ function Table() {
 					<thead>
 						<tr className="table-first-row">
 							<th className="table-habit-title-cell">
-								<h4 className="table-habit-title">Favorite Habits</h4>
+								<h4 className="table-habit-title">Favorite Habits ({favoriteHabits.length})</h4>
 							</th>
 							{daysArray.map(makeDaysHtml)}
 						</tr>
@@ -115,7 +115,7 @@ function Table() {
 				<thead>
 					<tr className="table-first-row">
 						<th className="table-habit-title-cell">
-							<h4 className="table-habit-title">Habits</h4>
+							<h4 className="table-habit-title">Habits ({ongoingHabits.length})</h4>
 						</th>
 						{daysArray.map(makeDaysHtml)}
 					</tr>
@@ -133,7 +133,7 @@ function Table() {
 					<thead>
 						<tr className="table-first-row">
 							<th className="table-habit-title-cell">
-								<h4 className="table-habit-title">Solidified Habits</h4>
+								<h4 className="table-habit-title">Solidified Habits ({finishedHabits.length})</h4>
 							</th>
 							{daysArray.map(makeDaysHtml)}
 						</tr>
