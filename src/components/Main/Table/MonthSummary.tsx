@@ -19,6 +19,8 @@ const MonthSummary: FunctionComponent = () => {
 	)
 
 	const [month, setMonth] = useState(currentMonth)
+	const [isFavoritesOnly, setIsFavoritesOnly] = useState(false)
+	const countedHabits = isFavoritesOnly ? habits.filter((habit) => habit.isFavorite) : habits
 	const dates = getMonthDateKeys(month).filter((date) => date <= todayKey)
 
 	return (
@@ -37,11 +39,15 @@ const MonthSummary: FunctionComponent = () => {
 					<span className={styles.success}>Win</span> · <span className={styles.fail}>Fail</span> ·{' '}
 					<span className={styles.unknown}>Unknown</span>
 				</span>
+				<label className={styles.filter}>
+					<input type="checkbox" checked={isFavoritesOnly} onChange={(event) => setIsFavoritesOnly(event.target.checked)} />
+					Favorites only
+				</label>
 			</div>
 
 			<div className={styles.days}>
 				{dates.map((date) => {
-					const counts = calculateDayCounts(habits, date, todayKey)
+					const counts = calculateDayCounts(countedHabits, date, todayKey)
 					return (
 						<div key={date} className={`${styles.day} ${date === todayKey ? styles.today : ''}`}>
 							<span className={styles.dayNumber}>{Number(date.slice(8))}</span>
